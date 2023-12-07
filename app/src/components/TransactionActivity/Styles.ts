@@ -48,43 +48,43 @@ export const TransactionIconWrapper = styled.div`
 `;
 
 export const IconBubble = styled.div<{
-    status: TransactionActivityStatus;
+  status: TransactionActivityStatus;
 }>`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: ${props => {
-        switch (props.status) {
-            case "Done":
-                return props.theme.colors.green0;
-            case "Pending":
-                return props.theme.colors.blue0;
-            case "Error":
-                return props.theme.colors.red0;
-            default:
-                return props.theme.colors.green0;
-        }
-    }};
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: ${(props) => {
+    switch (props.status) {
+      case "Done":
+        return props.theme.colors.green0;
+      case "Pending":
+        return props.theme.colors.blue0;
+      case "Error":
+        return props.theme.colors.red0;
+      default:
+        return props.theme.colors.green0;
+    }
+  }};
 
-    >svg {
-        width: 60%;
-        height: 60%;
-        color: ${props => {
-            switch (props.status) {
-                case "Done":
-                    return props.theme.colors.green1;
-                case "Pending":
-                    return props.theme.colors.blue2;
-                case "Error":
-                    return props.theme.colors.red1;
-                default:
-                    return props.theme.colors.green1;
-            }
-        }};
-    };
+  > svg {
+    width: 60%;
+    height: 60%;
+    color: ${(props) => {
+      switch (props.status) {
+        case "Done":
+          return props.theme.colors.green1;
+        case "Pending":
+          return props.theme.colors.blue2;
+        case "Error":
+          return props.theme.colors.red1;
+        default:
+          return props.theme.colors.green1;
+      }
+    }};
+  }
 `;
 
 export const TransactionDataWrapper = styled.div`
@@ -143,7 +143,7 @@ export const TransactionOwnerWrapper = styled.div`
 `;
 
 export const StatusBubble = styled.div<{
-    status: TransactionActivityStatus;
+  status: TransactionActivityStatus;
 }>`
     display: flex;
     width: auto;
