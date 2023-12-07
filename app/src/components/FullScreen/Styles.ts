@@ -33,7 +33,7 @@ export const FullScreenHeader = styled.div`
 
   > svg {
     cursor: pointer;
-    width: 1.75rem;
+    width: 2rem;
     height: auto;
     color: ${(props) => props.theme.colors.green1};
   }
