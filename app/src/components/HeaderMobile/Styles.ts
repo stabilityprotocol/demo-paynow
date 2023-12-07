@@ -10,6 +10,7 @@ export const HeaderMobileWrapper = styled.div`
     ${(props) => props.theme.spacing.medium};
   border-radius: ${(props) => props.theme.box.borderRadius};
   backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   background: rgba(255, 255, 255, 0.8);
   margin-top: 1rem;
 
