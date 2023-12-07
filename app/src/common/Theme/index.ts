@@ -50,6 +50,7 @@ export const Theme = {
     bgBlue: "#2D3353",
     blue0: "#BAECFF",
     blue1: "#F0FBFF",
+    blue2: "#30C5FF",
     blueLink: "#3E7CB1",
     red0: "#FEE8E7",
     red1: "#F97068",
