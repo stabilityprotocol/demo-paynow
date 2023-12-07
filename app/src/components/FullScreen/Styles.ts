@@ -20,9 +20,9 @@ export const FullScreenWrapper = styled.div`
 
   @media ${mediaSizes.portableQuery} {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     max-width: 100vw;
-    max-height: 100vh;
+    max-height: 100dvh;
     border-radius: 0;
   }
 `;
