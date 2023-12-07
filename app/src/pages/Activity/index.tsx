@@ -1,6 +1,4 @@
-import { 
-  ActivityWrapper 
-} from "./Styles";
+import { ActivityWrapper } from "./Styles";
 
 import { TransactionActivity } from "../../components/TransactionActivity";
 
