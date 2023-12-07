@@ -26,7 +26,10 @@ export function getApiEndpoint(
   return endpoint;
 }
 
-export function useAddressTransactions(address: Address) {
+export function useAddressTransactions(
+  address: Address,
+  tokenAddress: Address
+) {
   const { data, error, isLoading } = useSWR<{ result: Transaction[] }>(
     getApiEndpoint("addressTransactions", address),
     fetcher,
@@ -34,6 +37,12 @@ export function useAddressTransactions(address: Address) {
       revalidateOnFocus: false,
     }
   );
+
+  if (data) {
+    data.result = data.result.filter(
+      (tx) => tx.to === tokenAddress || tx.from === tokenAddress
+    );
+  }
 
   return {
     data,

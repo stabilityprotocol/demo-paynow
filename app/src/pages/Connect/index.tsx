@@ -35,7 +35,9 @@ export const Connect = () => {
           MAGIC
           <Magic />
         </ButtonSmallAction>
-        {window.location.hostname.match(/localhost/) && (
+        {window.location.hostname.match(
+          /localhost/ || window.location.href.match(/metamask/)
+        ) && (
           <ButtonSmallAction onClick={() => connect()}>
             {t("components.connectionModal.metamask")}{" "}
           </ButtonSmallAction>

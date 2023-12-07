@@ -23,7 +23,6 @@ contract PaymentRequestContract {
     mapping(address => uint256[]) private requestsByRequester;
     mapping(address => uint256[]) private requestsByTarget;
 
-    // Eventos
     event RequestCreated(uint256 indexed requestId, address indexed requester, address indexed target, uint256 amount);
     event RequestCancelled(uint256 indexed requestId);
     event RequestFulfilled(uint256 indexed requestId, uint256 amount);

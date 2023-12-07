@@ -1,23 +1,27 @@
-import { useNavigate } from "react-router-dom";
-import { useDisconnect } from "wagmi";
 import {
+  ActionBarWrapper,
+  BalanceLowerContainer,
   BalanceLowerSection,
   BalanceUpperBalance,
+  BalanceUpperContainer,
   BalanceUpperSection,
   BalanceUpperTitle,
+  BalanceViewMoreTransactions,
   BalanceWrapper,
 } from "./Styles";
 import { FaMoneyBill } from "react-icons/fa";
 import { ActionBar } from "../../components/ActionBar";
+import { WalletDetail } from "./Components/WalletDetail";
+import { useNavigate } from "react-router-dom";
+import { FaCircleArrowRight } from "react-icons/fa6";
 
 export const Balance = () => {
   const navigate = useNavigate();
-  const { disconnect } = useDisconnect();
 
   return (
     <BalanceWrapper>
       <BalanceUpperSection>
-        <div>
+        <BalanceUpperContainer>
           <BalanceUpperTitle>
             BALANCE <FaMoneyBill />
           </BalanceUpperTitle>
@@ -25,30 +29,20 @@ export const Balance = () => {
             <span className="symbol">$</span>
             <span>10,000.00</span>
           </BalanceUpperBalance>
-        </div>
-        <div>
-          <ActionBar />
-        </div>
+        </BalanceUpperContainer>
       </BalanceUpperSection>
       <BalanceLowerSection>
-        <h1>Balance</h1>
-        <div>
-          <button onClick={() => navigate("/send")}>Go To Send</button>
-        </div>
-        <div>
-          <button onClick={() => navigate("/send/request")}>
-            Go To Request
-          </button>
-        </div>
-        <div>
-          <button onClick={() => navigate("/activity")}>Go To Activity</button>
-        </div>
-        <div>
-          <button onClick={() => navigate("/profile")}>Go To Profile</button>
-        </div>
-        <div>
-          <button onClick={() => disconnect()}>Disconnect</button>
-        </div>
+        <ActionBarWrapper>
+          <ActionBar />
+        </ActionBarWrapper>
+        <BalanceLowerContainer>
+          <WalletDetail />
+          <BalanceViewMoreTransactions>
+            <span onClick={() => navigate("/activity")}>
+              View more transactions <FaCircleArrowRight />
+            </span>
+          </BalanceViewMoreTransactions>
+        </BalanceLowerContainer>
       </BalanceLowerSection>
     </BalanceWrapper>
   );
