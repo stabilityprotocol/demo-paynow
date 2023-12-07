@@ -5,12 +5,20 @@ export const BalanceWrapper = styled.div`
 `;
 
 export const BalanceUpperSection = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding-top: ${(props) => props.theme.spacing.xlarge};
+  justify-content: flex-end;
   color: ${(props) => props.theme.colors.white};
-  padding: 0 ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.medium};
+`;
+
+export const BalanceUpperContainer = styled.div`
+  padding-bottom: ${(props) => props.theme.spacing.xlarge};
 `;
 
 export const BalanceUpperTitle = styled.div`
@@ -28,7 +36,7 @@ export const BalanceUpperTitle = styled.div`
 export const BalanceUpperBalance = styled.div`
   font-size: ${(props) => props.theme.fontSizes.xxlarge};
   letter-spacing: 0.1rem;
-  margin-top: ${(props) => props.theme.spacing.large};
+  margin-top: ${(props) => props.theme.spacing.medium};
 
   > .symbol {
     font-size: ${(props) => props.theme.fontSizes.large};
@@ -42,9 +50,21 @@ export const BalanceLowerSection = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 40%;
   background: ${(props) => props.theme.colors.bgGreen};
   padding: ${(props) => props.theme.spacing.medium};
+  display: flex;
+  flex-direction: column;
+`;
+
+export const BalanceLowerContainer = styled.div`
+  margin-top: ${(props) => props.theme.spacing.xlarge};
+  margin-bottom: ${(props) => props.theme.spacing.medium};
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const ActionBarWrapper = styled.div`
@@ -54,4 +74,19 @@ export const ActionBarWrapper = styled.div`
   top: 0%;
   width: 100%;
   padding: 0 ${(props) => props.theme.spacing.medium};
+`;
+
+export const BalanceViewMoreTransactions = styled.div`
+  font-size: ${(props) => props.theme.fontSizes.small};
+  font-family: ${(props) => props.theme.font.secondary};
+
+  > span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    > svg {
+      margin-left: ${(props) => props.theme.spacing.xsmall};
+    }
+  }
 `;

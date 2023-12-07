@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const ActionBarWrapper = styled.div`
   width: 100%;
   backdrop-filter: blur(80px);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 1rem;
   border-radius: ${(props) => props.theme.box.borderRadius};
   padding: ${(props) => props.theme.spacing.medium};
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const ActionBarItem = styled.span`
