@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDisconnect } from "wagmi";
 import {
+  ActionBarWrapper,
   BalanceLowerSection,
   BalanceUpperBalance,
   BalanceUpperSection,
@@ -26,11 +27,11 @@ export const Balance = () => {
             <span>10,000.00</span>
           </BalanceUpperBalance>
         </div>
-        <div>
-          <ActionBar />
-        </div>
       </BalanceUpperSection>
       <BalanceLowerSection>
+        <ActionBarWrapper>
+          <ActionBar />
+        </ActionBarWrapper>
         <h1>Balance</h1>
         <div>
           <button onClick={() => navigate("/send")}>Go To Send</button>

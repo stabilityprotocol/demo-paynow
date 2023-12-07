@@ -6,7 +6,7 @@ import * as codebuild from "aws-cdk-lib/aws-codebuild";
 
 export class AmplifyCdkStack extends cdk.Stack {
   private config = {
-    repositoryName: "demo-fungibles",
+    repositoryName: "demo-paynow",
     organizationName: "stabilityprotocol",
     productionBranch: "master",
   };
@@ -14,7 +14,7 @@ export class AmplifyCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const app = new amplify.App(this, "Fungibles", {
+    const app = new amplify.App(this, "PayNow", {
       sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
         owner: this.config.organizationName,
         repository: this.config.repositoryName,

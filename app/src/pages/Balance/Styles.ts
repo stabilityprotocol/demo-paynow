@@ -38,7 +38,20 @@ export const BalanceUpperBalance = styled.div`
 `;
 
 export const BalanceLowerSection = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  height: 50%;
   background: ${(props) => props.theme.colors.bgGreen};
   padding: ${(props) => props.theme.spacing.medium};
+`;
+
+export const ActionBarWrapper = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 0%;
+  width: 100%;
+  padding: 0 ${(props) => props.theme.spacing.medium};
 `;

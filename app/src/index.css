@@ -19,19 +19,6 @@ body {
   margin: 0;
 }
 
-@media (max-width: 600px) {
-  html,
-  body {
-    font-size: 12px;
-  }
-
-  .react-modal {
-    width: 95vw;
-    max-width: 95vw;
-    min-width: 95vw;
-  }
-}
-
 h1 {
   font-size: 2rem;
   margin: 0;
