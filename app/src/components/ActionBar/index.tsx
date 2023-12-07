@@ -9,7 +9,7 @@ export const ActionBar = () => {
 
   return (
     <ActionBarWrapper>
-      <ActionBarItem onClick={() => navigate("/faucet")}>
+      <ActionBarItem onClick={() => navigate("/add-money")}>
         <ActionBarItemIcon>
           <PiCoinDuotone />
         </ActionBarItemIcon>

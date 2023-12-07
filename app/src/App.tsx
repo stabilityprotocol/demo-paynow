@@ -15,10 +15,11 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Send } from "./pages/Send";
 import { Activity } from "./pages/Activity";
 import { Profile } from "./pages/Profile";
-
-import "react-toastify/dist/ReactToastify.css";
 import { Request } from "./pages/Request";
 import { Receive } from "./pages/Receive";
+import { AddMoney } from "./pages/AddMoney";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,22 @@ const router = createBrowserRouter([
       {
         path: "/receive",
         element: <Receive />,
+      },
+    ],
+  },
+  {
+    path: "/add-money",
+    element: (
+      <ProtectedRoute>
+        <Shell>
+          <FullScreen />
+        </Shell>
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/add-money",
+        element: <AddMoney />,
       },
     ],
   },
