@@ -48,7 +48,7 @@ export const Receive = () => {
     <ReceiveWrapper>
       <ReceiveTitle>RECEIVE</ReceiveTitle>
       <ReceiveQrWrapper>
-        <div ref={ref} />
+        <span ref={ref} />
       </ReceiveQrWrapper>
       <ReceiveActionWrapper>
         <ButtonSmallAction>

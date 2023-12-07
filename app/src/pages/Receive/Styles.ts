@@ -21,6 +21,13 @@ export const ReceiveQrWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  > span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const ReceiveActionWrapper = styled.div`
