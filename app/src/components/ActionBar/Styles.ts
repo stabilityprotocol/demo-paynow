@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ActionBarWrapper = styled.div`
   width: 100%;
+  -webkit-backdrop-filter: blur(80px);
   backdrop-filter: blur(80px);
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1rem;
   border-radius: ${(props) => props.theme.box.borderRadius};
