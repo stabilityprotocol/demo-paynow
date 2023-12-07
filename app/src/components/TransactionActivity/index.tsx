@@ -100,7 +100,10 @@ const TransactionActivityItem = ({
                     </TransactionOwnerWrapper>
                 </TransactionDetailsWrapper>
                 <TransactionAmountWrapper>
-                    <a href="https://stability-testnet.blockscout.com/">0.0000001</a>
+                    <a 
+                        href="https://stability-testnet.blockscout.com/"
+                        target="_blank"
+                    >0.00001</a>
                     <p>PyUSD</p>
                 </TransactionAmountWrapper>
             </TransactionDataWrapper>
