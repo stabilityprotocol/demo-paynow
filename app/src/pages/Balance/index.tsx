@@ -39,7 +39,7 @@ export const Balance = () => {
           <WalletDetail />
           <BalanceViewMoreTransactions>
             <span onClick={() => navigate("/activity")}>
-              View more transactions <FaCircleArrowRight />
+              View recent transactions <FaCircleArrowRight />
             </span>
           </BalanceViewMoreTransactions>
         </BalanceLowerContainer>

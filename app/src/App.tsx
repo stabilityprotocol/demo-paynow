@@ -18,6 +18,7 @@ import { Profile } from "./pages/Profile";
 
 import "react-toastify/dist/ReactToastify.css";
 import { Request } from "./pages/Request";
+import { Receive } from "./pages/Receive";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,22 @@ const router = createBrowserRouter([
       {
         path: "/activity",
         element: <Activity />,
+      },
+    ],
+  },
+  {
+    path: "/receive",
+    element: (
+      <ProtectedRoute>
+        <Shell>
+          <FullScreen />
+        </Shell>
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/receive",
+        element: <Receive />,
       },
     ],
   },
