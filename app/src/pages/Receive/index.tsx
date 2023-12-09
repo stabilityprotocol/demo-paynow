@@ -13,7 +13,7 @@ import {
 import { ButtonSmallAction } from "../../components/Button";
 import { PiCopySimpleFill } from "react-icons/pi";
 import { useCopyToClipboard } from "usehooks-ts";
-import { useERC20 } from "../../common/Hooks/useERC20";
+import { useERC20 } from "../../common/hooks/useERC20";
 
 export const Receive = () => {
   const { symbol } = useERC20();

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useERC20 } from "../../common/Hooks/useERC20";
+import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonSmallAction } from "../../components/Button";
 import { waitForTransaction } from "@wagmi/core";
 
@@ -11,9 +11,9 @@ import {
   AddMoneyTitle,
   AddMoneyWrapper,
 } from "./Styles";
-import { useAppBalance } from "../../common/Hooks/useAppBalance";
+import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { Navigate } from "react-router-dom";
-import { useFaucet } from "../../common/Hooks/useFaucet";
+import { useFaucet } from "../../common/hooks/useFaucet";
 import { LoadingIcon } from "../../components/LoadingIcon";
 
 export const AddMoney = () => {

@@ -1,4 +1,4 @@
-import { useERC20 } from "../../common/Hooks/useERC20";
+import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonSmallAction } from "../../components/Button";
 import {
   AddMoneyAction,
@@ -7,7 +7,7 @@ import {
   AddMoneyTitle,
   AddMoneyWrapper,
 } from "./Styles";
-import { useAppBalance } from "../../common/Hooks/useAppBalance";
+import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { useNavigate } from "react-router-dom";
 
 export const ComeLater = () => {

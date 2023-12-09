@@ -14,7 +14,7 @@ import { ActionBar } from "../../components/ActionBar";
 import { WalletDetail } from "./Components/WalletDetail";
 import { useNavigate } from "react-router-dom";
 import { FaCircleArrowRight } from "react-icons/fa6";
-import { useAppBalance } from "../../common/Hooks/useAppBalance";
+import { useAppBalance } from "../../common/hooks/useAppBalance";
 
 export const Balance = () => {
   const { formatted } = useAppBalance();
