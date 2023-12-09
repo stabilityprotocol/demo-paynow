@@ -21,6 +21,7 @@ export const LoadingWrapper = styled.div`
     width: 4rem;
     height: 4rem;
     margin-bottom: ${(props) => props.theme.spacing.medium};
+    fill: ${(props) => props.theme.colors.green1};
   }
 `;
 
