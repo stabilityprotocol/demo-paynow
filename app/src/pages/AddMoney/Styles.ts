@@ -36,3 +36,15 @@ export const AddMoneyAction = styled.div`
     width: 80%;
   }
 `;
+
+export const AddMoneyLoading = styled.div`
+  display: flex;
+  justify-content: center;
+
+  svg {
+    margin-top: ${(props) => props.theme.spacing.large};
+    width: 4rem;
+    height: 4rem;
+    color: ${(props) => props.theme.colors.green1};
+  }
+`;

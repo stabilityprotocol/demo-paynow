@@ -5,7 +5,7 @@ export const Fonts = {
 
 export const mediaSizes = {
   portable: "600px",
-  portableQuery: "(max-width: 900px)",
+  portableQuery: "(max-width: 750px)",
 };
 
 export const Theme = {
@@ -49,7 +49,7 @@ export const Theme = {
     neutralDark: "#DEDEDE",
     bgBlue: "#2D3353",
     blue0: "#BAECFF",
-    blue1: "#F0FBFF",
+    blue1: "#D6F3FF",
     blue2: "#30C5FF",
     blueLink: "#3E7CB1",
     red0: "#FEE8E7",

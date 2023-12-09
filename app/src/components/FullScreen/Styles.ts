@@ -29,7 +29,10 @@ export const FullScreenWrapper = styled.div`
 
 export const FullScreenHeader = styled.div`
   padding: ${(props) => props.theme.spacing.medium};
+  padding-bottom: ${(props) => props.theme.spacing.xsmall};
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 
   > svg {
     cursor: pointer;

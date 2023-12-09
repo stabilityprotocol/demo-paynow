@@ -1,10 +1,17 @@
 import { useAccount, useConfig, useConnect } from "wagmi";
 import { ButtonSmallAction } from "../../components/Button";
-import { ConnectContainer, ConnectTitle, ConnectWrapper } from "./Styles";
+import {
+  ConnectContainer,
+  ConnectTitle,
+  ConnectWrapper,
+  LoadingWrapper,
+} from "./Styles";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 // @ts-expect-error: regarding the import of the svg
 import Magic from "../../assets/magiclink-green.svg?react";
+// @ts-expect-error: regarding the import of the svg
+import Loading from "../../assets/loading.svg?react";
 
 export const Connect = () => {
   const { isConnected, isConnecting } = useAccount();
@@ -24,7 +31,14 @@ export const Connect = () => {
   }
 
   if (isConnecting) {
-    return <ConnectWrapper>LOADING</ConnectWrapper>;
+    return (
+      <ConnectWrapper>
+        <LoadingWrapper>
+          <Loading />
+          <div>LOADING</div>
+        </LoadingWrapper>
+      </ConnectWrapper>
+    );
   }
 
   return (

@@ -14,8 +14,10 @@ import { ActionBar } from "../../components/ActionBar";
 import { WalletDetail } from "./Components/WalletDetail";
 import { useNavigate } from "react-router-dom";
 import { FaCircleArrowRight } from "react-icons/fa6";
+import { useAppBalance } from "../../common/Hooks/useAppBalance";
 
 export const Balance = () => {
+  const { formatted } = useAppBalance();
   const navigate = useNavigate();
 
   return (
@@ -27,7 +29,7 @@ export const Balance = () => {
           </BalanceUpperTitle>
           <BalanceUpperBalance>
             <span className="symbol">$</span>
-            <span>10,000.00</span>
+            <span>{formatted}</span>
           </BalanceUpperBalance>
         </BalanceUpperContainer>
       </BalanceUpperSection>

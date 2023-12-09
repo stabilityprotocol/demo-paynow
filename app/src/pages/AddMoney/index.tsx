@@ -1,25 +1,70 @@
+import { useCallback, useState } from "react";
+import { useERC20 } from "../../common/Hooks/useERC20";
 import { ButtonSmallAction } from "../../components/Button";
+import { waitForTransaction } from "@wagmi/core";
+
 import {
   AddMoneyAction,
   AddMoneyBody,
   AddMoneyContainer,
+  AddMoneyLoading,
   AddMoneyTitle,
   AddMoneyWrapper,
 } from "./Styles";
+import { useAppBalance } from "../../common/Hooks/useAppBalance";
+import { Navigate } from "react-router-dom";
+import { useFaucet } from "../../common/Hooks/useFaucet";
+import { LoadingIcon } from "../../components/LoadingIcon";
 
 export const AddMoney = () => {
+  const { symbol } = useERC20();
+  const { value } = useAppBalance();
+  const { getTokens } = useFaucet();
+  const [claiming, setClaiming] = useState<"sent" | "success" | undefined>();
+
+  const onClaim = useCallback(() => {
+    const fn = () => {
+      const p = getTokens();
+      p.then((hash) => {
+        waitForTransaction({ hash, confirmations: 2 }).then(() => {
+          setClaiming("success");
+        });
+      });
+      return p;
+    };
+    fn().catch(() => {
+      setClaiming(undefined);
+    });
+    setClaiming("sent");
+  }, [getTokens]);
+
+  if (value && value > 0n) {
+    return <Navigate to="/add-money/come-later" />;
+  }
+
+  if (claiming === "success") {
+    return <Navigate to="/" />;
+  }
+
   return (
     <AddMoneyWrapper>
       <AddMoneyContainer>
         <AddMoneyTitle>ADD MONEY</AddMoneyTitle>
         <AddMoneyBody>
           This demo is for demonstration purposes only. Because of this, we have
-          created a fake token called PyUSD. You can claim PyUSD to your wallet
-          by clicking the button below.
+          created a fake token called {symbol}. You can claim {symbol} to your
+          wallet by clicking the button below.
         </AddMoneyBody>
-        <AddMoneyAction>
-          <ButtonSmallAction>CLAIM</ButtonSmallAction>
-        </AddMoneyAction>
+        {claiming === "sent" && (
+          <AddMoneyLoading>
+            <LoadingIcon />
+          </AddMoneyLoading>
+        )}
+        {!claiming && (
+          <AddMoneyAction>
+            <ButtonSmallAction onClick={onClaim}>CLAIM</ButtonSmallAction>
+          </AddMoneyAction>
+        )}
       </AddMoneyContainer>
     </AddMoneyWrapper>
   );

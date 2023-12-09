@@ -13,11 +13,16 @@ import {
 import { ButtonSmallAction } from "../../components/Button";
 import { PiCopySimpleFill } from "react-icons/pi";
 import { useCopyToClipboard } from "usehooks-ts";
+import { useERC20 } from "../../common/Hooks/useERC20";
 
 export const Receive = () => {
+  const { symbol } = useERC20();
   const { address } = useAccount();
   const [qr, setQr] = useState<QR | undefined>();
   const [, copy] = useCopyToClipboard();
+  const [copyText, setCopyText] = useState<"Copy Address" | "Copied!">(
+    "Copy Address"
+  );
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,6 +47,14 @@ export const Receive = () => {
     }
   }, [ref]);
 
+  const onCopy = () => {
+    copy(address ?? "");
+    setCopyText("Copied!");
+    setTimeout(() => {
+      setCopyText("Copy Address");
+    }, 2_000);
+  };
+
   if (!address) return null;
 
   return (
@@ -51,14 +64,14 @@ export const Receive = () => {
         <span ref={ref} />
       </ReceiveQrWrapper>
       <ReceiveActionWrapper>
-        <ButtonSmallAction>
-          <span>COPY ADDRESS</span>
-          <PiCopySimpleFill onClick={() => copy(address)} />
+        <ButtonSmallAction onClick={onCopy}>
+          <span>{copyText}</span>
+          <PiCopySimpleFill />
         </ButtonSmallAction>
       </ReceiveActionWrapper>
       <ReceiveSubTitle>
-        This is an Stability wallet. Only send PyUSD or other ERC-20 tokens to
-        this wallet.
+        This is an Stability wallet. Only send {symbol} or other ERC-20 tokens
+        to this wallet.
       </ReceiveSubTitle>
     </ReceiveWrapper>
   );

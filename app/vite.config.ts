@@ -5,11 +5,5 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    svgr(),
-    react(),
-    ViteImageOptimizer({
-      exclude: ["src/assets/hero.png"],
-    }),
-  ],
+  plugins: [svgr(), react(), ViteImageOptimizer()],
 });

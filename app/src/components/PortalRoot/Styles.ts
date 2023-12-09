@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { mediaSizes } from "../../common/Theme";
-import heroBg from "../../assets/hero.png";
+import heroBg from "../../assets/hero.png?url";
 
 export const PortalRootWrapper = styled.div`
   position: relative;

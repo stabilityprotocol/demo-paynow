@@ -18,6 +18,7 @@ import { Profile } from "./pages/Profile";
 import { Request } from "./pages/Request";
 import { Receive } from "./pages/Receive";
 import { AddMoney } from "./pages/AddMoney";
+import { ComeLater } from "./pages/AddMoney/ComeLater";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
       {
         path: "/add-money",
         element: <AddMoney />,
+      },
+      {
+        path: "/add-money/come-later",
+        element: <ComeLater />,
       },
     ],
   },
