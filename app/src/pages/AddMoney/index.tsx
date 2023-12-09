@@ -39,7 +39,7 @@ export const AddMoney = () => {
   }, [getTokens]);
 
   if (value && value > 0n) {
-    return <Navigate to="/add-money/come-later" />;
+    return <Navigate to="/add-money/come-later" replace />;
   }
 
   if (claiming === "success") {
