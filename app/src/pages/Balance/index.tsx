@@ -10,7 +10,7 @@ import {
   BalanceWrapper,
 } from "./Styles";
 import { FaMoneyBill } from "react-icons/fa";
-import { ActionBar } from "../../components/ActionBar";
+import { ActionBarNavigation } from "../../components/ActionBar";
 import { WalletDetail } from "./Components/WalletDetail";
 import { useNavigate } from "react-router-dom";
 import { FaCircleArrowRight } from "react-icons/fa6";
@@ -37,7 +37,7 @@ export const Balance = () => {
       </BalanceUpperSection>
       <BalanceLowerSection>
         <ActionBarWrapper>
-          <ActionBar />
+          <ActionBarNavigation />
         </ActionBarWrapper>
         <BalanceLowerContainer>
           <WalletDetail />

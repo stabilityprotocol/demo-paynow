@@ -18,10 +18,16 @@
         },
         "balance": {
             "title": "BALANCE",
-            "recentTransactions": "View recen transactions",
+            "recentTransactions": "View recent transactions",
             "account": {
                 "title": "Magic Wallet"
             }
+        },
+        "profile": {
+            "account": {
+                "title": "Wallet Address"
+            },
+            "usernameTitle": "Username"
         }
     },
     "components": {

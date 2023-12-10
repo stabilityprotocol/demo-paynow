@@ -5,7 +5,7 @@ import { LuArrowDownToLine } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export const ActionBar = () => {
+export const ActionBarNavigation = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -32,3 +32,5 @@ export const ActionBar = () => {
     </ActionBarWrapper>
   );
 };
+
+export const ActionBar = ActionBarWrapper;
