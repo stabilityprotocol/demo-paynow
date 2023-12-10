@@ -9,23 +9,27 @@ import {
 } from "./Styles";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const ComeLater = () => {
   const { symbol } = useERC20();
   const navigate = useNavigate();
   const { formatted } = useAppBalance();
+  const { t } = useTranslation();
 
   return (
     <AddMoneyWrapper>
       <AddMoneyContainer>
-        <AddMoneyTitle>COME LATER</AddMoneyTitle>
+        <AddMoneyTitle>{t("pages.add-money.come-later.title")}</AddMoneyTitle>
         <AddMoneyBody>
-          You already have {symbol} in your wallet ({formatted} {symbol}). Come
-          back later to claim more.
+          {t("pages.add-money.come-later.description", {
+            symbol,
+            amount: formatted,
+          })}
         </AddMoneyBody>
         <AddMoneyAction>
           <ButtonSmallAction onClick={() => navigate("/")}>
-            GO TO DASHBOARD
+            {t("pages.add-money.come-later.button")}
           </ButtonSmallAction>
         </AddMoneyAction>
       </AddMoneyContainer>

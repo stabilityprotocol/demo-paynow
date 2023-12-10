@@ -9,9 +9,11 @@ import {
 import { PiCopySimpleFill } from "react-icons/pi";
 import { shortAddress } from "../../../../common/ETH";
 import { useCopyToClipboard } from "usehooks-ts";
+import { useTranslation } from "react-i18next";
 
 export const WalletDetail = () => {
   const { address } = useAccount();
+  const { t } = useTranslation();
   const [, copy] = useCopyToClipboard();
 
   if (!address) return null;
@@ -21,7 +23,7 @@ export const WalletDetail = () => {
       <WalletDetailContent>
         <WalletDetailCircle />
         <WalletDetailInfo>
-          <span className="title">Magic Wallet</span>
+          <span className="title">{t("pages.balance.account.title")}</span>
           <span>{shortAddress(address)}</span>
         </WalletDetailInfo>
       </WalletDetailContent>

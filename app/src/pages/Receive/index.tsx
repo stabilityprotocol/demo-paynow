@@ -14,15 +14,15 @@ import { ButtonSmallAction } from "../../components/Button";
 import { PiCopySimpleFill } from "react-icons/pi";
 import { useCopyToClipboard } from "usehooks-ts";
 import { useERC20 } from "../../common/hooks/useERC20";
+import { useTranslation } from "react-i18next";
 
 export const Receive = () => {
   const { symbol } = useERC20();
   const { address } = useAccount();
   const [qr, setQr] = useState<QR | undefined>();
   const [, copy] = useCopyToClipboard();
-  const [copyText, setCopyText] = useState<"Copy Address" | "Copied!">(
-    "Copy Address"
-  );
+  const { t } = useTranslation();
+  const [copyText, setCopyText] = useState<string>(t("pages.receive.button"));
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,9 +49,9 @@ export const Receive = () => {
 
   const onCopy = () => {
     copy(address ?? "");
-    setCopyText("Copied!");
+    setCopyText(t("pages.receive.buttonPressed"));
     setTimeout(() => {
-      setCopyText("Copy Address");
+      setCopyText(t("pages.receive.button"));
     }, 2_000);
   };
 
@@ -59,7 +59,7 @@ export const Receive = () => {
 
   return (
     <ReceiveWrapper>
-      <ReceiveTitle>RECEIVE</ReceiveTitle>
+      <ReceiveTitle>{t("pages.receive.title")}</ReceiveTitle>
       <ReceiveQrWrapper>
         <span ref={ref} />
       </ReceiveQrWrapper>
@@ -70,8 +70,7 @@ export const Receive = () => {
         </ButtonSmallAction>
       </ReceiveActionWrapper>
       <ReceiveSubTitle>
-        This is an Stability wallet. Only send {symbol} or other ERC-20 tokens
-        to this wallet.
+        {t("pages.receive.description", { symbol })}
       </ReceiveSubTitle>
     </ReceiveWrapper>
   );

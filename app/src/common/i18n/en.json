@@ -1,96 +1,34 @@
 {
     "pages": {
-        "erc20": {
-            "invalidStep": "Invalid step",
-            "step1": {
-                "title": "LET'S MAKE A TOKEN",
-                "tokenName": "Token Name",
-                "tokenSymbol": "Token Symbol",
-                "amountToMint": "Amount to Mint",
-                "action": "Mint"
+        "add-money": {
+            "come-later": {
+                "title": "COME LATER",
+                "description": "You already have {{symbol}} in your wallet ({{amount}} {{symbol}}). Come back later to claim more.",
+                "button": "GO TO DASHBOARD"
             },
-            "step2": {
-                "title": "CONFIRM YOUR TOKEN",
-                "back": "Back",
-                "confirm": "Confirm",
-                "loading": "Check your Wallet",
-                "error": "Error deploying your token, review your information and try again.",
-                "validation": {
-                    "title": "Please review your token information before continue:",
-                    "wrongNetwork": "Wrong Network, please change your wallet to Stability network."
-                }
-            },
-            "step3": {
-                "title": "SUCCESS!",
-                "action": "Add Token to Wallet",
-                "actionBack": "Create another token",
-                "tokenDetail": {
-                    "title": "Congratulations! This is your new token:",
-                    "name": "Token Name",
-                    "symbol": "Token Symbol",
-                    "address": "Token Address",
-                    "transactionHash": "Transaction Hash",
-                    "blockNumber": "Block Number"
-                }
-            }
+            "title": "ADD MONEY",
+            "description": "This demo is for demonstration purposes only. Because of this, we have created a fake token called {{symbol}}. You can claim {{symbol}} to your wallet by clicking the button below.",
+            "button": "CLAIM"
         },
-        "erc1155": {
-            "invalidStep": "Invalid step",
-            "step1": {
-                "title": "LET'S MAKE AN NFT",
-                "tokenName": "Collection Name",
-                "dropzoneDescription": "Drop your image here or click to select"
-            },
-            "step2": {
-                "error": "Error deploying your NFT, review your information and try again.",
-                "validation": {
-                    "title": "Please review your NFT information before continue:",
-                    "wrongNetwork": "Wrong Network, please change your wallet to Stability network.",
-                    "noImage": "Please upload an image"
-                }
-            },
-            "step3": {
-                "title": "SUCCESS!",
-                "actionBack": "Create another NFT",
-                "tokenDetail": {
-                    "title": "Congratulations! This is your new NFT:",
-                    "name": "Token Name",
-                    "address": "Token Address",
-                    "metadata": "Metadata URL",
-                    "transactionHash": "Transaction Hash",
-                    "blockNumber": "Block Number"
-                }
+        "receive": {
+            "button": "COPY ADDRESS",
+            "buttonPressed": "COPIED!",
+            "title": "RECEIVE",
+            "description": "This is an Stability wallet. Only send {{symbol}} or other ERC-20 tokensto this wallet."
+        },
+        "balance": {
+            "title": "BALANCE",
+            "recentTransactions": "View recen transactions",
+            "account": {
+                "title": "Magic Wallet"
             }
         }
     },
     "components": {
-        "footer": {
-            "copyright": "COPYRIGHT © 2023 STABILITY SOLUTIONS INC. ALL RIGHTS RESERVED.",
-            "contactUs": "CONTACT US",
-            "followUs": "FOLLOW US",
-            "addStability": "ADD STABILITY"
-        },
-        "header": {
-            "upgrade": "Upgrade",
-            "docs": "Docs",
-            "networks": {
-                "testnet": "Testnet",
-                "mainnet": "Mainnet",
-                "invalid": "Invalid Network"
-            },
-            "web3": {
-                "copyAddress": "Copy Address",
-                "logOut": "Log Out",
-                "explorer": "Explorer"
-            }
-        },
-        "connectionModal": {
-            "title": "Manage your access to the Stability Ecosystem",
-            "email": "EMAIL",
-            "newUser": "NEW USER",
-            "magiclink": "MAGICLINK",
-            "magiclinkNoModals": "MAGICLINK (NO MODALS)",
-            "metamask": "METAMASK"
+        "actionBar": {
+            "addMoney": "Add Money",
+            "sendRequest": "Send / Request",
+            "receive": "Receive"
         }
     },
     "links": {

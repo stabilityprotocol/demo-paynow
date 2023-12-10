@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonSmallAction } from "../../components/Button";
 import { waitForTransaction } from "@wagmi/core";
-
 import {
   AddMoneyAction,
   AddMoneyBody,
@@ -15,8 +14,10 @@ import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { Navigate } from "react-router-dom";
 import { useFaucet } from "../../common/hooks/useFaucet";
 import { LoadingIcon } from "../../components/LoadingIcon";
+import { useTranslation } from "react-i18next";
 
 export const AddMoney = () => {
+  const { t } = useTranslation();
   const { symbol } = useERC20();
   const { value } = useAppBalance();
   const { getTokens } = useFaucet();
@@ -49,11 +50,9 @@ export const AddMoney = () => {
   return (
     <AddMoneyWrapper>
       <AddMoneyContainer>
-        <AddMoneyTitle>ADD MONEY</AddMoneyTitle>
+        <AddMoneyTitle>{t("pages.add-money.title")}</AddMoneyTitle>
         <AddMoneyBody>
-          This demo is for demonstration purposes only. Because of this, we have
-          created a fake token called {symbol}. You can claim {symbol} to your
-          wallet by clicking the button below.
+          {t("pages.add-money.description", { symbol })}
         </AddMoneyBody>
         {claiming === "sent" && (
           <AddMoneyLoading>
@@ -62,7 +61,9 @@ export const AddMoney = () => {
         )}
         {!claiming && (
           <AddMoneyAction>
-            <ButtonSmallAction onClick={onClaim}>CLAIM</ButtonSmallAction>
+            <ButtonSmallAction onClick={onClaim}>
+              {t("pages.add-money.button")}
+            </ButtonSmallAction>
           </AddMoneyAction>
         )}
       </AddMoneyContainer>

@@ -3,9 +3,11 @@ import { PiCoinDuotone } from "react-icons/pi";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { LuArrowDownToLine } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const ActionBar = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <ActionBarWrapper>
@@ -13,19 +15,19 @@ export const ActionBar = () => {
         <ActionBarItemIcon>
           <PiCoinDuotone />
         </ActionBarItemIcon>
-        <span>Add Money</span>
+        <span>{t("components.actionBar.addMoney")}</span>
       </ActionBarItem>
       <ActionBarItem onClick={() => navigate("/send")}>
         <ActionBarItemIcon>
           <RiSendPlaneFill />
         </ActionBarItemIcon>
-        <span>Send / Request</span>
+        <span>{t("components.actionBar.sendRequest")}</span>
       </ActionBarItem>
       <ActionBarItem onClick={() => navigate("/receive")}>
         <ActionBarItemIcon>
           <LuArrowDownToLine />
         </ActionBarItemIcon>
-        <span>Receive</span>
+        <span>{t("components.actionBar.receive")}</span>
       </ActionBarItem>
     </ActionBarWrapper>
   );

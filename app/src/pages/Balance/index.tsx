@@ -15,17 +15,19 @@ import { WalletDetail } from "./Components/WalletDetail";
 import { useNavigate } from "react-router-dom";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
+import { useTranslation } from "react-i18next";
 
 export const Balance = () => {
   const { formatted } = useAppBalance();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <BalanceWrapper>
       <BalanceUpperSection>
         <BalanceUpperContainer>
           <BalanceUpperTitle>
-            BALANCE <FaMoneyBill />
+            {t("pages.balance.title")} <FaMoneyBill />
           </BalanceUpperTitle>
           <BalanceUpperBalance>
             <span className="symbol">$</span>
@@ -41,7 +43,7 @@ export const Balance = () => {
           <WalletDetail />
           <BalanceViewMoreTransactions>
             <span onClick={() => navigate("/activity")}>
-              View recent transactions <FaCircleArrowRight />
+              {t("pages.balance.recentTransactions")} <FaCircleArrowRight />
             </span>
           </BalanceViewMoreTransactions>
         </BalanceLowerContainer>
