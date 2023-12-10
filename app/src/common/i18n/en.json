@@ -1,5 +1,11 @@
 {
     "pages": {
+        "connect": {
+            "title": "LOGIN",
+            "magic": "MAGIC",
+            "metamask": "METAMASK",
+            "loading": "LOADING"
+        },
         "add-money": {
             "come-later": {
                 "title": "COME LATER",
@@ -27,7 +33,14 @@
             "account": {
                 "title": "Wallet Address"
             },
-            "usernameTitle": "Username"
+            "usernameTitle": "Username",
+            "setProfileName": "SET USERNAME"
+        },
+        "set-username": {
+            "title": "SET USERNAME",
+            "description": "PayNow uses a decentralized Name Service similar to ENS. Set a username to start sending or requesting money!",
+            "inputPlaceholder": "Enter username",
+            "button": "SETUP"
         }
     },
     "components": {

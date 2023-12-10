@@ -39,12 +39,12 @@ export const AddMoney = () => {
     setClaiming("sent");
   }, [getTokens]);
 
-  if (value && value > 0n) {
-    return <Navigate to="/add-money/come-later" replace />;
-  }
-
   if (claiming === "success") {
     return <Navigate to="/" />;
+  }
+
+  if (value && value > 0n && !claiming) {
+    return <Navigate to="/add-money/come-later" replace />;
   }
 
   return (

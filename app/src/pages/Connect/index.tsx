@@ -35,7 +35,7 @@ export const Connect = () => {
       <ConnectWrapper>
         <LoadingWrapper>
           <Loading />
-          <div>LOADING</div>
+          <div>{t("pages.connect.loading")}</div>
         </LoadingWrapper>
       </ConnectWrapper>
     );
@@ -44,16 +44,16 @@ export const Connect = () => {
   return (
     <ConnectWrapper>
       <ConnectContainer>
-        <ConnectTitle>LOGIN</ConnectTitle>
+        <ConnectTitle>{t("pages.connect.title")}</ConnectTitle>
         <ButtonSmallAction onClick={connectMagicLink}>
-          MAGIC
+          {t("pages.connect.magic")}
           <Magic />
         </ButtonSmallAction>
         {window.location.hostname.match(
           /localhost/ || window.location.href.match(/metamask/)
         ) && (
           <ButtonSmallAction onClick={() => connect()}>
-            {t("components.connectionModal.metamask")}{" "}
+            {t("pages.connect.metamask")}
           </ButtonSmallAction>
         )}
       </ConnectContainer>

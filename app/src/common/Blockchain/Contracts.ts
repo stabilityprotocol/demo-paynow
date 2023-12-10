@@ -6,3 +6,6 @@ export const Contracts: Record<string, { token: Address; faucet: Address }> = {
     faucet: "0x6106E403Bc358E4caBD3F64CA3bC78A74A079bdd",
   },
 };
+
+export const EnsContract: Address =
+  "0x75015963F12e9EDeDcBbd28EfdF75AF4C5FB9d82";

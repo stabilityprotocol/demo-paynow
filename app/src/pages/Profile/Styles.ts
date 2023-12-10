@@ -52,6 +52,22 @@ export const ProfileName = styled.span`
   font-weight: 800;
 `;
 
+export const SetProfileName = styled.span`
+  color: ${(props) => props.theme.colors.green1};
+  font-weight: 800;
+  font-size: ${(props) => props.theme.fontSizes.small};
+  background: ${(props) => props.theme.colors.green0};
+  padding: ${(props) => props.theme.spacing.xsmall}
+    ${(props) => props.theme.spacing.small};
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  border-radius: ${(props) => props.theme.box.borderRadius};
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export const ProfileLowerSection = styled.div`
   position: absolute;
   bottom: 0;
