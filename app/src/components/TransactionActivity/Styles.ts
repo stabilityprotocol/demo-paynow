@@ -4,7 +4,7 @@ import { TransactionActivityStatus } from ".";
 export const TransactionActivityWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 85%;
   height: 100%;
   align-items: center;
   justify-content: flex-start;
@@ -23,24 +23,26 @@ export const TransactionActivityStack = styled.div`
 
 export const TransactionDate = styled.div`
   display: flex;
-  width: 90%;
+  width: 100%;
   height: auto;
   align-items: center;
   justify-content: flex-start;
+  font-family: ${(props) => props.theme.font.secondary};
+  font-size: ${(props) => props.theme.fontSizes.small};
 `;
 
 export const TransactionActivityItemWrapper = styled.div`
   display: flex;
-  height: 4rem;
+  height: 3.125rem;
   flex: 0 0 auto;
-  width: 90%;
+  width: 100%;
   align-items: flex-start;
   justify-content: flex-start;
 `;
 
 export const TransactionIconWrapper = styled.div`
   display: flex;
-  width: 4rem;
+  width: 3.125rem;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -89,7 +91,7 @@ export const IconBubble = styled.div<{
 
 export const TransactionDataWrapper = styled.div`
   display: flex;
-  width: calc(100% - 4rem);
+  width: calc(100% - 3.125rem);
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -104,7 +106,7 @@ export const TransactionDetailsWrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
   background-color: transparent;
-  padding-left: 0.5rem;
+  padding-left: ${(props) => props.theme.spacing.small};
 `;
 
 export const TransactionAmountWrapper = styled.div`
@@ -116,9 +118,11 @@ export const TransactionAmountWrapper = styled.div`
   background-color: transparent;
   > a {
     color: ${(props) => props.theme.colors.blueLink};
+    font-family: ${(props) => props.theme.font.secondary};
   }
-  > p {
+  > span {
     font-size: ${(props) => props.theme.fontSizes.small};
+    font-family: ${(props) => props.theme.font.secondary};
   }
 `;
 
@@ -130,6 +134,7 @@ export const TransactionOverviewWrapper = styled.div`
   justify-content: flex-start;
   background-color: transparent;
   font-size: ${(props) => props.theme.fontSizes.large};
+  gap: ${(props) => props.theme.spacing.xsmall};
 `;
 
 export const TransactionOwnerWrapper = styled.div`
@@ -140,6 +145,7 @@ export const TransactionOwnerWrapper = styled.div`
   justify-content: flex-start;
   background-color: transparent;
   font-size: ${(props) => props.theme.fontSizes.xsmall};
+  font-family: ${(props) => props.theme.font.secondary};
 `;
 
 export const StatusBubble = styled.div<{
@@ -150,6 +156,7 @@ export const StatusBubble = styled.div<{
   height: auto;
   border-radius: ${(props) => props.theme.box.borderRadius};
   font-size: ${(props) => props.theme.fontSizes.xsmall};
+  font-family: ${(props) => props.theme.font.secondary};
   background-color: ${(props) => {
     switch (props.status) {
       case "Done":
@@ -174,7 +181,6 @@ export const StatusBubble = styled.div<{
         return props.theme.colors.green1;
     }
   }};
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-left: 0.5rem;
+  padding-left: ${(props) => props.theme.spacing.small};
+  padding-right: ${(props) => props.theme.spacing.small};
 `;

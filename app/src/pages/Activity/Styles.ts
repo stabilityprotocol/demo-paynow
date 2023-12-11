@@ -9,3 +9,11 @@ export const ActivityWrapper = styled.div`
   justify-content: flex-start;
   overflow-y: auto;
 `;
+
+export const ActivityTitle = styled.h1`
+  letter-spacing: 0.1rem;
+  font-size: ${(props) => props.theme.fontSizes.xxlarge};
+  color: ${(props) => props.theme.colors.green1};
+  font-weight: 500;
+  margin-bottom: ${(props) => props.theme.spacing.large};
+`;
