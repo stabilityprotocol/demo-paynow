@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
 import { UserIcon } from "../../components/UserIcon";
+import { shortAddress } from "../../common/ETH";
 
 export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
   const navigate = useNavigate();
@@ -22,14 +23,18 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
     <RecentContactsWrapper>
       <RecentsContactsTitle>Recent Contacts</RecentsContactsTitle>
       <RecentContactsList>
-        {entries.map((entry, i) => (
-          <RecentContactsListItem key={i} onClick={() => onClick(entry)}>
-            <UserIcon
-              name={entry.name}
-              letters={entry.name.slice(0, 2)}
-            ></UserIcon>
-          </RecentContactsListItem>
-        ))}
+        {entries.map((entry, i) => {
+          const displayName = entry.name || shortAddress(entry.address);
+
+          return (
+            <RecentContactsListItem key={i} onClick={() => onClick(entry)}>
+              <UserIcon
+                name={displayName}
+                letters={displayName.slice(0, 2).toUpperCase()}
+              ></UserIcon>
+            </RecentContactsListItem>
+          );
+        })}
       </RecentContactsList>
     </RecentContactsWrapper>
   );

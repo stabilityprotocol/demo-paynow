@@ -59,7 +59,10 @@ export const AddressSection = () => {
     <AddressSectionWrapper>
       <AddressSectionTitle>{t("pages.address.title")}</AddressSectionTitle>
       <AddressInformationWrapper>
-        <UserIcon name={displayName} letters={displayName.slice(0, 2)} />
+        <UserIcon
+          name={displayName}
+          letters={displayName.slice(0, 2).toUpperCase()}
+        />
         {transfer.account?.name && shortAddress(transfer.account!.address)}
       </AddressInformationWrapper>
       <TokenInputWrapper>
