@@ -22,6 +22,7 @@ import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
 
 import "react-toastify/dist/ReactToastify.css";
+import { Updater } from "./components/Updater";
 
 const router = createBrowserRouter([
   {
@@ -160,6 +161,7 @@ function App() {
           <ThemeProvider theme={Theme}>
             <RouterProvider router={router} />
             <ToastContainer theme="dark" />
+            <Updater />
           </ThemeProvider>
         </WagmiConfig>
       </RecoilRoot>

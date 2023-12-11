@@ -13,25 +13,15 @@ import {
 import { ActionBar } from "../../components/ActionBar";
 import { WalletDetail } from "./Components/WalletDetail";
 import { useTranslation } from "react-i18next";
-import { useAccount } from "wagmi";
-import { useEffect, useMemo, useState } from "react";
-import { useENS } from "../../common/hooks/useENS";
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../common/State/User";
 
 export const Profile = () => {
   const { t } = useTranslation();
-  const { address } = useAccount();
   const navigate = useNavigate();
-  const [username, setUsername] = useState<string | undefined>();
-  const { getNameByAdress } = useENS();
-
-  useEffect(() => {
-    if (address && !username) {
-      getNameByAdress(address).then((name) => {
-        setUsername(name);
-      });
-    }
-  }, [address, username, getNameByAdress]);
+  const { ens: username } = useRecoilValue(UserState);
 
   const normalizedUsername = useMemo(() => {
     if (!username) return undefined;
