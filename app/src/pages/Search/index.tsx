@@ -19,7 +19,7 @@ export const Search = () => {
   const { t } = useTranslation();
   const [value, setValue] = useState("");
   const theme = useTheme();
-  const searchValue = useDebounce(value, 500);
+  const searchValue = useDebounce(value, 300);
   const { data } = useSimilarENSNames(searchValue);
 
   const showSearchResults = useMemo(() => {
