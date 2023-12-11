@@ -17,6 +17,9 @@ export const InputWrapper = styled.span`
   width: 80%;
   background-color: #fff;
   border-radius: ${(p) => p.theme.box.borderRadius};
+  input {
+    font-family: ${(p) => p.theme.font.secondary};
+  }
 `;
 
 export const ResultWrapper = styled.div`

@@ -12,15 +12,19 @@ import {
 } from "./Styles";
 import { useTranslation } from "react-i18next";
 import { SearchResults } from "./SearchResults";
+import { useDebounce } from "usehooks-ts";
+import { useSimilarENSNames } from "../../common/API/ENS";
 
 export const Search = () => {
   const { t } = useTranslation();
   const [value, setValue] = useState("");
   const theme = useTheme();
+  const searchValue = useDebounce(value, 500);
+  const { data } = useSimilarENSNames(searchValue);
 
   const showSearchResults = useMemo(() => {
-    return value.length > 0;
-  }, [value]);
+    return data?.result;
+  }, [data?.result]);
 
   //@todo To be replaced with actual data
   const entries: EnsEntry[] = useMemo(
@@ -60,7 +64,7 @@ export const Search = () => {
       </InputWrapper>
       <ResultWrapper>
         {showSearchResults ? (
-          <SearchResults entries={entries} />
+          <SearchResults entries={data!.result ?? []} />
         ) : (
           <RecentContacts entries={entries}></RecentContacts>
         )}

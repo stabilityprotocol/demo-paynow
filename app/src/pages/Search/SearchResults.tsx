@@ -63,6 +63,7 @@ const SearchResultsItemName = styled.span`
   display: flex;
   align-items: center;
   text-indent: ${(p) => p.theme.spacing.medium};
+  font-family: ${(p) => p.theme.font.secondary};
 `;
 
 const AccountLogo = styled.span`

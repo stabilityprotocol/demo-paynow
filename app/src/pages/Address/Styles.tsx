@@ -21,6 +21,9 @@ export const AddressInformationWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: ${(p) => p.theme.spacing.large};
+  * {
+    font-family: ${(p) => p.theme.font.secondary};
+  }
 `;
 
 export const AccountLogo = styled.span`
@@ -37,6 +40,7 @@ export const AccountLogo = styled.span`
 
 export const AccountName = styled.span`
   margin-top: ${(p) => p.theme.spacing.medium};
+  font-family: ${(p) => p.theme.font.secondary};
 `;
 
 export const TokenInputWrapper = styled.span`
@@ -45,6 +49,9 @@ export const TokenInputWrapper = styled.span`
   display: flex;
   flex-direction: column;
   text-indent: ${(p) => p.theme.spacing.xsmall};
+  input {
+    font-family: ${(p) => p.theme.font.secondary};
+  }
 `;
 
 export const TokenBalanceAmount = styled.span`

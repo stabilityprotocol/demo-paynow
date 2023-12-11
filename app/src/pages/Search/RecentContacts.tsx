@@ -48,6 +48,7 @@ const RecentsContactsTitle = styled.h1`
   color: ${(p) => p.theme.colors.primary};
   font-size: ${(p) => p.theme.fontSizes.large};
   text-align: left;
+  font-family: ${(p) => p.theme.font.secondary};
 `;
 
 const RecentContactsList = styled.span`
@@ -87,4 +88,5 @@ const RecentContactsListItemName = styled.span`
   max-width: 100%;
   word-break: break-word;
   display: inline-block;
+  font-family: ${(p) => p.theme.font.secondary};
 `;
