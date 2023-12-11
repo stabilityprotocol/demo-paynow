@@ -20,9 +20,9 @@ import { Receive } from "./pages/Receive";
 import { AddMoney } from "./pages/AddMoney";
 import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
+import { Updater } from "./components/Updater";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Updater } from "./components/Updater";
 
 const router = createBrowserRouter([
   {

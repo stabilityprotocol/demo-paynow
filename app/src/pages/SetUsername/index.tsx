@@ -15,6 +15,8 @@ import { useTranslation } from "react-i18next";
 import { Input } from "../../components/Input";
 import { useENS } from "../../common/hooks/useENS";
 import { useAccount } from "wagmi";
+import { useRecoilState } from "recoil";
+import { UserState } from "../../common/State/User";
 
 export const SetUsername = () => {
   const { t } = useTranslation();
@@ -23,6 +25,7 @@ export const SetUsername = () => {
   const { claimName, getNameByAdress } = useENS();
   const { address } = useAccount();
   const [claiming, setClaiming] = useState<"sent" | "success" | undefined>();
+  const [userState, setUserState] = useRecoilState(UserState);
 
   const onClaim = useCallback(() => {
     const fn = () => {
@@ -30,6 +33,7 @@ export const SetUsername = () => {
       const p = claimName(username);
       p.then((hash) => {
         waitForTransaction({ hash, confirmations: 2 }).then(() => {
+          setUserState({ ...userState, ens: username });
           setClaiming("success");
         });
       });
@@ -39,7 +43,7 @@ export const SetUsername = () => {
       setClaiming(undefined);
     });
     setClaiming("sent");
-  }, [claimName, address, username]);
+  }, [address, username, claimName, setUserState, userState]);
 
   useEffect(() => {
     if (address && !actualUsername) {

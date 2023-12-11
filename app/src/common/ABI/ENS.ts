@@ -50,7 +50,7 @@ export const EnsABI = [
         type: "address",
       },
     ],
-    name: "getAddressByName",
+    name: "getNameByAddress",
     outputs: [
       {
         internalType: "string",
