@@ -1,5 +1,6 @@
 import {
   ActionBarWrapper,
+  ProfileFooter,
   ProfileImage,
   ProfileLowerContainer,
   ProfileLowerSection,
@@ -17,8 +18,11 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../common/State/User";
+import { IoChatbubbleEllipses } from "react-icons/io5";
+import { useDisconnect } from "wagmi";
 
 export const Profile = () => {
+  const { disconnect } = useDisconnect();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { ens: username } = useRecoilValue(UserState);
@@ -62,6 +66,16 @@ export const Profile = () => {
         </ActionBarWrapper>
         <ProfileLowerContainer>
           <h1>transactions here</h1>
+          <ProfileFooter>
+            <span
+              onClick={() => window.open("https://docs.stabilityprotocol.com")}
+            >
+              {t("pages.profile.helpCenter")} <IoChatbubbleEllipses />
+            </span>
+            <span onClick={() => disconnect()}>
+              {t("pages.profile.logout")}
+            </span>
+          </ProfileFooter>
         </ProfileLowerContainer>
       </ProfileLowerSection>
     </ProfileWrapper>

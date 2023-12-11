@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const InputWrapper = styled.div<{ icon?: boolean }>`
+export const InputWrapper = styled.div<{ icon?: boolean; background?: string }>`
   border-radius: ${(props) => props.theme.box.borderRadius};
-  background: ${(props) => props.theme.colors.neutral};
+  background: ${(props) => props.background ?? props.theme.colors.neutral};
+  color: ${(props) => props.color ?? "inherit"};
   padding: ${(props) => props.theme.spacing.small}
     ${(props) => props.theme.spacing.small};
 

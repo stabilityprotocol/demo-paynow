@@ -30,11 +30,9 @@ export const AddMoney = () => {
     const fn = () => {
       const p = mint(address, randomEtherAmount(1000, 9999));
       p.then((hash) => {
-        waitForTransaction({ hash, confirmations: 2, timeout: 30_000 }).then(
-          () => {
-            setClaiming("success");
-          }
-        );
+        waitForTransaction({ hash, timeout: 30_000 }).then(() => {
+          setClaiming("success");
+        });
       });
       return p;
     };

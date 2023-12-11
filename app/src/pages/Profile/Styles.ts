@@ -75,14 +75,12 @@ export const ProfileLowerSection = styled.div`
   width: 100%;
   height: 60%;
   background: ${(props) => props.theme.colors.bgGreen};
-  padding: ${(props) => props.theme.spacing.medium};
   display: flex;
   flex-direction: column;
 `;
 
 export const ProfileLowerContainer = styled.div`
   margin-top: ${(props) => props.theme.spacing.xlarge};
-  margin-bottom: ${(props) => props.theme.spacing.medium};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -97,4 +95,28 @@ export const ActionBarWrapper = styled.div`
   top: 0%;
   width: 100%;
   padding: 0 ${(props) => props.theme.spacing.medium};
+`;
+
+export const ProfileFooter = styled.div`
+  border-top: 1px solid ${(props) => props.theme.colors.green1};
+  padding: ${(props) => props.theme.spacing.small}
+    ${(props) => props.theme.spacing.medium};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: ${(props) => props.theme.font.secondary};
+  font-size: ${(props) => props.theme.fontSizes.small};
+
+  > span {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: ${(props) => props.theme.spacing.xsmall};
+      height: 1.25rem;
+      width: auto;
+    }
+  }
 `;

@@ -17,6 +17,7 @@ import { useENS } from "../../common/hooks/useENS";
 import { useAccount } from "wagmi";
 import { useRecoilState } from "recoil";
 import { UserState } from "../../common/State/User";
+import { useRegisterEns } from "../../common/API/ENS";
 
 export const SetUsername = () => {
   const { t } = useTranslation();
@@ -26,15 +27,18 @@ export const SetUsername = () => {
   const { address } = useAccount();
   const [claiming, setClaiming] = useState<"sent" | "success" | undefined>();
   const [userState, setUserState] = useRecoilState(UserState);
+  const { trigger: registerEnsApi } = useRegisterEns();
 
   const onClaim = useCallback(() => {
     const fn = () => {
       if (!address || !username) return Promise.reject();
       const p = claimName(username);
       p.then((hash) => {
-        waitForTransaction({ hash, confirmations: 2 }).then(() => {
-          setUserState({ ...userState, ens: username });
-          setClaiming("success");
+        waitForTransaction({ hash }).then(() => {
+          registerEnsApi({ address, name: username }).then(() => {
+            setUserState({ ...userState, ens: username });
+            setClaiming("success");
+          });
         });
       });
       return p;
@@ -43,7 +47,7 @@ export const SetUsername = () => {
       setClaiming(undefined);
     });
     setClaiming("sent");
-  }, [address, username, claimName, setUserState, userState]);
+  }, [address, username, claimName, registerEnsApi, setUserState, userState]);
 
   useEffect(() => {
     if (address && !actualUsername) {
