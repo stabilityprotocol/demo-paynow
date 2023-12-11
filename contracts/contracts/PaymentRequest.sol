@@ -31,7 +31,7 @@ contract PaymentRequestContract {
         token = IERC20(_tokenAddress);
     }
 
-    function createRequest(address _target, uint256 _amount, string _memo) external {
+    function createRequest(address _target, uint256 _amount, string memory _memo) external {
         require(_target != address(0), "PaymentRequestContract: Target cannot be zero address");
         require(_amount > 0, "PaymentRequestContract: Amount must be greater than zero");
 
