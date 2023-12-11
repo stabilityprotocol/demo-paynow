@@ -54,7 +54,8 @@
       "total": "Total",
       "txn-completed": "Txn Completed",
       "cancel": "CANCEL",
-      "confirm": "CONFIRM"
+      "confirm": "CONFIRM",
+      "pending": "SENDING..."
     },
     "address": {
       "title": "SEND / REQUEST",

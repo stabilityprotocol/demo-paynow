@@ -4,16 +4,18 @@ import { UserIcon } from "../../components/UserIcon";
 import { AttributeWrapper, ButtonWrapper, PageTitle } from "../Request/Styles";
 import { Quantity } from "../Request/components/Quantity";
 import { RequestAttribute } from "../Request/components/RequestAttribute";
+import { waitForTransaction } from "@wagmi/core";
 import { TransferState } from "../../common/State/Transfer";
 import { useRecoilValue } from "recoil";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { shortAddress } from "../../common/ETH";
 import { parseUnits } from "ethers";
 
 export const Send = () => {
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
   const { symbol, transfer, decimals } = useERC20();
   const navigate = useNavigate();
   const transferState = useRecoilValue(TransferState);
@@ -23,7 +25,15 @@ export const Send = () => {
       transferState.formattedAmount!,
       decimals
     ).toString();
-    transfer(transferState.account!.address, amount).then(() => navigate("/"));
+
+    setLoading(true);
+
+    transfer(transferState.account!.address, amount)
+      .then((hash) => waitForTransaction({ hash, timeout: 30_000 }))
+      .catch(() => {
+        setLoading(false);
+      })
+      .then(() => navigate("/"));
   }, [
     decimals,
     navigate,
@@ -62,7 +72,9 @@ export const Send = () => {
       </AttributeWrapper>
 
       <ButtonWrapper>
-        <Button onClick={onSend}>{t("pages.send.confirm")}</Button>
+        <Button onClick={onSend}>
+          {loading ? t("pages.send.pending") : t("pages.send.confirm")}
+        </Button>
         <ButtonNoFilled onClick={() => navigate(-1)}>
           {t("pages.send.cancel")}
         </ButtonNoFilled>
