@@ -28,7 +28,7 @@ export const useENS = () => {
       const data = await readContract({
         address: EnsContract,
         abi: EnsABI,
-        functionName: "getAddressByName",
+        functionName: "getNameByAddress",
         args: [address],
       });
       return data;

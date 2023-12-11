@@ -7,4 +7,4 @@ export const Contracts: Record<string, { token: Address }> = {
 };
 
 export const EnsContract: Address =
-  "0x75015963F12e9EDeDcBbd28EfdF75AF4C5FB9d82";
+  "0xc4D1c939bBD143f12Ad44a69c6B9Ee767eBC2319";
