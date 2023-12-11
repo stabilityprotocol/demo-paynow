@@ -15,6 +15,7 @@ import { Navigate } from "react-router-dom";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { useTranslation } from "react-i18next";
 import { useAccount } from "wagmi";
+import { parseEther } from "viem";
 
 export const AddMoney = () => {
   const { address } = useAccount();
@@ -76,7 +77,7 @@ export const AddMoney = () => {
 };
 
 function randomEtherAmount(min: number, max: number): string {
-  return BigInt(
-    (Math.floor(Math.random() * (max - min + 1)) + min) * 1e18
+  return parseEther(
+    BigInt(Math.floor(Math.random() * (max - min + 1) + min)).toString()
   ).toString();
 }
