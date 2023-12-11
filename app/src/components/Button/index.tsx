@@ -75,6 +75,7 @@ const StyledButton = styled.button<{ noFill?: boolean }>`
       ? css`
           background: none;
           color: ${(props) => props.theme.colors.gray};
+          font-family: ${(props) => props.theme.font.secondary};
           border: 0;
         `
       : css`

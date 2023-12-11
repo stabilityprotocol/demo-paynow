@@ -8,7 +8,8 @@ export const QuantityWrapper = styled.div`
 `;
 
 export const TokenName = styled.p`
-    font-size: ${(props) => props.theme.fontSizes.medium};
+    font-size: ${(props) => props.theme.fontSizes.large};
+    font-family: ${(props) => props.theme.font.secondary};
     font-weight: 200;
 `;
 
