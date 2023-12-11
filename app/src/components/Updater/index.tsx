@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 import { UserState } from "../../common/State/User";
 import { useENS } from "../../common/hooks/useENS";
 import { useCallback, useEffect } from "react";
+import { watchAccount } from "@wagmi/core";
 
 export const Updater = () => {
   const [userState, setUserState] = useRecoilState(UserState);
@@ -30,6 +31,14 @@ export const Updater = () => {
   useEffect(() => {
     updateEns();
   }, [updateEns]);
+
+  useEffect(() => {
+    const unwatch = watchAccount((account) => {
+      console.log("Account changed to", account);
+      setUserState({});
+    });
+    return () => unwatch();
+  }, [setUserState]);
 
   return <></>;
 };
