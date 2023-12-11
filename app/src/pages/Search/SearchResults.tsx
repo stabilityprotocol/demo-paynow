@@ -22,7 +22,7 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
       {entries.map((entry) => {
         return (
           <SearchResultsItem onClick={() => onClick(entry)}>
-            <AccountLogo>JS</AccountLogo>
+            <AccountLogo>{entry.name.slice(0, 2)}</AccountLogo>
             <SearchResultsItemName>{entry.name}</SearchResultsItemName>
           </SearchResultsItem>
         );
@@ -63,6 +63,7 @@ const SearchResultsItemName = styled.span`
   display: flex;
   align-items: center;
   text-indent: ${(p) => p.theme.spacing.medium};
+  font-family: ${(p) => p.theme.font.secondary};
 `;
 
 const AccountLogo = styled.span`

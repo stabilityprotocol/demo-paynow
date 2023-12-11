@@ -67,6 +67,7 @@ const StyledButton = styled.button<{ noFill?: boolean }>`
   font-weight: 800;
   outline: 0;
   border-radius: ${(props) => props.theme.box.borderRadius};
+  border: 0;
   cursor: pointer;
   transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
 
@@ -95,6 +96,7 @@ const StyledButton = styled.button<{ noFill?: boolean }>`
 const StyledButtonAction = styled(StyledButton)`
   background: ${(props) => props.theme.colors.buttons.primary};
   color: ${(props) => props.theme.colors.bgBlue};
+  border: 0;
 
   &:hover {
     background: ${(props) => props.theme.colors.buttons.primaryHover};

@@ -42,7 +42,7 @@ export const AddMoney = () => {
     setClaiming("sent");
   }, [address, mint]);
 
-  if (claiming === "success") {
+  if (value && value > 0n && !!claiming) {
     return <Navigate to="/" />;
   }
 

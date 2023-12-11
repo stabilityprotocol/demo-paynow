@@ -1,5 +1,7 @@
+import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { Address } from "viem";
+import { EnsEntry } from "../models/EnsEntry";
 
 export async function fetcher<JSON = object>(
   url: RequestInfo,
@@ -25,6 +27,7 @@ const BASE_ENDPOINT = "https://vmfathvnna.us-east-2.awsapprunner.com/v1/ens";
 
 export const endpoints = {
   register: "/",
+  search: "/search?value=$1",
 } satisfies Record<string, string>;
 
 export function getApiEndpoint(
@@ -53,5 +56,36 @@ export function useRegisterEns() {
     isError: error,
     isMutating,
     trigger,
+  };
+}
+
+export interface SimilarEnsEntryDTO {
+  result: EnsEntry[];
+  status: "ok";
+}
+
+export function useSimilarENSNames(search: string) {
+  const isValid = search.length > 0;
+
+  const { data, error, isLoading } = useSWR<SimilarEnsEntryDTO>(
+    isValid ? getApiEndpoint("search", search) : null,
+    fetcher,
+    {
+      refreshInterval: 5_000,
+    }
+  );
+
+  if (search === "") {
+    return {
+      data: { result: null },
+      isLoading: false,
+      isError: false,
+    };
+  }
+
+  return {
+    data,
+    isLoading,
+    isError: error,
   };
 }

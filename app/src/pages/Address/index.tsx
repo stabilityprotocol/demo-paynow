@@ -1,8 +1,6 @@
 import { useRecoilState } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
 import {
-  AccountLogo,
-  AccountName,
   ActionButtonWrapper,
   AddressInformationWrapper,
   AddressSectionTitle,
@@ -22,9 +20,11 @@ import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonAction } from "../../components/Button";
 import { useTheme } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { shortAddress } from "../../common/ETH";
+import { UserIcon } from "../../components/UserIcon";
 
 export const AddressSection = () => {
-  const [account, setAccount] = useRecoilState(TransferState);
+  const [transfer, setAccount] = useRecoilState(TransferState);
   const theme = useTheme();
   const navigate = useNavigate();
   const { symbol } = useERC20();
@@ -47,14 +47,15 @@ export const AddressSection = () => {
     navigate("/search/request");
   }, [setAccount, amount, navigate]);
 
+  const displayName = useMemo(() => {
+    return transfer.account?.name || shortAddress(transfer.account!.address);
+  }, [transfer]);
+
   return (
     <AddressSectionWrapper>
       <AddressSectionTitle>{t("pages.address.title")}</AddressSectionTitle>
       <AddressInformationWrapper>
-        <AccountLogo>JS</AccountLogo>
-        <AccountName>
-          {account.account?.name || account.account?.address}
-        </AccountName>
+        <UserIcon name={displayName} letters={displayName.slice(0, 2)} />
       </AddressInformationWrapper>
       <TokenInputWrapper>
         <TokenAmountInput
