@@ -1,14 +1,16 @@
+import { useERC20 } from "../../../../common/hooks/useERC20";
 import { QuantityWrapper, TokenName, TokenQuantity } from "./Styles";
 
 export interface QuantityProps {
-    quantity: number;
+  quantity: number;
 }
 
 export const Quantity = (props: QuantityProps) => {
-    return (
-        <QuantityWrapper>
-            <TokenName>PyUSD</TokenName>
-            <TokenQuantity>{props.quantity}</TokenQuantity>
-        </QuantityWrapper>
-    )
-}
+  const { symbol } = useERC20();
+  return (
+    <QuantityWrapper>
+      <TokenName>{symbol}</TokenName>
+      <TokenQuantity>{props.quantity}</TokenQuantity>
+    </QuantityWrapper>
+  );
+};

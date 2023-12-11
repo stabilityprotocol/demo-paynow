@@ -43,6 +43,8 @@ export const Send = () => {
     <>
       <PageTitle>{t("pages.send.title")}</PageTitle>
       <UserIcon name={displayName} letters={displayName.slice(0, 2)} />
+      {transferState.account?.name &&
+        shortAddress(transferState.account!.address)}
       <Quantity quantity={parseFloat(transferState.formattedAmount!)} />
       <AttributeWrapper>
         <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />

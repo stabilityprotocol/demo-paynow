@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
+import { shortAddress } from "../../common/ETH";
 
 export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
   const navigate = useNavigate();
@@ -20,10 +21,11 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
   return (
     <SearchResultsWrapper>
       {entries.map((entry) => {
+        const displayName = entry.name || shortAddress(entry.address);
         return (
           <SearchResultsItem onClick={() => onClick(entry)}>
-            <AccountLogo>{entry.name.slice(0, 2)}</AccountLogo>
-            <SearchResultsItemName>{entry.name}</SearchResultsItemName>
+            <AccountLogo>{displayName.slice(0, 2)}</AccountLogo>
+            <SearchResultsItemName>{displayName}</SearchResultsItemName>
           </SearchResultsItem>
         );
       })}

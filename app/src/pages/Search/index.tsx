@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { SearchResults } from "./SearchResults";
 import { useDebounce } from "usehooks-ts";
 import { useSimilarENSNames } from "../../common/API/ENS";
+import { isAddress } from "viem";
 
 export const Search = () => {
   const { t } = useTranslation();
@@ -21,10 +22,6 @@ export const Search = () => {
   const theme = useTheme();
   const searchValue = useDebounce(value, 300);
   const { data } = useSimilarENSNames(searchValue);
-
-  const showSearchResults = useMemo(() => {
-    return data?.result;
-  }, [data?.result]);
 
   //@todo To be replaced with actual data
   const entries: EnsEntry[] = useMemo(
@@ -49,6 +46,16 @@ export const Search = () => {
     []
   );
 
+  const Results = useMemo(() => {
+    if (!data?.result) {
+      return <RecentContacts entries={entries} />;
+    }
+    if (data.result.length === 0 && isAddress(value)) {
+      return <SearchResults entries={[{ address: value, name: "" }]} />;
+    }
+    return <SearchResults entries={data.result} />;
+  }, [data?.result, entries, value]);
+
   return (
     <SearchWrapper>
       <SearchSectionTitle>{t("pages.search.title")}</SearchSectionTitle>
@@ -62,13 +69,7 @@ export const Search = () => {
           color={theme.colors.black}
         />
       </InputWrapper>
-      <ResultWrapper>
-        {showSearchResults ? (
-          <SearchResults entries={data!.result ?? []} />
-        ) : (
-          <RecentContacts entries={entries}></RecentContacts>
-        )}
-      </ResultWrapper>
+      <ResultWrapper>{Results}</ResultWrapper>
     </SearchWrapper>
   );
 };

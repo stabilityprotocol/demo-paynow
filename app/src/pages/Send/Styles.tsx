@@ -15,6 +15,10 @@ export const PageTitle = styled.h1`
   margin-bottom: ${(props) => props.theme.spacing.large};
 `;
 
+export const UserIconFooter = styled.span`
+  font-family: ${(props) => props.theme.font.secondary};
+`;
+
 export const AttributeWrapper = styled.div`
   display: flex;
   flex-direction: column;
