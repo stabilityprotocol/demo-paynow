@@ -21,6 +21,8 @@ import { AddMoney } from "./pages/AddMoney";
 import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
 import { Updater } from "./components/Updater";
+import { Search } from "./pages/Search";
+import { AddressSection } from "./pages/Address";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -50,7 +52,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/send",
+    path: "/search",
     element: (
       <ProtectedRoute>
         <Shell>
@@ -60,11 +62,19 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/send",
+        path: "/search",
+        element: <Search />,
+      },
+      {
+        path: "/search/address",
+        element: <AddressSection></AddressSection>,
+      },
+      {
+        path: "/search/send",
         element: <Send />,
       },
       {
-        path: "/send/request",
+        path: "/search/request",
         element: <Request />,
       },
     ],

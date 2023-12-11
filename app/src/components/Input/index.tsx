@@ -7,7 +7,9 @@ export const Input: React.FC<{
   onChange: (value: string) => void;
   disabled?: boolean;
   icon?: React.ReactNode;
-}> = ({ placeholder, onChange, icon, value, disabled }) => {
+  background?: string;
+  color?: string;
+}> = ({ placeholder, onChange, icon, value, disabled, background, color }) => {
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange(e.target.value);
@@ -16,7 +18,7 @@ export const Input: React.FC<{
   );
 
   return (
-    <InputWrapper icon={!!icon}>
+    <InputWrapper icon={!!icon} color={color} background={background}>
       {icon && icon}
       <InputComponent
         value={value}

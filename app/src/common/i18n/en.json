@@ -1,66 +1,76 @@
 {
-    "pages": {
-        "connect": {
-            "title": "LOGIN",
-            "magic": "MAGIC",
-            "metamask": "METAMASK",
-            "loading": "LOADING"
-        },
-        "add-money": {
-            "come-later": {
-                "title": "COME LATER",
-                "description": "You already have {{symbol}} in your wallet ({{amount}} {{symbol}}). Come back later to claim more.",
-                "button": "GO TO DASHBOARD"
-            },
-            "title": "ADD MONEY",
-            "description": "This demo is for demonstration purposes only. Because of this, we have created a fake token called {{symbol}}. You can claim {{symbol}} to your wallet by clicking the button below.",
-            "button": "CLAIM"
-        },
-        "receive": {
-            "button": "COPY ADDRESS",
-            "buttonPressed": "COPIED!",
-            "title": "RECEIVE",
-            "description": "This is an Stability wallet. Only send {{symbol}} or other ERC-20 tokensto this wallet."
-        },
-        "balance": {
-            "title": "BALANCE",
-            "recentTransactions": "View recent transactions",
-            "account": {
-                "title": "Magic Wallet"
-            }
-        },
-        "profile": {
-            "account": {
-                "title": "Wallet Address"
-            },
-            "usernameTitle": "Username",
-            "setProfileName": "SET USERNAME",
-            "helpCenter": "Help Center",
-            "logout": "Log Out"
-        },
-        "set-username": {
-            "title": "SET USERNAME",
-            "description": "PayNow uses a decentralized Name Service similar to ENS. Set a username to start sending or requesting money!",
-            "inputPlaceholder": "Enter username",
-            "button": "SETUP"
-        }
+  "pages": {
+    "connect": {
+      "title": "LOGIN",
+      "magic": "MAGIC",
+      "metamask": "METAMASK",
+      "loading": "LOADING"
     },
-    "components": {
-        "actionBar": {
-            "addMoney": "Add Money",
-            "sendRequest": "Send / Request",
-            "receive": "Receive"
-        }
+    "add-money": {
+      "come-later": {
+        "title": "COME LATER",
+        "description": "You already have {{symbol}} in your wallet ({{amount}} {{symbol}}). Come back later to claim more.",
+        "button": "GO TO DASHBOARD"
+      },
+      "title": "ADD MONEY",
+      "description": "This demo is for demonstration purposes only. Because of this, we have created a fake token called {{symbol}}. You can claim {{symbol}} to your wallet by clicking the button below.",
+      "button": "CLAIM"
     },
-    "links": {
-        "explorer": "https://stability-testnet.blockscout.com/",
-        "explorerTx": "https://stability-testnet.blockscout.com/tx/{{hash}}",
-        "explorerBlock": "https://stability-testnet.blockscout.com/block/{{blockNumber}}",
-        "explorerAddress": "https://stability-testnet.blockscout.com/address/{{address}}",
-        "docs": "https://docs.stabilityprotocol.com/",
-        "contactForm": "https://us21.list-manage.com/contact-form?u=8afbcbdb9e4fdad91bd87ce22&form_id=9e39027f0e20b64fe0eb9a79af776a0c",
-        "x": "https://x.com/stabilityinc",
-        "linkedin": "https://www.linkedin.com/company/stabilitysolutions/",
-        "testnet-api": "https://vzahfimc4y.us-east-2.awsapprunner.com/api"
+    "receive": {
+      "button": "COPY ADDRESS",
+      "buttonPressed": "COPIED!",
+      "title": "RECEIVE",
+      "description": "This is an Stability wallet. Only send {{symbol}} or other ERC-20 tokensto this wallet."
+    },
+    "balance": {
+      "title": "BALANCE",
+      "recentTransactions": "View recent transactions",
+      "account": {
+        "title": "Magic Wallet"
+      }
+    },
+    "profile": {
+      "account": {
+        "title": "Wallet Address"
+      },
+      "usernameTitle": "Username",
+      "setProfileName": "SET USERNAME"
+    },
+    "set-username": {
+      "title": "SET USERNAME",
+      "description": "PayNow uses a decentralized Name Service similar to ENS. Set a username to start sending or requesting money!",
+      "inputPlaceholder": "Enter username",
+      "button": "SETUP"
+    },
+    "search": {
+      "title": "SEND / REQUEST",
+      "placeholder": "Search username or wallet"
+    },
+    "address": {
+      "title": "SEND / REQUEST",
+      "amount": "Insert an amount",
+      "balance": "BALANCE",
+      "send": "SEND",
+      "request": "REQUEST",
+      "insufficient-funds": "Insufficient funds"
     }
+  },
+  "components": {
+    "actionBar": {
+      "addMoney": "Add Money",
+      "sendRequest": "Send / Request",
+      "receive": "Receive"
+    }
+  },
+  "links": {
+    "explorer": "https://stability-testnet.blockscout.com/",
+    "explorerTx": "https://stability-testnet.blockscout.com/tx/{{hash}}",
+    "explorerBlock": "https://stability-testnet.blockscout.com/block/{{blockNumber}}",
+    "explorerAddress": "https://stability-testnet.blockscout.com/address/{{address}}",
+    "docs": "https://docs.stabilityprotocol.com/",
+    "contactForm": "https://us21.list-manage.com/contact-form?u=8afbcbdb9e4fdad91bd87ce22&form_id=9e39027f0e20b64fe0eb9a79af776a0c",
+    "x": "https://x.com/stabilityinc",
+    "linkedin": "https://www.linkedin.com/company/stabilitysolutions/",
+    "testnet-api": "https://vzahfimc4y.us-east-2.awsapprunner.com/api"
+  }
 }
