@@ -1,5 +1,6 @@
+import { Button, ButtonNoFilled } from "../../components/Button";
 import { UserIcon } from "../../components/UserIcon";
-import { ButtonStyled } from "./Styles";
+import { ButtonWrapper } from "./Styles";
 import { AddMemo } from "./components/AddMemo";
 import { Quantity } from "./components/Quantity";
 import { RequestAttribute } from "./components/RequestAttribute";
@@ -15,7 +16,10 @@ export const Request = () => {
            <RequestAttribute name="Payment recieved" value="In Second"/>
 
 
-           <ButtonStyled>CONFIRM</ButtonStyled>
-           <ButtonStyled>cANCEL</ButtonStyled>
+            <ButtonWrapper>
+              <Button>CONFIRM</Button>
+              <ButtonNoFilled>CANCEL</ButtonNoFilled>
+            </ButtonWrapper>
+
           </>
 };

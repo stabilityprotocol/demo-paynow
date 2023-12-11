@@ -9,7 +9,7 @@ export const AddMemo = () => {
       {!isFocused && 
         <PlaceHolderWrapper>
             <PencilIcon/>
-            <AddMemoLabel>Add a memo</AddMemoLabel>
+            <AddMemoLabel>Optional: Add a memo</AddMemoLabel>
         </PlaceHolderWrapper>}
       <MemoInput 
         maxLength={100} 

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Button } from '../../components/Button';
 
-export const ButtonStyled = styled(Button)`
+export const ButtonWrapper = styled.div`
     width: 80%;
-    margin-top: ${(props) => props.theme.spacing.large};
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 `;
