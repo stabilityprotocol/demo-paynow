@@ -47,6 +47,7 @@ export const Theme = {
     dark1: "#404761",
     neutral: "#F4F4F4",
     neutralDark: "#DEDEDE",
+    neutralDarker: "#989898",
     bgBlue: "#2D3353",
     blue0: "#BAECFF",
     blue1: "#D6F3FF",
