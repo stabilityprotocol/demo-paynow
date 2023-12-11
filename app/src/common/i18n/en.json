@@ -34,7 +34,9 @@
         "title": "Wallet Address"
       },
       "usernameTitle": "Username",
-      "setProfileName": "SET USERNAME"
+      "setProfileName": "SET USERNAME",
+      "helpCenter": "Help Center",
+      "logout": "Log Out"
     },
     "set-username": {
       "title": "SET USERNAME",
