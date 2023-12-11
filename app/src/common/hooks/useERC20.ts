@@ -91,6 +91,6 @@ export const useERC20 = () => {
     allowance,
     approve,
     transferFrom,
-    transfer,
+    transfer
   };
 };

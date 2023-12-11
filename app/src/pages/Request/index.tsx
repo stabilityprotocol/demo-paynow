@@ -6,18 +6,43 @@ import { AttributeWrapper, ButtonWrapper, PageTitle, AddMemoWrapper } from "./St
 import { AddMemo } from "./components/AddMemo";
 import { Quantity } from "./components/Quantity";
 import { RequestAttribute } from "./components/RequestAttribute";
+import { useRecoilState } from "recoil";
+import { TransferState } from "../../common/State/Transfer";
+import { waitForTransaction } from '@wagmi/core'
+import { parseEther } from "viem";
+import { LoadingIcon } from "../../components/LoadingIcon";
 
 export const Request = () => {
   const [memo, setMemo] = useState('');
+  const [ transferState ] = useRecoilState(TransferState);
+  const [loading, setLoading] = useState(false);
 
   const { createRequest } = usePaymentRequest();
 
-  const handleCreateRequest = () => {
-    createRequest(
-      "0x8eB92711aa4Fa5D54fD41dB4A47C012bD66783cF",
-      "100",
-      memo,
-    );
+
+
+  const handleCreateRequest = async () => {
+    if (!transferState.account || !transferState.formattedAmount) {
+      console.log("no account or amount");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const hash = await createRequest(
+        transferState.account.address,
+        parseEther(transferState.formattedAmount).toString(),
+        memo,
+      );
+
+      const data = await waitForTransaction({hash});
+        
+      
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return <>
@@ -38,7 +63,9 @@ export const Request = () => {
 
 
             <ButtonWrapper>
-              <Button onClick={handleCreateRequest}>CONFIRM</Button>
+              <Button onClick={handleCreateRequest}>
+                { loading ? <LoadingIcon/> : "CONFIRM"}
+              </Button>
               <ButtonNoFilled>CANCEL</ButtonNoFilled>
             </ButtonWrapper>
 
