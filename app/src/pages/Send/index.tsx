@@ -8,29 +8,47 @@ import { TransferState } from "../../common/State/Transfer";
 import { useRecoilValue } from "recoil";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { shortAddress } from "../../common/ETH";
+import { parseUnits } from "ethers";
 
 export const Send = () => {
   const { t } = useTranslation();
-  const { symbol } = useERC20();
+  const { symbol, transfer, decimals } = useERC20();
   const navigate = useNavigate();
-  const transfer = useRecoilValue(TransferState);
+  const transferState = useRecoilValue(TransferState);
+
+  const onSend = useCallback(() => {
+    const amount = parseUnits(
+      transferState.formattedAmount!,
+      decimals
+    ).toString();
+    transfer(transferState.account!.address, amount).then(() => navigate("/"));
+  }, [
+    decimals,
+    navigate,
+    transfer,
+    transferState.account,
+    transferState.formattedAmount,
+  ]);
 
   const displayName = useMemo(() => {
-    return transfer.account?.name || shortAddress(transfer.account!.address);
-  }, [transfer]);
+    return (
+      transferState.account?.name ||
+      shortAddress(transferState.account!.address)
+    );
+  }, [transferState]);
 
   return (
     <>
       <PageTitle>{t("pages.send.title")}</PageTitle>
       <UserIcon name={displayName} letters={displayName.slice(0, 2)} />
-      <Quantity quantity={parseFloat(transfer.formattedAmount!)} />
+      <Quantity quantity={parseFloat(transferState.formattedAmount!)} />
       <AttributeWrapper>
         <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
         <RequestAttribute
           name={t("pages.send.total")}
-          value={`${transfer.formattedAmount} ${symbol}`}
+          value={`${transferState.formattedAmount} ${symbol}`}
         />
         <RequestAttribute
           name={t("pages.send.txn-completed")}
@@ -39,7 +57,7 @@ export const Send = () => {
       </AttributeWrapper>
 
       <ButtonWrapper>
-        <Button>{t("pages.send.confirm")}</Button>
+        <Button onClick={onSend}>{t("pages.send.confirm")}</Button>
         <ButtonNoFilled onClick={() => navigate(-1)}>
           {t("pages.send.cancel")}
         </ButtonNoFilled>

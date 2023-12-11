@@ -68,7 +68,7 @@ export const ColouredText = styled.span<{ color: string }>`
   color: ${(p) => p.color};
 `;
 
-export const ActionButtonWrapper = styled.div`
+export const ActionButtonWrapper = styled.div<{ disableButtons?: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -82,6 +82,8 @@ export const ActionButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    ${(p) => p.disableButtons && `opacity: 0.5`};
+    cursor: ${(p) => (p.disableButtons ? "not-allowed" : "pointer")};
   }
 `;
 

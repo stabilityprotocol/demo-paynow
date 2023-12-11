@@ -51,6 +51,10 @@ export const AddressSection = () => {
     return transfer.account?.name || shortAddress(transfer.account!.address);
   }, [transfer]);
 
+  const disableButtons = useMemo(() => {
+    return !enoughBalance || parseFloat(amount || "0") === 0;
+  }, [amount, enoughBalance]);
+
   return (
     <AddressSectionWrapper>
       <AddressSectionTitle>{t("pages.address.title")}</AddressSectionTitle>
@@ -77,12 +81,12 @@ export const AddressSection = () => {
             </ColouredText>
           )}
         </TokenBalanceAmount>
-        <ActionButtonWrapper>
-          <ButtonAction onClick={onSend}>
+        <ActionButtonWrapper disableButtons={disableButtons}>
+          <ButtonAction onClick={disableButtons ? undefined : onSend}>
             {t("pages.address.send")}
             <WhiteSendIcon />
           </ButtonAction>
-          <ButtonAction onClick={onRequest}>
+          <ButtonAction onClick={disableButtons ? undefined : onRequest}>
             {t("pages.address.request")}
             <WhiteThunderboltIcon />
           </ButtonAction>
