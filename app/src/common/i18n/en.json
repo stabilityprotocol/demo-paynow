@@ -48,6 +48,14 @@
       "title": "SEND / REQUEST",
       "placeholder": "Search username or wallet"
     },
+    "send": {
+      "title": "SEND",
+      "fee": "Fee",
+      "total": "Total",
+      "txn-completed": "Txn Completed",
+      "cancel": "CANCEL",
+      "confirm": "CONFIRM"
+    },
     "address": {
       "title": "SEND / REQUEST",
       "amount": "Insert an amount",

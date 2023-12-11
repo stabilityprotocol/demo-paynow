@@ -1,5 +1,5 @@
 import { Input } from "../Input";
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import {
   InputWrapper,
   MaxButton,
