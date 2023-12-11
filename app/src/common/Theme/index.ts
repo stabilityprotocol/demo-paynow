@@ -59,6 +59,7 @@ export const Theme = {
     green1: "#013709",
     white: "#FFF",
     black: "#000",
+    gray: "#535353",
     buttons: {
       primary: "#013709",
       primaryHover: "#005909",

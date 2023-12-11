@@ -61,7 +61,7 @@ const StyledButton = styled.button<{ noFill?: boolean }>`
   justify-content: center;
   padding: ${(props) => props.theme.spacing.medium}
     ${(props) => props.theme.spacing.large};
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.white};
   font-family: ${(props) => props.theme.font.primary};
   font-size: 1.2rem;
   font-weight: 800;
@@ -74,11 +74,11 @@ const StyledButton = styled.button<{ noFill?: boolean }>`
     props.noFill
       ? css`
           background: none;
+          color: ${(props) => props.theme.colors.gray};
           border: 0;
         `
       : css`
-          background: ${(props) => props.theme.colors.dark0};
-          border: 1px solid ${(props) => props.theme.colors.dark1};
+          background: ${(props) => props.theme.colors.primary};
 
           &:hover {
             background: ${(props) => props.theme.colors.dark1};
