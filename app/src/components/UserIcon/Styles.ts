@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const UserIconWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -18,8 +17,12 @@ export const UserIconCircle = styled.div`
   justify-content: center;
   align-items: center;
   font-size: ${(props) => props.theme.fontSizes.xxlarge};
-`
+`;
 
 export const Name = styled.span`
   font-family: ${(props) => props.theme.font.secondary};
+  max-width: 100%;
+  word-break: break-word;
+  display: inline-block;
+  text-align: center;
 `;

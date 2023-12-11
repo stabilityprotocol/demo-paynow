@@ -22,7 +22,7 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
       {entries.map((entry) => {
         return (
           <SearchResultsItem onClick={() => onClick(entry)}>
-            <AccountLogo>JS</AccountLogo>
+            <AccountLogo>{entry.name.slice(0, 2)}</AccountLogo>
             <SearchResultsItemName>{entry.name}</SearchResultsItemName>
           </SearchResultsItem>
         );

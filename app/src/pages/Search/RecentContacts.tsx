@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
+import { UserIcon } from "../../components/UserIcon";
 
 export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
   const navigate = useNavigate();
@@ -21,15 +22,12 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
     <RecentContactsWrapper>
       <RecentsContactsTitle>Recent Contacts</RecentsContactsTitle>
       <RecentContactsList>
-        {entries.map((entry) => (
-          <RecentContactsListItem
-            key={entry.address}
-            onClick={() => onClick(entry)}
-          >
-            <RecentContactsListItemImage>JS</RecentContactsListItemImage>
-            <RecentContactsListItemName>
-              {entry.name}
-            </RecentContactsListItemName>
+        {entries.map((entry, i) => (
+          <RecentContactsListItem key={i} onClick={() => onClick(entry)}>
+            <UserIcon
+              name={entry.name}
+              letters={entry.name.slice(0, 2)}
+            ></UserIcon>
           </RecentContactsListItem>
         ))}
       </RecentContactsList>
@@ -60,7 +58,6 @@ const RecentContactsList = styled.span`
 `;
 
 const RecentContactsListItem = styled.div`
-  flex: 0 0 27.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,24 +66,5 @@ const RecentContactsListItem = styled.div`
     cursor: pointer;
     transform: scale(1.01);
   }
-`;
-
-const RecentContactsListItemImage = styled.span`
-  width: 100%;
-  aspect-ratio: 1;
-  font-size: ${(p) => p.theme.fontSizes.large};
-  padding: ${(p) => p.theme.spacing.medium};
-  background: ${(p) => p.theme.colors.green0};
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const RecentContactsListItemName = styled.span`
-  text-align: center;
-  max-width: 100%;
-  word-break: break-word;
-  display: inline-block;
-  font-family: ${(p) => p.theme.font.secondary};
+  width: 25%;
 `;
