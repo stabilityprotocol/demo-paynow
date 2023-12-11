@@ -6,6 +6,8 @@ import {
   ConnectWrapper,
   LoadingWrapper,
 } from "./Styles";
+import { useLocalStorage } from "usehooks-ts";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 // @ts-expect-error: regarding the import of the svg
@@ -17,6 +19,24 @@ export const Connect = () => {
   const { isConnected, isConnecting } = useAccount();
   const { t } = useTranslation();
   const { connectors } = useConfig();
+  const [localStorage] = useLocalStorage(
+    "debugging",
+    JSON.stringify({
+      metamask: false,
+    })
+  );
+
+  const isMetamaskActive = useMemo(() => {
+    if (window.location.hostname.match(/localhost/)) return true;
+    if (!localStorage) return false;
+    try {
+      const { metamask } = JSON.parse(localStorage);
+      return metamask;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }, [localStorage]);
 
   const { connect } = useConnect({
     connector: connectors[1],
@@ -49,9 +69,7 @@ export const Connect = () => {
           {t("pages.connect.magic")}
           <Magic />
         </ButtonSmallAction>
-        {window.location.hostname.match(
-          /localhost/ || window.location.href.match(/metamask/)
-        ) && (
+        {isMetamaskActive && (
           <ButtonSmallAction onClick={() => connect()}>
             {t("pages.connect.metamask")}
           </ButtonSmallAction>
