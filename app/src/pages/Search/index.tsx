@@ -25,10 +25,22 @@ export const Search = () => {
   //@todo To be replaced with actual data
   const entries: EnsEntry[] = useMemo(
     () => [
-      { name: "john.smith.stability", address: "0xjhehf" },
-      { name: "john.smith.stability", address: "0xjhehf" },
-      { name: "john.smith.stability", address: "0xjhehf" },
-      { name: "john.smith.stability", address: "0xjhehf" },
+      {
+        name: "john.smith.stability",
+        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
+      },
+      {
+        name: "john.smith.stability",
+        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
+      },
+      {
+        name: "john.smith.stability",
+        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
+      },
+      {
+        name: "john.smith.stability",
+        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
+      },
     ],
     []
   );

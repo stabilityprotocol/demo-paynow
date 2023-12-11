@@ -1,12 +1,27 @@
 import styled from "styled-components";
 import { EnsEntry } from "../../common/models/EnsEntry";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { TransferState } from "../../common/State/Transfer";
 
 export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
+  const navigate = useNavigate();
+  const setAccount = useSetRecoilState(TransferState);
+
+  const onClick = useCallback(
+    (entry: EnsEntry) => {
+      setAccount({ account: entry });
+      navigate(`address`);
+    },
+    [navigate, setAccount]
+  );
+
   return (
     <SearchResultsWrapper>
       {entries.map((entry) => {
         return (
-          <SearchResultsItem>
+          <SearchResultsItem onClick={() => onClick(entry)}>
             <AccountLogo>JS</AccountLogo>
             <SearchResultsItemName>{entry.name}</SearchResultsItemName>
           </SearchResultsItem>

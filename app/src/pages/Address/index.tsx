@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
 import {
   AccountLogo,
@@ -16,15 +16,17 @@ import {
 } from "./Styles";
 import { useTranslation } from "react-i18next";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { TokenAmountInput } from "../../components/TokenAmountInput";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonAction } from "../../components/Button";
 import { useTheme } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export const AddressSection = () => {
-  const account = useRecoilValue(TransferState);
+  const [account, setAccount] = useRecoilState(TransferState);
   const theme = useTheme();
+  const navigate = useNavigate();
   const { symbol } = useERC20();
   const { t } = useTranslation();
 
@@ -34,6 +36,16 @@ export const AddressSection = () => {
   const enoughBalance = useMemo(() => {
     return Number(formatted) >= Number(amount);
   }, [formatted, amount]);
+
+  const onSend = useCallback(() => {
+    setAccount((prev) => ({ ...prev, formattedAmount: amount }));
+    navigate("/search/send");
+  }, [setAccount, amount, navigate]);
+
+  const onRequest = useCallback(() => {
+    setAccount((prev) => ({ ...prev, formattedAmount: amount }));
+    navigate("/search/request");
+  }, [setAccount, amount, navigate]);
 
   return (
     <AddressSectionWrapper>
@@ -65,11 +77,11 @@ export const AddressSection = () => {
           )}
         </TokenBalanceAmount>
         <ActionButtonWrapper>
-          <ButtonAction>
+          <ButtonAction onClick={onSend}>
             {t("pages.address.send")}
             <WhiteSendIcon />
           </ButtonAction>
-          <ButtonAction>
+          <ButtonAction onClick={onRequest}>
             {t("pages.address.request")}
             <WhiteThunderboltIcon />
           </ButtonAction>
