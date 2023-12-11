@@ -1,4 +1,4 @@
-import { UserIconWrapper, UserIconCircle } from "./Styles";
+import { UserIconWrapper, UserIconCircle, Name } from "./Styles";
 
 export interface UserIconProps {
     name: string;
@@ -9,7 +9,7 @@ export const UserIcon = (props: UserIconProps) => {
     return (
         <UserIconWrapper>
             <UserIconCircle>{props.letters}</UserIconCircle>
-            <p>{props.name}</p>
+            <Name>{props.name}</Name>
         </UserIconWrapper>
     );
 }
