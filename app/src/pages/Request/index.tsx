@@ -35,7 +35,7 @@ export const Request = () => {
         memo,
       );
 
-      const data = await waitForTransaction({hash});
+      await waitForTransaction({hash});
         
       
     } catch (e) {
