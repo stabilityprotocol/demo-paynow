@@ -70,8 +70,24 @@ export const useERC20 = () => {
     }
   };
 
+  const mint = async (to: Address, amount: string) => {
+    try {
+      const { request } = await prepareWriteContract({
+        ...wagmiTokenParams,
+        functionName: "mint",
+        args: [to, BigInt(amount)],
+      });
+      const { hash } = await writeContract(request);
+      return hash;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   return {
     ...data,
+    mint,
     allowance,
     approve,
     transferFrom,

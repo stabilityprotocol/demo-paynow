@@ -12,24 +12,28 @@ import {
 } from "./Styles";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { Navigate } from "react-router-dom";
-import { useFaucet } from "../../common/hooks/useFaucet";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { useTranslation } from "react-i18next";
+import { useAccount } from "wagmi";
 
 export const AddMoney = () => {
+  const { address } = useAccount();
   const { t } = useTranslation();
   const { symbol } = useERC20();
   const { value } = useAppBalance();
-  const { getTokens } = useFaucet();
+  const { mint } = useERC20();
   const [claiming, setClaiming] = useState<"sent" | "success" | undefined>();
 
   const onClaim = useCallback(() => {
+    if (!address) return;
     const fn = () => {
-      const p = getTokens();
+      const p = mint(address, randomEtherAmount(1000, 9999));
       p.then((hash) => {
-        waitForTransaction({ hash, confirmations: 2 }).then(() => {
-          setClaiming("success");
-        });
+        waitForTransaction({ hash, confirmations: 2, timeout: 30_000 }).then(
+          () => {
+            setClaiming("success");
+          }
+        );
       });
       return p;
     };
@@ -37,7 +41,7 @@ export const AddMoney = () => {
       setClaiming(undefined);
     });
     setClaiming("sent");
-  }, [getTokens]);
+  }, [address, mint]);
 
   if (claiming === "success") {
     return <Navigate to="/" />;
@@ -70,3 +74,9 @@ export const AddMoney = () => {
     </AddMoneyWrapper>
   );
 };
+
+function randomEtherAmount(min: number, max: number): string {
+  return BigInt(
+    (Math.floor(Math.random() * (max - min + 1)) + min) * 1e18
+  ).toString();
+}

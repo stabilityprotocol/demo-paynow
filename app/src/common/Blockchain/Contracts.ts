@@ -1,9 +1,8 @@
 import { Address } from "viem";
 
-export const Contracts: Record<string, { token: Address; faucet: Address }> = {
+export const Contracts: Record<string, { token: Address }> = {
   pyusd: {
-    token: "0xc266B0fca9C232811956CE4cd1fF90EFcdF44185",
-    faucet: "0x6106E403Bc358E4caBD3F64CA3bC78A74A079bdd",
+    token: "0xb253fAA010eC8DfC976232BF20c4fd340740A3Bf",
   },
 };
 

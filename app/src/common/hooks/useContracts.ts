@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { Contracts } from "../Blockchain/Contracts";
-import { erc20ABI } from "wagmi";
-import { FaucetABI } from "../ABI/Faucet";
+import { Erc20ABI } from "../ABI/ERC20";
 
 export const useContract = () => {
   const tokenAddress = useMemo(() => {
@@ -11,31 +10,15 @@ export const useContract = () => {
     return Contracts["pyusd"]["token"];
   }, []);
 
-  const faucetAddress = useMemo(() => {
-    if (window.location.href.includes("pyusd")) {
-      return Contracts["pyusd"]["faucet"];
-    }
-    return Contracts["pyusd"]["faucet"];
-  }, []);
-
   const wagmiTokenParams = useMemo(() => {
     return {
-      abi: erc20ABI,
+      abi: Erc20ABI,
       address: tokenAddress,
     };
   }, [tokenAddress]);
 
-  const wagmiFaucetParams = useMemo(() => {
-    return {
-      abi: FaucetABI,
-      address: faucetAddress,
-    };
-  }, [faucetAddress]);
-
   return {
-    wagmiFaucetParams,
     wagmiTokenParams,
     tokenAddress,
-    faucetAddress,
   };
 };
