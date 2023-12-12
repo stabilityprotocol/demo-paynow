@@ -26,7 +26,7 @@ export const useENS = () => {
     }
   };
 
-  const getNameByAdress = useCallback(
+  const getNameByAddress = useCallback(
     async (address: Address) => {
       try {
         if (has(address)) return get(address);
@@ -48,5 +48,5 @@ export const useENS = () => {
     [get, has, set]
   );
 
-  return { claimName, getNameByAdress };
+  return { claimName, getNameByAddress };
 };

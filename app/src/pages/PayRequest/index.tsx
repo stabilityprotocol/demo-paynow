@@ -36,7 +36,7 @@ export const PayRequest = () => {
     fullfillRequest,
     address: paymentRequestAddress,
   } = usePaymentRequest();
-  const { getNameByAdress } = useENS();
+  const { getNameByAddress } = useENS();
   const { address } = useAccount();
   const { value: balance } = useAppBalance();
 
@@ -100,10 +100,10 @@ export const PayRequest = () => {
 
   useEffect(() => {
     if (!request || !!displayName) return;
-    getNameByAdress(request.target).then((name) => {
+    getNameByAddress(request.target).then((name) => {
       setDisplayName(`${name}.stability` ?? shortAddress(request.target));
     });
-  }, [displayName, request, getNameByAdress]);
+  }, [displayName, request, getNameByAddress]);
 
   if (!request)
     return (
