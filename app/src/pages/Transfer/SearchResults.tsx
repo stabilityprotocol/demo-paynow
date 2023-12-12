@@ -24,11 +24,13 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
   return (
     <SearchResultsWrapper>
       {entries.map((entry) => {
-        const displayName = `${entry.name}.stability`;
+        const displayName = entry.name ? `${entry.name}.stability` : null;
         const address = shortAddress(entry.address);
         return (
           <SearchResultsItem onClick={() => onClick(entry)}>
-            <AccountLogo>{displayName.slice(0, 2).toUpperCase()}</AccountLogo>
+            <AccountLogo>
+              {displayName ? displayName.slice(0, 2).toUpperCase() : "0x"}
+            </AccountLogo>
             <SearchResultsItemName>
               <FlexSpan>{displayName}</FlexSpan>
               <FlexSpan>
