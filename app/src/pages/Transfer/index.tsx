@@ -29,7 +29,7 @@ export const Transfer = () => {
   const { data } = useSimilarENSNames(searchValue);
   const { recentTransactions } = useRecoilValue(UserState);
   const [entries, setEntries] = useState<EnsEntry[]>([]);
-  const { getNameByAdress } = useENS();
+  const { getNameByAddress } = useENS();
 
   const recommendedAddresses = useMemo(() => {
     let addresses = recentTransactions
@@ -53,12 +53,12 @@ export const Transfer = () => {
     if (!recommendedAddresses) return;
 
     const promises = recommendedAddresses.map(async (e) => ({
-      name: (await getNameByAdress(e)) ?? "",
+      name: (await getNameByAddress(e)) ?? "",
       address: e,
     }));
 
     Promise.all(promises).then((entries) => setEntries(entries));
-  }, [getNameByAdress, recommendedAddresses]);
+  }, [getNameByAddress, recommendedAddresses]);
 
   const Results = useMemo(() => {
     if (!data?.result) {
