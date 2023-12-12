@@ -100,3 +100,14 @@ export const WhiteThunderboltIcon = styled(AiFillThunderbolt)`
   color: ${(p) => p.theme.colors.white} !important;
   font-size: ${(p) => p.theme.fontSizes.large};
 `;
+
+export const DisablingButtonWrapper = styled.span<{
+  disable: boolean;
+}>`
+  height: fit-content;
+  width: fit-content;
+  > button {
+    ${(p) => p.disable && `opacity: 0.5`};
+    cursor: ${(p) => (p.disable ? "not-allowed" : "pointer")};
+  }
+`;
