@@ -27,19 +27,19 @@ export const Search = () => {
   const entries: EnsEntry[] = useMemo(
     () => [
       {
-        name: "john.smith.stability",
+        name: "john.smith",
         address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
       },
       {
-        name: "john.smith.stability",
+        name: "john.smith",
         address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
       },
       {
-        name: "john.smith.stability",
+        name: "john.smith",
         address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
       },
       {
-        name: "john.smith.stability",
+        name: "john.smith",
         address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
       },
     ],

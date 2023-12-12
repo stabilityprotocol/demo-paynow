@@ -43,10 +43,9 @@ export const Send = () => {
   ]);
 
   const displayName = useMemo(() => {
-    return (
-      transferState.account?.name ||
-      shortAddress(transferState.account!.address)
-    );
+    return transferState.account?.name
+      ? `${transferState.account.name}.stability`
+      : shortAddress(transferState.account!.address);
   }, [transferState]);
 
   return (

@@ -24,7 +24,9 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
       <RecentsContactsTitle>Recent Contacts</RecentsContactsTitle>
       <RecentContactsList>
         {entries.map((entry, i) => {
-          const displayName = entry.name || shortAddress(entry.address);
+          const displayName = entry.name
+            ? `${entry.name}.stability`
+            : shortAddress(entry.address);
 
           return (
             <RecentContactsListItem key={i} onClick={() => onClick(entry)}>

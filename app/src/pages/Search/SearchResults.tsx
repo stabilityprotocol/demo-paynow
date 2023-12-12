@@ -21,7 +21,9 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
   return (
     <SearchResultsWrapper>
       {entries.map((entry) => {
-        const displayName = entry.name || shortAddress(entry.address);
+        const displayName = entry.name
+          ? `${entry.name}.stability`
+          : shortAddress(entry.address);
         return (
           <SearchResultsItem onClick={() => onClick(entry)}>
             <AccountLogo>{displayName.slice(0, 2).toUpperCase()}</AccountLogo>

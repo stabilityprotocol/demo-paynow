@@ -48,7 +48,9 @@ export const AddressSection = () => {
   }, [setAccount, amount, navigate]);
 
   const displayName = useMemo(() => {
-    return transfer.account?.name || shortAddress(transfer.account!.address);
+    return transfer.account?.name
+      ? `${transfer.account.name}.stability`
+      : shortAddress(transfer.account!.address);
   }, [transfer]);
 
   const disableButtons = useMemo(() => {
