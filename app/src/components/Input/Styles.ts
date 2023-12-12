@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 
-export const InputWrapper = styled.div<{ icon?: boolean; background?: string }>`
+export const InputWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["icon"].includes(prop),
+})<{ icon?: boolean; background?: string }>`
   border-radius: ${(props) => props.theme.box.borderRadius};
   background: ${(props) => props.background ?? props.theme.colors.neutral};
   color: ${(props) => props.color ?? "inherit"};
