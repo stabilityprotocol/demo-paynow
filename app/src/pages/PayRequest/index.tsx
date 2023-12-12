@@ -109,7 +109,7 @@ export const PayRequest = () => {
     return (
       <LoadingIconWrapper>
         <LoadingIcon />
-        <div>{t("pages.pay-requests.loading")}</div>
+        <div>{t("pages.pay-request.loading")}</div>
       </LoadingIconWrapper>
     );
 
