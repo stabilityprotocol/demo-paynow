@@ -6,14 +6,12 @@ export const RequestAttributeWrapper = styled.div`
   line-height: 1rem;
 `;
 
-export const AttributeLabel = styled.p`
+export const AttributeLabel = styled.span`
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-family: ${(props) => props.theme.font.secondary};
-  margin: 0;
 `;
 
-export const AttributeValue = styled.p`
+export const AttributeValue = styled.span`
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-family: ${(props) => props.theme.font.secondary};
-  margin: 0;
 `;
