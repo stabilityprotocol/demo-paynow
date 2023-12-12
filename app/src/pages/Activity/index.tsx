@@ -1,11 +1,12 @@
 import { ActivityWrapper, ActivityTitle } from "./Styles";
-
 import { TransactionActivity } from "../../components/TransactionActivity";
+import { useTranslation } from "react-i18next";
 
 export const Activity = () => {
+  const { t } = useTranslation();
   return (
     <ActivityWrapper>
-      <ActivityTitle>ACTIVITY</ActivityTitle>
+      <ActivityTitle>{t("pages.activity.title")}</ActivityTitle>
       <TransactionActivity />
     </ActivityWrapper>
   );
