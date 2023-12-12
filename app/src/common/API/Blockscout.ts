@@ -1,5 +1,21 @@
 import useSWR from "swr";
-import { Address, Transaction } from "viem";
+import { Address } from "viem";
+
+export interface TransactionActivityData {
+  type: string;
+  timestamp: string;
+  to: { hash: string };
+  from: { hash: string };
+  token: {
+    name: string;
+    symbol: string;
+    decimals: string;
+  };
+  total: {
+    decimals: string;
+    value: string;
+  };
+}
 
 export async function fetcher<JSON = object>(
   input: RequestInfo,
@@ -12,14 +28,19 @@ export async function fetcher<JSON = object>(
 const BASE_ENDPOINT = "https://stability-testnet.blockscout.com/api";
 
 export const endpoints = {
-  addressTransactions: "/v2/addresses/$1/transactions",
+  addressTokenTransfers: "/v2/addresses/$1/token-transfers",
 } satisfies Record<string, string>;
 
 export function getApiEndpoint(
   endpointName: keyof typeof endpoints,
-  replace?: string
+  replace?: string,
+  query?: string
 ) {
-  const endpoint = BASE_ENDPOINT + endpoints[endpointName];
+  let endpoint = BASE_ENDPOINT + endpoints[endpointName];
+
+  if (query) {
+    endpoint = endpoint + "?" + query;
+  }
   if (replace) {
     return endpoint.replace("$1", replace);
   }
@@ -30,8 +51,14 @@ export function useAddressTransactions(
   address: Address,
   tokenAddress: Address
 ) {
-  const { data, error, isLoading } = useSWR<{ result: Transaction[] }>(
-    getApiEndpoint("addressTransactions", address),
+  const { data, error, isLoading } = useSWR<{
+    items: TransactionActivityData[];
+  }>(
+    getApiEndpoint(
+      "addressTokenTransfers",
+      address,
+      `type=ERC-20%2CERC-721%2CERC-1155&token=${tokenAddress}`
+    ),
     fetcher,
     {
       revalidateOnFocus: false,
@@ -39,9 +66,7 @@ export function useAddressTransactions(
   );
 
   if (data) {
-    data.result = data.result.filter(
-      (tx) => tx.to === tokenAddress || tx.from === tokenAddress
-    );
+    data.items = data.items.filter((tx) => tx.type == "token_transfer");
   }
 
   return {
