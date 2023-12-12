@@ -10,7 +10,6 @@ export const ButtonWrapper = styled.div`
 
 export const PageTitle = styled.div`
   font-family: ${(props) => props.theme.font.primary};
-  font-weight: 500;
   font-size: ${(props) => props.theme.fontSizes.xlarge};
   margin-bottom: ${(props) => props.theme.spacing.large};
 `;

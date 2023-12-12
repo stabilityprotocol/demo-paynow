@@ -41,7 +41,6 @@ export const MaxButton = styled.button<{ onMax?: boolean }>`
   background: inherit;
   padding: ${(p) => p.theme.spacing.xsmall};
   border-radius: ${(p) => p.theme.box.borderRadius};
-  font-weight: 500;
   font-size: ${(p) => p.theme.fontSizes.medium};
   &:hover {
     cursor: pointer;

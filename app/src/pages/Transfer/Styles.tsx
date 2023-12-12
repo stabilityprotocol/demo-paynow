@@ -9,7 +9,6 @@ export const SearchWrapper = styled.div`
 
 export const SearchSectionTitle = styled.div`
   font-family: ${(props) => props.theme.font.primary};
-  font-weight: 500;
   color: ${(props) => props.theme.colors.green1};
   font-size: ${(props) => props.theme.fontSizes.large};
   margin-bottom: ${(props) => props.theme.spacing.large};
