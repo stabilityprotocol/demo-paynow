@@ -7,13 +7,14 @@ import { useCallback, useEffect } from "react";
 import { watchAccount } from "@wagmi/core";
 import { useAddressTransactions } from "../../common/API/Blockscout";
 import { useContract } from "../../common/hooks/useContracts";
-import { formatActivityData } from "../TransactionActivity/FormatData";
+import { useRecentTransactions } from "../../common/hooks/useRecentTransactions";
 
 export const Updater = () => {
   const [userState, setUserState] = useRecoilState(UserState);
   const { address } = useAccount();
   const { tokenAddress } = useContract();
   const { getNameByAdress } = useENS();
+  const { updateRecentTransactions } = useRecentTransactions();
   const { data, isLoading } = useAddressTransactions(address, tokenAddress);
 
   const updateEns = useCallback(() => {
@@ -36,26 +37,6 @@ export const Updater = () => {
   useEffect(() => {
     updateEns();
   }, [updateEns]);
-
-  const updateRecentTransactions = useCallback(() => {
-    if (!data || isLoading) {
-      return;
-    }
-
-    const recentTransactions = formatActivityData(data);
-
-    setUserState((prevState) => ({
-      ...prevState,
-      recentTransactions,
-    }));
-  }, [isLoading, data, setUserState]);
-
-  useInterval(
-    () => {
-      updateRecentTransactions();
-    },
-    typeof userState.recentTransactions === "undefined" ? 10_000 : null
-  );
 
   useEffect(() => {
     updateRecentTransactions();
