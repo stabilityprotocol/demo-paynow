@@ -14,5 +14,4 @@ export const ActivityTitle = styled.h1`
   letter-spacing: 0.1rem;
   font-size: ${(props) => props.theme.fontSizes.large};
   color: ${(props) => props.theme.colors.green1};
-  font-weight: 500;
 `;
