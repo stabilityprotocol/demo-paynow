@@ -76,6 +76,14 @@
       },
       "cancel": "CANCEL",
       "confirm": "CONFIRM"
+    },
+    "activity": {
+      "title": "ACTIVITY",
+      "transactionTypes": {
+        "send": "Send",
+        "receive": "Receive",
+        "request": "Request"
+      }
     }
   },
   "components": {
