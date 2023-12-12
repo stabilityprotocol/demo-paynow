@@ -44,6 +44,7 @@ export const TokenAmountInput: FC<TokenAmountInputProps> = ({
           placeholder={placeholder}
           color={color}
           background={background}
+          type="number"
         />
       </InputWrapper>
       <MaxButton
