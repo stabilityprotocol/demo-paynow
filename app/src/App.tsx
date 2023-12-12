@@ -23,6 +23,7 @@ import { SetUsername } from "./pages/SetUsername";
 import { Updater } from "./components/Updater";
 import { Search } from "./pages/Search";
 import { TransferAddress } from "./pages/TransferAddress";
+import { PayRequest } from "./pages/PayRequest";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -108,6 +109,22 @@ const router = createBrowserRouter([
       {
         path: "/receive",
         element: <Receive />,
+      },
+    ],
+  },
+  {
+    path: "/pay-request",
+    element: (
+      <ProtectedRoute>
+        <Shell>
+          <FullScreen />
+        </Shell>
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/pay-request/:id",
+        element: <PayRequest />,
       },
     ],
   },

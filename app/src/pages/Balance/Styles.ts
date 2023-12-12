@@ -8,7 +8,7 @@ export const BalanceUpperSection = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 60%;
+  height: 55%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -50,9 +50,10 @@ export const BalanceLowerSection = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 40%;
+  height: 45%;
   background: ${(props) => props.theme.colors.bgGreen};
-  padding: ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.small}
+    ${(props) => props.theme.spacing.medium};
   display: flex;
   flex-direction: column;
 `;
