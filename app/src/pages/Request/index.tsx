@@ -29,6 +29,17 @@ export const Request = () => {
   const { t } = useTranslation();
   const { createRequest } = usePaymentRequest();
 
+  const imageLetters = useMemo(() => {
+    if (!transferState.account?.name) return "?";
+    // get initials delimitated by hyphen or dot and uppercase them with limit of 2
+    const initials = transferState.account.name
+      .split(/[-.]/)
+      .map((word) => word.charAt(0).toUpperCase())
+      .join("")
+      .substring(0, 2);
+    return initials;
+  }, [transferState.account?.name]);
+
   const displayName = useMemo(() => {
     return transferState.account?.name
       ? `${transferState.account.name}.stability`
@@ -62,10 +73,7 @@ export const Request = () => {
   return (
     <>
       <PageTitle>{t("pages.request.title")}</PageTitle>
-      <UserIcon
-        name={displayName}
-        letters={displayName.slice(0, 2).toUpperCase()}
-      />
+      <UserIcon name={displayName} letters={imageLetters} />
       {transferState.account?.name &&
         shortAddress(transferState.account!.address)}
       <Quantity quantity={transferState.formattedAmount ?? ""} />

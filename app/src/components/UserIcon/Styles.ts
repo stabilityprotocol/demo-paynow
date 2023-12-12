@@ -9,8 +9,8 @@ export const UserIconWrapper = styled.div`
 `;
 
 export const UserIconCircle = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   background: ${(props) => props.theme.colors.green0};
   display: flex;

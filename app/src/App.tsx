@@ -21,7 +21,7 @@ import { AddMoney } from "./pages/AddMoney";
 import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
 import { Updater } from "./components/Updater";
-import { Search } from "./pages/Search";
+import { Transfer } from "./pages/Transfer";
 import { TransferAddress } from "./pages/TransferAddress";
 import { PayRequest } from "./pages/PayRequest";
 
@@ -64,11 +64,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/transfer",
-        element: <Search />,
+        element: <Transfer />,
       },
       {
         path: "/transfer/address",
-        element: <TransferAddress></TransferAddress>,
+        element: <TransferAddress />,
       },
       {
         path: "/transfer/send",

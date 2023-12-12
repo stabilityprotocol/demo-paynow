@@ -16,7 +16,7 @@ import { useDebounce } from "usehooks-ts";
 import { useSimilarENSNames } from "../../common/API/ENS";
 import { isAddress } from "viem";
 
-export const Search = () => {
+export const Transfer = () => {
   const { t } = useTranslation();
   const [value, setValue] = useState("");
   const theme = useTheme();
