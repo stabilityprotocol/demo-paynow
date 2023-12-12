@@ -1,6 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { PiNotePencilFill } from "react-icons/pi";
-
 
 export const MemoInputWrapper = styled.div`
   display: flex;
@@ -19,15 +18,15 @@ export const PencilIcon = styled(PiNotePencilFill)`
 `;
 
 export const PlaceHolderWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: left;
-    padding: ${(props) => props.theme.spacing.small};
-    font-size: ${(props) => props.theme.fontSizes.small};
-    gap: ${(props) => props.theme.spacing.small};
-    position: absolute;
-    pointer-events: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: left;
+  padding: ${(props) => props.theme.spacing.small};
+  font-size: ${(props) => props.theme.fontSizes.small};
+  gap: ${(props) => props.theme.spacing.small};
+  position: absolute;
+  pointer-events: none;
 `;
 
 export const AddMemoLabel = styled.span`
@@ -56,7 +55,7 @@ export const MemoInput = styled.textarea`
   width: 100%;
   height: 100%;
   resize: none;
-  
+
   &::placeholder {
     color: ${(props) => props.theme.colors.dark0};
   }
