@@ -7,21 +7,36 @@ export const useCache = (namespace: string) => {
 
   const get = useCallback(
     (key: string) => {
-      return cache[`${namespace}.${key}`] ? cache[`${namespace}.${key}`] : null;
+      const cacheNamespace = cache[namespace];
+      if (!cacheNamespace) return null;
+      const cacheEntry = cacheNamespace[key];
+      if (cacheEntry === undefined || cacheEntry.expires < Date.now()) {
+        return null;
+      }
+      return cacheEntry.value;
     },
     [cache, namespace]
   );
 
   const has = useCallback(
     (key: string) => {
-      return !!cache[`${namespace}.${key}`];
+      const cacheInstance = cache[namespace];
+      if (!cacheInstance) return null;
+      const cacheEntry = cacheInstance[key];
+      return cacheEntry !== undefined && cacheEntry.expires >= Date.now();
     },
     [cache, namespace]
   );
 
   const set = useCallback(
-    (key: string, value: string) => {
-      setCache((prev) => ({ ...prev, [`${namespace}.${key}`]: value }));
+    (key: string, value: string, ttlInSeconds: number = 3600) => {
+      setCache((prev) => ({
+        ...prev,
+        [namespace]: {
+          ...prev[namespace],
+          [key]: { value, expires: Date.now() + 1000 * ttlInSeconds },
+        },
+      }));
     },
     [setCache, namespace]
   );
