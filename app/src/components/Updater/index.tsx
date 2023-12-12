@@ -37,29 +37,29 @@ export const Updater = () => {
     updateEns();
   }, [updateEns]);
 
-  const updateActivityTransactions = useCallback(() => {
+  const updateRecentTransactions = useCallback(() => {
     if (!data || isLoading) {
       return;
     }
 
-    const activityTransactions = formatActivityData(data);
+    const recentTransactions = formatActivityData(data);
 
     setUserState((prevState) => ({
       ...prevState,
-      activityTransactions,
+      recentTransactions,
     }));
   }, [isLoading, data, setUserState]);
 
   useInterval(
     () => {
-      updateActivityTransactions();
+      updateRecentTransactions();
     },
-    typeof userState.activityTransactions === "undefined" ? 10_000 : null
+    typeof userState.recentTransactions === "undefined" ? 10_000 : null
   );
 
   useEffect(() => {
-    updateActivityTransactions();
-  }, [data, isLoading, updateActivityTransactions]);
+    updateRecentTransactions();
+  }, [data, isLoading, updateRecentTransactions]);
 
   useEffect(() => {
     const unwatch = watchAccount((account) => {

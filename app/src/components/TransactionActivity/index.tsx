@@ -36,11 +36,11 @@ import {
 
 export const TransactionActivity = () => {
   const { address } = useAccount();
-  const { activityTransactions } = useRecoilValue(UserState);
+  const { recentTransactions } = useRecoilValue(UserState);
 
-  return activityTransactions && address ? (
+  return recentTransactions && address ? (
     <TransactionActivityWrapper>
-      {activityTransactions.map(
+      {recentTransactions.map(
         (
           stack: { date: string; items: TransactionActivityData[] },
           i: number
