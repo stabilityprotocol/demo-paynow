@@ -1,14 +1,19 @@
 import styled from "styled-components";
-import { TransactionActivityStatus } from "../../common/models/TransactionActivity";
+import {
+  TransactionActivityStatus,
+  TransactionActivityType,
+} from "../../common/models/TransactionActivity";
 
 export const TransactionActivityWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width: 100%;
   height: 100%;
   align-items: center;
   justify-content: flex-start;
   gap: ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.small}
+    ${(props) => props.theme.spacing.medium};
 `;
 
 export const TransactionActivityStack = styled.div`
@@ -50,7 +55,7 @@ export const TransactionIconWrapper = styled.div`
 `;
 
 export const IconBubble = styled.div<{
-  status: TransactionActivityStatus;
+  transactionType?: TransactionActivityType;
 }>`
   display: flex;
   width: 100%;
@@ -59,13 +64,9 @@ export const IconBubble = styled.div<{
   justify-content: center;
   border-radius: 50%;
   background-color: ${(props) => {
-    switch (props.status) {
-      case "Done":
-        return props.theme.colors.green0;
-      case "Pending":
+    switch (props.transactionType) {
+      case "Request":
         return props.theme.colors.blue0;
-      case "Error":
-        return props.theme.colors.red0;
       default:
         return props.theme.colors.green0;
     }
@@ -75,13 +76,9 @@ export const IconBubble = styled.div<{
     width: 60%;
     height: 60%;
     color: ${(props) => {
-      switch (props.status) {
-        case "Done":
-          return props.theme.colors.green1;
-        case "Pending":
+      switch (props.transactionType) {
+        case "Request":
           return props.theme.colors.blue2;
-        case "Error":
-          return props.theme.colors.red1;
         default:
           return props.theme.colors.green1;
       }

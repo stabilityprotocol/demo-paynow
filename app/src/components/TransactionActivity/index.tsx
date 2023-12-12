@@ -12,13 +12,11 @@ import {
   TransactionOwnerWrapper,
   StatusBubble,
 } from "./Styles";
-
 import {
   PiArrowCircleDownLeftFill,
   PiArrowCircleUpRightFill,
   PiLightningFill,
 } from "react-icons/pi";
-
 import { useMemo, useEffect, useCallback, useState } from "react";
 import { useAccount } from "wagmi";
 import { TransactionActivityData } from "../../common/models/TransactionActivity";
@@ -35,65 +33,60 @@ import {
 } from "../../common/models/TransactionActivity";
 
 export const TransactionActivity = () => {
-  const { address } = useAccount();
   const { recentTransactions } = useRecoilValue(UserState);
 
-  return recentTransactions && address ? (
+  return recentTransactions.length > 0 ? (
     <TransactionActivityWrapper>
-      {recentTransactions.map(
-        (
-          stack: { date: string; items: TransactionActivityData[] },
-          i: number
-        ) => (
-          <TransactionActivityStack key={i}>
-            <TransactionDate>{stack.date}</TransactionDate>
-            {stack.items.map((item: TransactionActivityData, j: number) => (
-              <TransactionActivityItem
-                key={j}
-                type={
-                  item.from.hash == address
-                    ? TransactionActivityType.SEND
-                    : TransactionActivityType.RECEIVE
-                }
-                item={item}
-                status={TransactionActivityStatus.DONE}
-              />
-            ))}
-          </TransactionActivityStack>
-        )
-      )}
+      {recentTransactions.map((stack, i) => (
+        <TransactionActivityStack key={i}>
+          <TransactionDate>{stack.date}</TransactionDate>
+          {stack.items.map((item, j) => (
+            <TransactionActivityItem key={j} item={item} />
+          ))}
+        </TransactionActivityStack>
+      ))}
     </TransactionActivityWrapper>
-  ) : null;
+  ) : (
+    <div>No transactions found</div>
+  );
 };
 
-export const TransactionActivityItem = ({
-  type,
-  status,
-  item,
-}: {
-  type: TransactionActivityType;
-  status: TransactionActivityStatus;
+const TransactionActivityItem: React.FC<{
   item: TransactionActivityData;
-}) => {
-  const [displayAddress, setDisplayAddress] = useState<string>("");
-  const { getNameByAdress } = useENS();
+}> = ({ item }) => {
+  const [displayAddress, setDisplayAddress] = useState<string | undefined>();
+  const { getNameByAddress } = useENS();
   const { t } = useTranslation();
+  const { address } = useAccount();
 
   const handleAddress = useCallback(
     async (adress: Address) => {
-      const result = await getNameByAdress(adress);
-
+      const result = await getNameByAddress(adress);
       if (!result || result == "") {
         setDisplayAddress(shortAddress(adress));
       } else {
         setDisplayAddress(result.concat(".stability"));
       }
     },
-    [getNameByAdress]
+    [getNameByAddress]
   );
 
+  const transactionType = useMemo(() => {
+    if (!address) return undefined;
+    if (item.method === "fulfillRequest") {
+      if (item.from.hash === address) {
+        return TransactionActivityType.REQUEST;
+      }
+      return TransactionActivityType.RECEIVE;
+    }
+    if (item.from.hash === address) {
+      return TransactionActivityType.SEND;
+    }
+    return TransactionActivityType.RECEIVE;
+  }, [address, item]);
+
   const TransactionActivityData = useMemo(() => {
-    switch (type) {
+    switch (transactionType) {
       case "Send":
         return {
           icon: <PiArrowCircleUpRightFill />,
@@ -119,16 +112,22 @@ export const TransactionActivityItem = ({
           displayAddress: item.to.hash,
         };
     }
-  }, [type, item.from.hash, item.to.hash, t]);
+  }, [transactionType, item.from.hash, item.to.hash, t]);
+
+  const status = useMemo(() => TransactionActivityStatus.DONE, []);
 
   useEffect(() => {
-    handleAddress(TransactionActivityData.displayAddress as Address);
-  }, [TransactionActivityData.displayAddress, handleAddress]);
+    if (displayAddress === undefined) {
+      handleAddress(TransactionActivityData.displayAddress as Address);
+    }
+  }, [TransactionActivityData.displayAddress, displayAddress, handleAddress]);
 
   return (
     <TransactionActivityItemWrapper>
       <TransactionIconWrapper>
-        <IconBubble status={status}>{TransactionActivityData.icon}</IconBubble>
+        <IconBubble transactionType={transactionType}>
+          {TransactionActivityData.icon}
+        </IconBubble>
       </TransactionIconWrapper>
       <TransactionDataWrapper>
         <TransactionDetailsWrapper>
