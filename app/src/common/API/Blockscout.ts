@@ -33,7 +33,7 @@ export function useAddressTransactions(
   tokenAddress: Address
 ) {
   const { data, error, isLoading, mutate } = useSWR<{
-    items: TransactionActivityData[];
+    items?: TransactionActivityData[];
   }>(
     address
       ? getApiEndpoint("addressTokenTransfers", [address, tokenAddress])
@@ -44,7 +44,7 @@ export function useAddressTransactions(
     }
   );
 
-  if (data) {
+  if (data && data.items) {
     data.items = data.items.filter((tx) => tx.type == "token_transfer");
   }
 
