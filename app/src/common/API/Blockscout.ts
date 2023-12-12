@@ -1,21 +1,6 @@
 import useSWR from "swr";
 import { Address } from "viem";
-
-export interface TransactionActivityData {
-  type: string;
-  timestamp: string;
-  to: { hash: string };
-  from: { hash: string };
-  token: {
-    name: string;
-    symbol: string;
-    decimals: string;
-  };
-  total: {
-    decimals: string;
-    value: string;
-  };
-}
+import { TransactionActivityData } from "../models/TransactionActivity";
 
 export async function fetcher<JSON = object>(
   input: RequestInfo,
@@ -48,7 +33,7 @@ export function getApiEndpoint(
 }
 
 export function useAddressTransactions(
-  address: Address,
+  address: Address | undefined,
   tokenAddress: Address
 ) {
   const { data, error, isLoading } = useSWR<{

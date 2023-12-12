@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export const AddMemo = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [memo, setMemo] = useState("");
+  const [memo, setMemo] = useState(props.value || "");
   const { t } = useTranslation();
 
   const handleMemoChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

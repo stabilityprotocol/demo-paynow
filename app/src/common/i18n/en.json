@@ -13,7 +13,7 @@
         "button": "GO TO DASHBOARD"
       },
       "title": "ADD MONEY",
-      "description": "This demo is for demonstration purposes only. Because of this, we have created a fake token called {{symbol}}. You can claim {{symbol}} to your wallet by clicking the button below.",
+      "description": "This demo is for demonstration purposes only. As such, we have created a demo token called {{symbol}}. You can claim these {{symbol}} tokens to your wallet by clicking the button below.",
       "button": "CLAIM"
     },
     "receive": {
@@ -25,8 +25,11 @@
     "balance": {
       "title": "BALANCE",
       "recentTransactions": "View recent transactions",
-      "account": {
-        "title": "Magic Wallet"
+      "pendingRequest": {
+        "title": "Request",
+        "status": "Pending",
+        "fromLabel": "From",
+        "actionButton": "PAY NOW"
       }
     },
     "profile": {
@@ -53,6 +56,7 @@
       "fee": "Fee",
       "total": "Total",
       "txn-completed": "Txn Completed",
+      "txn-completed-time": "In Seconds",
       "cancel": "CANCEL",
       "confirm": "CONFIRM",
       "pending": "SENDING..."
@@ -76,6 +80,18 @@
       },
       "cancel": "CANCEL",
       "confirm": "CONFIRM"
+    },
+    "activity": {
+      "title": "ACTIVITY",
+      "transactionTypes": {
+        "send": "Send",
+        "receive": "Receive",
+        "request": "Request"
+      }
+    },
+    "pay-request": {
+      "title": "PAY REQUEST",
+      "loading": "LOADING",
     }
   },
   "components": {

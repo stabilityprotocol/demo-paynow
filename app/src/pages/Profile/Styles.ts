@@ -53,6 +53,7 @@ export const ProfileName = styled.span`
 `;
 
 export const SetProfileName = styled.span`
+  position: relative;
   color: ${(props) => props.theme.colors.green1};
   font-weight: 800;
   font-size: ${(props) => props.theme.fontSizes.small};
@@ -65,6 +66,17 @@ export const SetProfileName = styled.span`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: -${(props) => props.theme.spacing.xsmall};
+    right: -${(props) => props.theme.spacing.xsmall};
+    background: ${(props) => props.theme.colors.red2};
+    border-radius: 50%;
+    height: 0.7rem;
+    width: 0.7rem;
   }
 `;
 

@@ -20,42 +20,27 @@ import {
 } from "react-icons/pi";
 
 import { useMemo, useEffect, useCallback, useState } from "react";
-import { useAddressTransactions } from "../../common/API/Blockscout";
-import { useContract } from "../../common/hooks/useContracts";
 import { useAccount } from "wagmi";
-import { formatActivityData } from "./FormatData";
-import { TransactionActivityData } from "../../common/API/Blockscout";
+import { TransactionActivityData } from "../../common/models/TransactionActivity";
 import { formatUnits } from "ethers";
 import { shortAddress } from "../../common/ETH";
-
-export type TransactionActivityType = "Send" | "Receive" | "Request";
-export type TransactionActivityStatus = "Done" | "Pending" | "Error";
+import { useENS } from "../../common/hooks/useENS";
+import { Address } from "wagmi";
+import { useTranslation } from "react-i18next";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../common/State/User";
+import {
+  TransactionActivityStatus,
+  TransactionActivityType,
+} from "../../common/models/TransactionActivity";
 
 export const TransactionActivity = () => {
-  const { tokenAddress } = useContract();
   const { address } = useAccount();
-  const [activityData, setActivityData] =
-    useState<{ date: string; items: TransactionActivityData[] }[]>();
-  const { data, isLoading, isError } = useAddressTransactions(
-    address || "0x",
-    tokenAddress
-  );
+  const { recentTransactions } = useRecoilValue(UserState);
 
-  const onInit = useCallback(async () => {
-    if (isLoading || isError) return;
-
-    if (!data) return;
-
-    setActivityData(formatActivityData(data));
-  }, [isLoading, isError, data]);
-
-  useEffect(() => {
-    onInit();
-  }, [onInit, data, isLoading, isError, address]);
-
-  return activityData && address ? (
+  return recentTransactions && address ? (
     <TransactionActivityWrapper>
-      {activityData.map(
+      {recentTransactions.map(
         (
           stack: { date: string; items: TransactionActivityData[] },
           i: number
@@ -65,14 +50,13 @@ export const TransactionActivity = () => {
             {stack.items.map((item: TransactionActivityData, j: number) => (
               <TransactionActivityItem
                 key={j}
-                type={item.from.hash == address ? "Send" : "Receive"}
-                status="Done"
-                amount={formatUnits(
-                  item.total.value,
-                  Number(item.token.decimals)
-                )}
-                tokenSymbol={item.token.symbol}
-                address={address}
+                type={
+                  item.from.hash == address
+                    ? TransactionActivityType.SEND
+                    : TransactionActivityType.RECEIVE
+                }
+                item={item}
+                status={TransactionActivityStatus.DONE}
               />
             ))}
           </TransactionActivityStack>
@@ -82,43 +66,64 @@ export const TransactionActivity = () => {
   ) : null;
 };
 
-const TransactionActivityItem = ({
+export const TransactionActivityItem = ({
   type,
   status,
-  amount,
-  tokenSymbol,
-  address,
+  item,
 }: {
   type: TransactionActivityType;
   status: TransactionActivityStatus;
-  amount: string;
-  tokenSymbol: string;
-  address: string;
+  item: TransactionActivityData;
 }) => {
+  const [displayAddress, setDisplayAddress] = useState<string>("");
+  const { getNameByAdress } = useENS();
+  const { t } = useTranslation();
+
+  const handleAddress = useCallback(
+    async (adress: Address) => {
+      const result = await getNameByAdress(adress);
+
+      if (!result || result == "") {
+        setDisplayAddress(shortAddress(adress));
+      } else {
+        setDisplayAddress(result.concat(".stability"));
+      }
+    },
+    [getNameByAdress]
+  );
+
   const TransactionActivityData = useMemo(() => {
     switch (type) {
       case "Send":
         return {
           icon: <PiArrowCircleUpRightFill />,
-          type: "Send",
+          type: t("pages.activity.transactionTypes.send"),
+          displayAddress: item.to.hash,
         };
       case "Receive":
         return {
           icon: <PiArrowCircleDownLeftFill />,
-          type: "Receive",
+          type: t("pages.activity.transactionTypes.receive"),
+          displayAddress: item.from.hash,
         };
       case "Request":
         return {
           icon: <PiLightningFill />,
-          type: "Request",
+          type: t("pages.activity.transactionTypes.request"),
+          displayAddress: item.from.hash,
         };
       default:
         return {
           icon: <PiArrowCircleUpRightFill />,
-          type: "Send",
+          type: t("pages.activity.transactionTypes.send"),
+          displayAddress: item.to.hash,
         };
     }
-  }, [type]);
+  }, [type, item.from.hash, item.to.hash, t]);
+
+  useEffect(() => {
+    handleAddress(TransactionActivityData.displayAddress as Address);
+  }, [TransactionActivityData.displayAddress, handleAddress]);
 
   return (
     <TransactionActivityItemWrapper>
@@ -131,15 +136,16 @@ const TransactionActivityItem = ({
             <span>{TransactionActivityData.type}</span>
             <StatusBubble status={status}>{status}</StatusBubble>
           </TransactionOverviewWrapper>
-          <TransactionOwnerWrapper>
-            {shortAddress(address)}
-          </TransactionOwnerWrapper>
+          <TransactionOwnerWrapper>{displayAddress}</TransactionOwnerWrapper>
         </TransactionDetailsWrapper>
         <TransactionAmountWrapper>
-          <a href="https://stability-testnet.blockscout.com/" target="_blank">
-            {amount}
+          <a
+            href={t("links.explorerTx", { hash: item.tx_hash })}
+            target="_blank"
+          >
+            {formatUnits(item.total.value, Number(item.token.decimals))}
           </a>
-          <span>{tokenSymbol}</span>
+          <span>{item.token.symbol}</span>
         </TransactionAmountWrapper>
       </TransactionDataWrapper>
     </TransactionActivityItemWrapper>

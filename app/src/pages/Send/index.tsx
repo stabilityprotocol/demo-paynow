@@ -57,7 +57,7 @@ export const Send = () => {
       />
       {transferState.account?.name &&
         shortAddress(transferState.account!.address)}
-      <Quantity quantity={parseFloat(transferState.formattedAmount!)} />
+      <Quantity quantity={transferState.formattedAmount ?? "0"} />
       <AttributeWrapper>
         <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
         <RequestAttribute
@@ -66,7 +66,7 @@ export const Send = () => {
         />
         <RequestAttribute
           name={t("pages.send.txn-completed")}
-          value="In Seconds"
+          value={t("pages.send.txn-completed-time")}
         />
       </AttributeWrapper>
 

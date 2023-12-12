@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TransactionActivityStatus } from ".";
+import { TransactionActivityStatus } from "../../common/models/TransactionActivity";
 
 export const TransactionActivityWrapper = styled.div`
   display: flex;
@@ -133,7 +133,6 @@ export const TransactionOverviewWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-color: transparent;
-  font-size: ${(props) => props.theme.fontSizes.large};
   gap: ${(props) => props.theme.spacing.xsmall};
 `;
 
@@ -159,11 +158,11 @@ export const StatusBubble = styled.div<{
   font-family: ${(props) => props.theme.font.secondary};
   background-color: ${(props) => {
     switch (props.status) {
-      case "Done":
+      case TransactionActivityStatus.DONE:
         return props.theme.colors.green0;
-      case "Pending":
+      case TransactionActivityStatus.PENDING:
         return props.theme.colors.blue0;
-      case "Error":
+      case TransactionActivityStatus.ERROR:
         return props.theme.colors.red0;
       default:
         return props.theme.colors.green1;
@@ -171,11 +170,11 @@ export const StatusBubble = styled.div<{
   }};
   color: ${(props) => {
     switch (props.status) {
-      case "Done":
+      case TransactionActivityStatus.DONE:
         return props.theme.colors.green1;
-      case "Pending":
+      case TransactionActivityStatus.PENDING:
         return props.theme.colors.blue2;
-      case "Error":
+      case TransactionActivityStatus.ERROR:
         return props.theme.colors.red1;
       default:
         return props.theme.colors.green1;
