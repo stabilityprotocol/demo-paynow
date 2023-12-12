@@ -6,6 +6,7 @@ import {
   AddressSectionTitle,
   AddressSectionWrapper,
   ColouredText,
+  DisablingButtonWrapper,
   LightText,
   TokenBalanceAmount,
   TokenInputWrapper,
@@ -53,9 +54,9 @@ export const TransferAddress = () => {
       : shortAddress(transfer.account!.address);
   }, [transfer]);
 
-  const disableButtons = useMemo(() => {
-    return !enoughBalance || parseFloat(amount || "0") === 0;
-  }, [amount, enoughBalance]);
+  const disableSend = useMemo(() => {
+    return !enoughBalance;
+  }, [enoughBalance]);
 
   return (
     <AddressSectionWrapper>
@@ -87,12 +88,14 @@ export const TransferAddress = () => {
             </ColouredText>
           )}
         </TokenBalanceAmount>
-        <ActionButtonWrapper disableButtons={disableButtons}>
-          <ButtonAction onClick={disableButtons ? undefined : onSend}>
-            {t("pages.address.send")}
-            <WhiteSendIcon />
-          </ButtonAction>
-          <ButtonAction onClick={disableButtons ? undefined : onRequest}>
+        <ActionButtonWrapper>
+          <DisablingButtonWrapper disable={disableSend}>
+            <ButtonAction onClick={disableSend ? undefined : onSend}>
+              {t("pages.address.send")}
+              <WhiteSendIcon />
+            </ButtonAction>
+          </DisablingButtonWrapper>
+          <ButtonAction onClick={onRequest}>
             {t("pages.address.request")}
             <WhiteThunderboltIcon />
           </ButtonAction>
