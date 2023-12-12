@@ -8,7 +8,7 @@ export const ButtonWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const PageTitle = styled.h1`
+export const PageTitle = styled.div`
   font-family: ${(props) => props.theme.font.primary};
   font-weight: 500;
   font-size: ${(props) => props.theme.fontSizes.xlarge};
