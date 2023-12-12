@@ -3,12 +3,13 @@ import { AiFillThunderbolt } from "react-icons/ai";
 
 import styled from "styled-components";
 
-export const AddressSectionTitle = styled.h1`
+export const AddressSectionTitle = styled.div`
   font-family: ${(props) => props.theme.font.primary};
   font-weight: 500;
   font-size: ${(props) => props.theme.fontSizes.large};
   margin-bottom: ${(props) => props.theme.spacing.large};
   letter-spacing: 0.1rem;
+  color: ${(props) => props.theme.colors.green1};
 `;
 
 export const AddressSectionWrapper = styled.div`

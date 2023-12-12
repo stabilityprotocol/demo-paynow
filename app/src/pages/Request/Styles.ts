@@ -8,7 +8,7 @@ export const ButtonWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const PageTitle = styled.h1`
+export const PageTitle = styled.div`
   letter-spacing: 0.1rem;
   font-size: ${(props) => props.theme.fontSizes.large};
   color: ${(props) => props.theme.colors.green1};
