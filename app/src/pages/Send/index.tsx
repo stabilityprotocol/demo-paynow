@@ -30,10 +30,10 @@ export const Send = () => {
 
     transfer(transferState.account!.address, amount)
       .then((hash) => waitForTransaction({ hash, timeout: 30_000 }))
+      .then(() => navigate("/"))
       .catch(() => {
         setLoading(false);
-      })
-      .then(() => navigate("/"));
+      });
   }, [
     decimals,
     navigate,
