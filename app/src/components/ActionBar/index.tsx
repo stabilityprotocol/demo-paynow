@@ -17,7 +17,7 @@ export const ActionBarNavigation = () => {
         </ActionBarItemIcon>
         <span>{t("components.actionBar.addMoney")}</span>
       </ActionBarItem>
-      <ActionBarItem onClick={() => navigate("/search")}>
+      <ActionBarItem onClick={() => navigate("/transfer")}>
         <ActionBarItemIcon>
           <RiSendPlaneFill />
         </ActionBarItemIcon>

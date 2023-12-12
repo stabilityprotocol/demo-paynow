@@ -8,8 +8,10 @@ export const SearchWrapper = styled.div`
 `;
 
 export const SearchSectionTitle = styled.h1`
-  color: ${(p) => p.theme.colors.primary};
-  font-size: ${(p) => p.theme.fontSizes.large};
+  font-family: ${(props) => props.theme.font.primary};
+  font-weight: 500;
+  font-size: ${(props) => props.theme.fontSizes.xlarge};
+  margin-bottom: ${(props) => props.theme.spacing.large};
 `;
 
 export const InputWrapper = styled.span`

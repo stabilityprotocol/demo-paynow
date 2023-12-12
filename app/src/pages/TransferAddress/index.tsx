@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { shortAddress } from "../../common/ETH";
 import { UserIcon } from "../../components/UserIcon";
 
-export const AddressSection = () => {
+export const TransferAddress = () => {
   const [transfer, setAccount] = useRecoilState(TransferState);
   const theme = useTheme();
   const navigate = useNavigate();
@@ -39,12 +39,12 @@ export const AddressSection = () => {
 
   const onSend = useCallback(() => {
     setAccount((prev) => ({ ...prev, formattedAmount: amount }));
-    navigate("/search/send");
+    navigate("/transfer/send");
   }, [setAccount, amount, navigate]);
 
   const onRequest = useCallback(() => {
     setAccount((prev) => ({ ...prev, formattedAmount: amount }));
-    navigate("/search/request");
+    navigate("/transfer/request");
   }, [setAccount, amount, navigate]);
 
   const displayName = useMemo(() => {
