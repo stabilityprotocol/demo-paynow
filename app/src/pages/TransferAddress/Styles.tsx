@@ -77,10 +77,12 @@ export const ActionButtonWrapper = styled.div<{ disableButtons?: boolean }>`
   align-items: center;
   margin-top: ${(p) => p.theme.spacing.large};
   gap: ${(p) => p.theme.spacing.medium};
+  > * {
+    flex: 1;
+  }
   > button {
     padding: ${(p) => p.theme.spacing.medium} ${(p) => p.theme.spacing.small};
     font-size: ${(p) => p.theme.fontSizes.small};
-    width: 45%;
     color: ${(p) => p.theme.colors.neutral};
     display: flex;
     justify-content: center;
@@ -104,8 +106,12 @@ export const DisablingButtonWrapper = styled.span<{
   disable: boolean;
 }>`
   height: fit-content;
-  width: fit-content;
+  width: 45%;
   > button {
+    width: 100%;
+    padding: ${(p) => p.theme.spacing.medium} ${(p) => p.theme.spacing.small};
+    font-size: ${(p) => p.theme.fontSizes.small};
+    color: ${(p) => p.theme.colors.neutral};
     ${(p) => p.disable && `opacity: 0.5`};
     cursor: ${(p) => (p.disable ? "not-allowed" : "pointer")};
   }
