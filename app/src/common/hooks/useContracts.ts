@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Contracts } from "../Blockchain/Contracts";
 import { Erc20ABI } from "../ABI/ERC20";
 import { PaymentRequestABI } from "../ABI/PaymentRequest";
+import { stbleTestnet } from "../Blockchain";
 
 export const useContract = () => {
   const tokenAddress = useMemo(() => {
@@ -22,6 +23,7 @@ export const useContract = () => {
     return {
       abi: Erc20ABI,
       address: tokenAddress,
+      chainId: stbleTestnet.id,
     };
   }, [tokenAddress]);
 
@@ -29,6 +31,7 @@ export const useContract = () => {
     return {
       abi: PaymentRequestABI,
       address: paymentRequestsAddress,
+      chainId: stbleTestnet.id,
     };
   }, [paymentRequestsAddress]);
 
