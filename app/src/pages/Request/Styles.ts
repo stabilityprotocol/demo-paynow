@@ -12,7 +12,7 @@ export const PageTitle = styled.h1`
   font-family: ${(props) => props.theme.font.primary};
   font-weight: 500;
   font-size: ${(props) => props.theme.fontSizes.xlarge};
-  margin-bottom: ${(props) => props.theme.spacing.large};
+  margin-bottom: ${(props) => props.theme.spacing.medium};
 `;
 
 export const AttributeWrapper = styled.div`

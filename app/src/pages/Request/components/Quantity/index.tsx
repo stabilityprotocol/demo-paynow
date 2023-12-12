@@ -2,7 +2,7 @@ import { useERC20 } from "../../../../common/hooks/useERC20";
 import { QuantityWrapper, TokenName, TokenQuantity } from "./Styles";
 
 export interface QuantityProps {
-  quantity: number;
+  quantity: string;
 }
 
 export const Quantity = (props: QuantityProps) => {
