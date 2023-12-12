@@ -55,8 +55,8 @@ export const TransferAddress = () => {
   }, [transfer]);
 
   const disableSend = useMemo(() => {
-    return !enoughBalance || parseFloat(amount || "0") === 0;
-  }, [amount, enoughBalance]);
+    return !enoughBalance;
+  }, [enoughBalance]);
 
   return (
     <AddressSectionWrapper>
