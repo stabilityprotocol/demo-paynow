@@ -22,7 +22,7 @@ import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
 import { Updater } from "./components/Updater";
 import { Search } from "./pages/Search";
-import { TransferAddress } from "./pages/Address";
+import { TransferAddress } from "./pages/TransferAddress";
 
 import "react-toastify/dist/ReactToastify.css";
 
