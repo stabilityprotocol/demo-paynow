@@ -7,7 +7,7 @@ import { useContract } from "./useContracts";
 import { TransactionActivityData } from "../models/TransactionActivity";
 import { useInterval } from "usehooks-ts";
 
-export const useRecentTransactions = () => {
+export const useFetchRecentTransactions = () => {
   const [userState, setUserState] = useRecoilState(UserState);
   const { address } = useAccount();
   const { tokenAddress } = useContract();
