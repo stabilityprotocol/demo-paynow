@@ -87,6 +87,7 @@ export const ProfileLowerSection = styled.div`
   width: 100%;
   height: 60%;
   background: ${(props) => props.theme.colors.bgGreen};
+  border-radius: ${(props) => props.theme.box.borderRadius};
   display: flex;
   flex-direction: column;
 `;

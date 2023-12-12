@@ -1,15 +1,22 @@
 import styled from "styled-components";
 import { mediaSizes } from "../../common/Theme";
 
-export const FullScreenWrapper = styled.div`
+export const FullScreenBackgroundLayer = styled.div`
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  justify-content: center;
+  position: relative;
   background: ${(props) => props.theme.colors.bgGreen};
+`;
+
+export const FullScreenWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: ${(props) => props.theme.colors.bgGreen};
-  border-radius: ${(props) => props.theme.box.borderRadius};
-  box-shadow: rgba(0, 0, 0, 0.2) 0 0 10px;
   overflow: hidden;
 
   width: ${(props) => props.theme.viewport.phone.width};
@@ -28,11 +35,17 @@ export const FullScreenWrapper = styled.div`
 `;
 
 export const FullScreenHeader = styled.div`
-  padding: ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.xxlarge}
+    ${(props) => props.theme.spacing.medium};
   padding-bottom: ${(props) => props.theme.spacing.xsmall};
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media ${mediaSizes.portableQuery} {
+    padding: ${(props) => props.theme.spacing.medium};
+    padding-bottom: ${(props) => props.theme.spacing.xsmall};
+  }
 
   > svg {
     cursor: pointer;

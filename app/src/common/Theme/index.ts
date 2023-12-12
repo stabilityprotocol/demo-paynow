@@ -26,6 +26,9 @@ export const Theme = {
     xxxlarge: "3rem",
   },
   viewport: {
+    desktop: {
+      maxWidth: "1080px",
+    },
     phone: {
       // iphone 12 pro
       width: "390px",

@@ -10,7 +10,7 @@ export const ActivityWrapper = styled.div`
   overflow-y: auto;
 `;
 
-export const ActivityTitle = styled.h1`
+export const ActivityTitle = styled.div`
   letter-spacing: 0.1rem;
   font-size: ${(props) => props.theme.fontSizes.large};
   color: ${(props) => props.theme.colors.green1};

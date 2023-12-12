@@ -38,7 +38,7 @@ export const Updater = () => {
 
   useEffect(() => {
     const unwatch = watchAccount((account) => {
-      console.log("Account changed to", account);
+      console.warn("Account changed to", account?.address);
       setUserState({
         recentTransactions: [],
       });

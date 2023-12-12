@@ -1,16 +1,23 @@
 import { Outlet } from "react-router-dom";
-import { HeaderWrapper, OutletWrapper, PortalRootWrapper } from "./Styles";
+import {
+  PortalRootBackgroundLayer,
+  HeaderWrapper,
+  OutletWrapper,
+  PortalRootWrapper,
+} from "./Styles";
 import { HeaderMobile } from "../HeaderMobile";
 
 export const PortalRoot = () => {
   return (
-    <PortalRootWrapper>
+    <PortalRootBackgroundLayer>
       <HeaderWrapper>
         <HeaderMobile />
       </HeaderWrapper>
-      <OutletWrapper>
-        <Outlet />
-      </OutletWrapper>
-    </PortalRootWrapper>
+      <PortalRootWrapper>
+        <OutletWrapper>
+          <Outlet />
+        </OutletWrapper>
+      </PortalRootWrapper>
+    </PortalRootBackgroundLayer>
   );
 };
