@@ -5,27 +5,23 @@ import { UserState } from "../../common/State/User";
 import { useENS } from "../../common/hooks/useENS";
 import { useCallback, useEffect } from "react";
 import { watchAccount } from "@wagmi/core";
-import { useAddressTransactions } from "../../common/API/Blockscout";
-import { useContract } from "../../common/hooks/useContracts";
 import { useFetchRecentTransactions } from "../../common/hooks/useFetchRecentTransactions";
 
 export const Updater = () => {
   const [userState, setUserState] = useRecoilState(UserState);
   const { address } = useAccount();
-  const { tokenAddress } = useContract();
-  const { getNameByAdress } = useENS();
-  const { updateRecentTransactions } = useFetchRecentTransactions();
-  const { data, isLoading } = useAddressTransactions(address, tokenAddress);
+  const { getNameByAddress } = useENS();
+  const { refetch } = useFetchRecentTransactions();
 
   const updateEns = useCallback(() => {
     if (!address || typeof userState.ens !== "undefined") return;
-    getNameByAdress(address).then((name) => {
+    getNameByAddress(address).then((name) => {
       setUserState((prevState) => ({
         ...prevState,
         ens: name ? name : null,
       }));
     });
-  }, [address, getNameByAdress, setUserState, userState.ens]);
+  }, [address, getNameByAddress, setUserState, userState.ens]);
 
   useInterval(
     () => {
@@ -38,14 +34,14 @@ export const Updater = () => {
     updateEns();
   }, [updateEns]);
 
-  useEffect(() => {
-    updateRecentTransactions();
-  }, [data, isLoading, updateRecentTransactions]);
+  useInterval(() => refetch(), address ? 5_000 : null);
 
   useEffect(() => {
     const unwatch = watchAccount((account) => {
       console.log("Account changed to", account);
-      setUserState({});
+      setUserState({
+        recentTransactions: [],
+      });
     });
     return () => unwatch();
   }, [setUserState]);

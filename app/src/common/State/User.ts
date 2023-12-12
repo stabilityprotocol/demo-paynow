@@ -3,10 +3,12 @@ import { TransactionActivityData } from "../models/TransactionActivity";
 
 export type TUserState = {
   ens?: string | null;
-  recentTransactions?: { date: string; items: TransactionActivityData[] }[];
+  recentTransactions: { date: string; items: TransactionActivityData[] }[];
 };
 
 export const UserState = atom<TUserState>({
   key: "user-state",
-  default: {},
+  default: {
+    recentTransactions: [],
+  },
 });

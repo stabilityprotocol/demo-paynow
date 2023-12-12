@@ -5,6 +5,8 @@ import { prepareWriteContract, writeContract, readContract } from "@wagmi/core";
 import { useCallback } from "react";
 import { useCache } from "./useCache";
 
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+
 export const useENS = () => {
   const { address } = useAccount();
   const { has, get, set } = useCache("ens-address-cache");
@@ -26,7 +28,7 @@ export const useENS = () => {
     }
   };
 
-  const getNameByAdress = useCallback(
+  const getNameByAddress = useCallback(
     async (address: Address) => {
       try {
         if (has(address)) return get(address);
@@ -38,7 +40,7 @@ export const useENS = () => {
           args: [address],
         });
 
-        set(address, data);
+        set(address, data, ONE_DAY_IN_SECONDS);
         return data;
       } catch (error) {
         console.error(error);
@@ -48,5 +50,5 @@ export const useENS = () => {
     [get, has, set]
   );
 
-  return { claimName, getNameByAdress };
+  return { claimName, getNameByAddress };
 };

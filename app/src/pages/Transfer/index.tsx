@@ -1,5 +1,5 @@
 import { useTheme } from "styled-components";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Input } from "../../components/Input";
 import { EnsEntry } from "../../common/models/EnsEntry";
@@ -14,37 +14,51 @@ import { useTranslation } from "react-i18next";
 import { SearchResults } from "./SearchResults";
 import { useDebounce } from "usehooks-ts";
 import { useSimilarENSNames } from "../../common/API/ENS";
-import { isAddress } from "viem";
+import { getAddress, isAddress } from "viem";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../common/State/User";
+import { useENS } from "../../common/hooks/useENS";
+import { useAccount } from "wagmi";
 
 export const Transfer = () => {
   const { t } = useTranslation();
+  const { address } = useAccount();
   const [value, setValue] = useState("");
   const theme = useTheme();
   const searchValue = useDebounce(value, 300);
   const { data } = useSimilarENSNames(searchValue);
+  const { recentTransactions } = useRecoilValue(UserState);
+  const [entries, setEntries] = useState<EnsEntry[]>([]);
+  const { getNameByAdress } = useENS();
 
-  //@todo To be replaced with actual data
-  const entries: EnsEntry[] = useMemo(
-    () => [
-      {
-        name: "john.smith",
-        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
-      },
-      {
-        name: "john.smith",
-        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
-      },
-      {
-        name: "john.smith",
-        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
-      },
-      {
-        name: "john.smith",
-        address: "0x56C47B7a680eadF25b49C3B0695482Dbe7927FcF",
-      },
-    ],
-    []
-  );
+  const recommendedAddresses = useMemo(() => {
+    let addresses = recentTransactions
+      ?.map((e) => e.items)
+      .flat()
+      .map((e) => [e.to.hash, e.from.hash])
+      .flat();
+
+    if (!addresses) return [];
+
+    addresses = addresses
+      .filter((e) => e.toLowerCase() !== address?.toLowerCase())
+      .map((e) => e.toLowerCase());
+
+    addresses = [...new Set(addresses)];
+
+    return addresses.map((e) => getAddress(e));
+  }, [address, recentTransactions]);
+
+  useEffect(() => {
+    if (!recommendedAddresses) return;
+
+    const promises = recommendedAddresses.map(async (e) => ({
+      name: (await getNameByAdress(e)) ?? "",
+      address: e,
+    }));
+
+    Promise.all(promises).then((entries) => setEntries(entries));
+  }, [getNameByAdress, recommendedAddresses]);
 
   const Results = useMemo(() => {
     if (!data?.result) {

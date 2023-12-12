@@ -1,27 +1,23 @@
 import { useRecoilState } from "recoil";
 import { UserState } from "../State/User";
-import { useCallback } from "react";
+import { useEffect } from "react";
 import { useAddressTransactions } from "../API/Blockscout";
 import { useAccount } from "wagmi";
 import { useContract } from "./useContracts";
 import { TransactionActivityData } from "../models/TransactionActivity";
-import { useInterval } from "usehooks-ts";
 
 export const useFetchRecentTransactions = () => {
-  const [userState, setUserState] = useRecoilState(UserState);
+  const [, setUserState] = useRecoilState(UserState);
   const { address } = useAccount();
   const { tokenAddress } = useContract();
-  const { data, isLoading, isError } = useAddressTransactions(
-    address,
-    tokenAddress
-  );
+  const { data, mutate } = useAddressTransactions(address, tokenAddress);
 
   const formatActivityData = (data: {
     items: TransactionActivityData[];
   }): { date: string; items: TransactionActivityData[] }[] => {
     const groupedItems = data.items.reduce(
       (
-        acc: { [key: string]: TransactionActivityData[] },
+        acc: { [date: string]: TransactionActivityData[] },
         item: TransactionActivityData
       ) => {
         const date = new Date(item.timestamp);
@@ -36,7 +32,7 @@ export const useFetchRecentTransactions = () => {
 
         return acc;
       },
-      {} as { [key: string]: TransactionActivityData[] }
+      {}
     );
 
     return Object.entries(groupedItems).map(([date, items]) => ({
@@ -45,30 +41,16 @@ export const useFetchRecentTransactions = () => {
     }));
   };
 
-  const updateRecentTransactions = useCallback(() => {
-    if (!data || isLoading) {
+  useEffect(() => {
+    if (!data) {
       return;
     }
-
-    if (isError) {
-      console.error("Error fetching recent transactions: ", isError);
-      return;
-    }
-
     const recentTransactions = formatActivityData(data);
-
     setUserState((prevState) => ({
       ...prevState,
       recentTransactions,
     }));
-  }, [isLoading, isError, data, setUserState]);
+  }, [data, setUserState]);
 
-  useInterval(
-    () => {
-      updateRecentTransactions();
-    },
-    typeof userState.recentTransactions === "undefined" ? 10_000 : null
-  );
-
-  return { updateRecentTransactions };
+  return { refetch: mutate };
 };

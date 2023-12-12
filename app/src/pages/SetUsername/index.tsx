@@ -23,7 +23,7 @@ export const SetUsername = () => {
   const { t } = useTranslation();
   const [username, setUsername] = useState<string | undefined>();
   const [actualUsername, setActualUsername] = useState<string | undefined>();
-  const { claimName, getNameByAdress } = useENS();
+  const { claimName, getNameByAddress } = useENS();
   const { address } = useAccount();
   const [claiming, setClaiming] = useState<"sent" | "success" | undefined>();
   const [userState, setUserState] = useRecoilState(UserState);
@@ -51,11 +51,12 @@ export const SetUsername = () => {
 
   useEffect(() => {
     if (address && !actualUsername) {
-      getNameByAdress(address).then((name) => {
+      getNameByAddress(address).then((name) => {
+        if (!name) return;
         setActualUsername(name);
       });
     }
-  }, [actualUsername, address, getNameByAdress]);
+  }, [actualUsername, address, getNameByAddress]);
 
   if (claiming === "success") {
     return <Navigate to="/profile" />;

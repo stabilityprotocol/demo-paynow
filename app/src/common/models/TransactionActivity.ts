@@ -25,4 +25,5 @@ export interface TransactionActivityData {
     value: string;
   };
   tx_hash: string;
+  method: "fulfillRequest" | "transfer";
 }

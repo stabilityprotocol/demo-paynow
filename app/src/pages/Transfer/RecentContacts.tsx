@@ -59,9 +59,7 @@ const RecentsContactsTitle = styled.h1`
 const RecentContactsList = styled.span`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: ${(p) => p.theme.spacing.small};
 `;
 
 const RecentContactsListItem = styled.div`
@@ -73,5 +71,5 @@ const RecentContactsListItem = styled.div`
     cursor: pointer;
     transform: scale(1.01);
   }
-  width: 25%;
+  width: 33%;
 `;
