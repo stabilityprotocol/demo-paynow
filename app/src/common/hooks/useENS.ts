@@ -3,12 +3,11 @@ import { EnsContract } from "../Blockchain/Contracts";
 import { EnsABI } from "../ABI/ENS";
 import { prepareWriteContract, writeContract, readContract } from "@wagmi/core";
 import { useCallback } from "react";
-import { useRecoilState } from "recoil";
-import { EnsCacheState } from "../State/EnsCache";
+import { useCache } from "./useCache";
 
 export const useENS = () => {
   const { address } = useAccount();
-  const [cache, setCache] = useRecoilState(EnsCacheState);
+  const { has, get, set } = useCache("ens-address-cache");
 
   const claimName = async (name: string) => {
     try {
@@ -30,7 +29,7 @@ export const useENS = () => {
   const getNameByAdress = useCallback(
     async (address: Address) => {
       try {
-        if (cache[address]) return cache[address];
+        if (has(address)) return get(address);
 
         const data = await readContract({
           address: EnsContract,
@@ -39,14 +38,14 @@ export const useENS = () => {
           args: [address],
         });
 
-        setCache((prev) => ({ ...prev, [address]: data }));
+        set(address, data);
         return data;
       } catch (error) {
         console.error(error);
         throw error;
       }
     },
-    [cache, setCache]
+    [get, has, set]
   );
 
   return { claimName, getNameByAdress };

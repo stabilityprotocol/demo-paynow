@@ -5,7 +5,7 @@ export type TEnsCacheState = Record<string, string>;
 
 const { persistAtom } = recoilPersist({});
 
-export const EnsCacheState = atom<TEnsCacheState>({
+export const CacheState = atom<TEnsCacheState>({
   key: "ens-cache-state",
   default: {},
   effects: [persistAtom],
