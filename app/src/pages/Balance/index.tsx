@@ -11,11 +11,11 @@ import {
 } from "./Styles";
 import { FaMoneyBill } from "react-icons/fa";
 import { ActionBarNavigation } from "../../components/ActionBar";
-import { WalletDetail } from "./Components/WalletDetail";
 import { useNavigate } from "react-router-dom";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { useTranslation } from "react-i18next";
+import { PendingRequest } from "./Components/PendingRequest";
 
 export const Balance = () => {
   const { formatted } = useAppBalance();
@@ -40,7 +40,7 @@ export const Balance = () => {
           <ActionBarNavigation />
         </ActionBarWrapper>
         <BalanceLowerContainer>
-          <WalletDetail />
+          <PendingRequest />
           <BalanceViewMoreTransactions>
             <span onClick={() => navigate("/activity")}>
               {t("pages.balance.recentTransactions")} <FaCircleArrowRight />

@@ -66,7 +66,7 @@ export const TransactionActivity = () => {
   ) : null;
 };
 
-const TransactionActivityItem = ({
+export const TransactionActivityItem = ({
   type,
   status,
   item,

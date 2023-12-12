@@ -55,6 +55,7 @@ export const Theme = {
     blueLink: "#3E7CB1",
     red0: "#FEE8E7",
     red1: "#F97068",
+    red2: "#e91e63",
     bgGreen: "#F0F4EF",
     green0: "#BED6C0",
     green1: "#013709",
