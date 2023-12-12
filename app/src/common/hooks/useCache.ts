@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
-import { CacheState } from "../State/EnsCache";
+import { CacheState } from "../State/PersistentCache";
 
 export const useCache = (namespace: string) => {
   const [cache, setCache] = useRecoilState(CacheState);
