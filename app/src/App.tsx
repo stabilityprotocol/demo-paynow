@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/transfer/address",
-        element: <TransferAddress></TransferAddress>,
+        element: <TransferAddress />,
       },
       {
         path: "/transfer/send",
