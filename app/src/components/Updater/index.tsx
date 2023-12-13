@@ -6,12 +6,14 @@ import { useENS } from "../../common/hooks/useENS";
 import { useCallback, useEffect } from "react";
 import { watchAccount } from "@wagmi/core";
 import { useFetchRecentTransactions } from "../../common/hooks/useFetchRecentTransactions";
+import { useCacheClearer } from "../../common/hooks/useCacheClearer";
 
 export const Updater = () => {
   const [userState, setUserState] = useRecoilState(UserState);
   const { address } = useAccount();
   const { getNameByAddress } = useENS();
   const { refetch } = useFetchRecentTransactions();
+  useCacheClearer();
 
   const updateEns = useCallback(() => {
     if (!address || typeof userState.ens !== "undefined") return;
