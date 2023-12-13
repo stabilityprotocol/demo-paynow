@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useMemo, useState } from "react";
 import { shortAddress } from "../../common/ETH";
 import { parseUnits } from "ethers";
+import { SendWrapper } from "./Styles";
 
 export const Send = () => {
   const { t } = useTranslation();
@@ -19,6 +20,12 @@ export const Send = () => {
   const { symbol, transfer, decimals } = useERC20();
   const navigate = useNavigate();
   const transferState = useRecoilValue(TransferState);
+
+  if (!transferState.account || !transferState.formattedAmount) {
+    // If the user dont follow the flow, redirect to the balance page
+    navigate("/balance");
+    return null;
+  }
 
   const onSend = useCallback(() => {
     const amount = parseUnits(
@@ -50,34 +57,36 @@ export const Send = () => {
 
   return (
     <>
-      <PageTitle>{t("pages.send.title")}</PageTitle>
-      <UserIcon
-        name={displayName}
-        letters={displayName.slice(0, 2).toUpperCase()}
-      />
-      {transferState.account?.name &&
-        shortAddress(transferState.account!.address)}
-      <Quantity quantity={transferState.formattedAmount ?? "0"} />
-      <AttributeWrapper>
-        <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
-        <RequestAttribute
-          name={t("pages.send.total")}
-          value={`${transferState.formattedAmount} ${symbol}`}
+      <SendWrapper>
+        <PageTitle>{t("pages.send.title")}</PageTitle>
+        <UserIcon
+          name={displayName}
+          letters={displayName.slice(0, 2).toUpperCase()}
         />
-        <RequestAttribute
-          name={t("pages.send.txn-completed")}
-          value={t("pages.send.txn-completed-time")}
-        />
-      </AttributeWrapper>
+        {transferState.account?.name &&
+          shortAddress(transferState.account!.address)}
+        <Quantity quantity={transferState.formattedAmount ?? "0"} />
+        <AttributeWrapper>
+          <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
+          <RequestAttribute
+            name={t("pages.send.total")}
+            value={`${transferState.formattedAmount} ${symbol}`}
+          />
+          <RequestAttribute
+            name={t("pages.send.txn-completed")}
+            value={t("pages.send.txn-completed-time")}
+          />
+        </AttributeWrapper>
 
-      <ButtonWrapper>
-        <Button onClick={onSend}>
-          {loading ? t("pages.send.pending") : t("pages.send.confirm")}
-        </Button>
-        <ButtonNoFilled onClick={() => navigate(-1)}>
-          {t("pages.send.cancel")}
-        </ButtonNoFilled>
-      </ButtonWrapper>
+        <ButtonWrapper>
+          <Button onClick={onSend}>
+            {loading ? t("pages.send.pending") : t("pages.send.confirm")}
+          </Button>
+          <ButtonNoFilled onClick={() => navigate(-1)}>
+            {t("pages.send.cancel")}
+          </ButtonNoFilled>
+        </ButtonWrapper>
+      </SendWrapper>
     </>
   );
 };

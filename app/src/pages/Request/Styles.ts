@@ -31,3 +31,12 @@ export const AddMemoWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const RequestingWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+`;
