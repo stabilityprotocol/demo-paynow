@@ -26,6 +26,7 @@ import { TransferAddress } from "./pages/TransferAddress";
 import { PayRequest } from "./pages/PayRequest";
 
 import "react-toastify/dist/ReactToastify.css";
+import { TransferFieldsGuard } from "./components/TransferFieldsGuard";
 
 const router = createBrowserRouter([
   {
@@ -68,15 +69,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/transfer/address",
-        element: <TransferAddress />,
+        element: (
+          <TransferFieldsGuard transferAddress>
+            <TransferAddress />
+          </TransferFieldsGuard>
+        ),
       },
       {
         path: "/transfer/send",
-        element: <Send />,
+        element: (
+          <TransferFieldsGuard transferAddress transferAmount>
+            <Send />
+          </TransferFieldsGuard>
+        ),
       },
       {
         path: "/transfer/request",
-        element: <Request />,
+        element: (
+          <TransferFieldsGuard transferAddress transferAmount>
+            <Request />
+          </TransferFieldsGuard>
+        ),
       },
     ],
   },

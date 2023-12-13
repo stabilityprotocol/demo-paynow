@@ -35,3 +35,5 @@ export const SendWrapper = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const HeaderWrapper = styled.div``;

@@ -12,22 +12,15 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useMemo, useState } from "react";
 import { shortAddress } from "../../common/ETH";
 import { parseUnits } from "ethers";
-import { SendWrapper } from "./Styles";
+import { SendWrapper, HeaderWrapper } from "./Styles";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { getUsernameInitials } from "../../common/Utils";
-
 export const Send = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const { symbol, transfer, decimals } = useERC20();
   const navigate = useNavigate();
   const transferState = useRecoilValue(TransferState);
-
-  if (!transferState.account || !transferState.formattedAmount) {
-    // If the user dont follow the flow, redirect to the balance page
-    navigate("/balance");
-    return null;
-  }
 
   const onSend = useCallback(() => {
     const amount = parseUnits(
@@ -60,10 +53,16 @@ export const Send = () => {
   return (
     <SendWrapper>
       <PageTitle>{t("pages.send.title")}</PageTitle>
-      <UserIcon name={displayName} letters={getUsernameInitials(displayName)} />
-      {transferState.account?.name &&
-        shortAddress(transferState.account!.address)}
-      <Quantity quantity={transferState.formattedAmount ?? "0"} />
+      <HeaderWrapper>
+        <UserIcon
+          name={displayName}
+          letters={getUsernameInitials(displayName)}
+        />
+        {transferState.account?.name &&
+          shortAddress(transferState.account!.address)}
+        <Quantity quantity={transferState.formattedAmount ?? "0"} />
+      </HeaderWrapper>
+
       <AttributeWrapper>
         <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
         <RequestAttribute

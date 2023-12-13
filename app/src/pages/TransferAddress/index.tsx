@@ -35,12 +35,6 @@ export const TransferAddress = () => {
   const { formatted } = useAppBalance();
   const [amount, setAmount] = useState("");
 
-  if (!transfer.account) {
-    // If the user dont follow the flow, redirect to the balance page
-    navigate("/balance");
-    return null;
-  }
-
   const enoughBalance = useMemo(() => {
     return Number(formatted) >= Number(amount);
   }, [formatted, amount]);

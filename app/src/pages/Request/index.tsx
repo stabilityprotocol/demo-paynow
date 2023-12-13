@@ -8,6 +8,7 @@ import {
   PageTitle,
   AddMemoWrapper,
   RequestingWrapper,
+  HeaderWrapper,
 } from "./Styles";
 import { AddMemo } from "./components/AddMemo";
 import { Quantity } from "./components/Quantity";
@@ -30,12 +31,6 @@ export const Request = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { createRequest } = usePaymentRequest();
-
-  if (!transferState.account || !transferState.formattedAmount) {
-    // If the user dont follow the flow, redirect to the balance page
-    navigate("/balance");
-    return null;
-  }
 
   const displayName = useMemo(() => {
     return transferState.account?.name
@@ -70,10 +65,16 @@ export const Request = () => {
   return (
     <RequestingWrapper>
       <PageTitle>{t("pages.request.title")}</PageTitle>
-      <UserIcon name={displayName} letters={getUsernameInitials(displayName)} />
-      {transferState.account?.name &&
-        shortAddress(transferState.account!.address)}
-      <Quantity quantity={transferState.formattedAmount ?? ""} />
+      <HeaderWrapper>
+        <UserIcon
+          name={displayName}
+          letters={getUsernameInitials(displayName)}
+        />
+        {transferState.account?.name &&
+          shortAddress(transferState.account!.address)}
+        <Quantity quantity={transferState.formattedAmount ?? ""} />
+      </HeaderWrapper>
+
       <AddMemoWrapper>
         <AddMemo
           value={memo}
