@@ -12,7 +12,7 @@ export const HeaderMobile: React.FC = () => {
 
   return (
     <HeaderMobileWrapper>
-      <img src={Logo} alt="PayNow" onClick={() => navigate("/")} />
+      <img src={Logo} alt="PayNow" onClick={() => navigate("/balance")} />
       <HeaderMobileProfileWrapper>
         <FaUserCircle onClick={() => navigate("/profile")} />
         {!userState.ens && <span className="notification"></span>}

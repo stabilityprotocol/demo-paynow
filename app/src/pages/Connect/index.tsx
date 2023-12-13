@@ -47,7 +47,7 @@ export const Connect = () => {
   });
 
   if (isConnected) {
-    return <Navigate to="/" />;
+    return <Navigate to="/balance" />;
   }
 
   if (isConnecting) {
