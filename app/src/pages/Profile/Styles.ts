@@ -182,4 +182,5 @@ export const TransactionActivityWrapper = styled.div`
   overflow-y: auto;
   padding: ${(props) => props.theme.spacing.small}
     ${(props) => props.theme.spacing.medium};
+  padding-bottom: 0;
 `;
