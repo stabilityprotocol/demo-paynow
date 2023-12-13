@@ -179,7 +179,6 @@ export const TransactionActivityWrapper = styled.div`
   width: 100%;
   height: 100%;
   align-items: center;
-  justify-content: center;
   overflow-y: auto;
   padding: ${(props) => props.theme.spacing.small}
     ${(props) => props.theme.spacing.medium};
