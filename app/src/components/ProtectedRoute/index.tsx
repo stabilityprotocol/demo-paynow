@@ -6,7 +6,7 @@ export const ProtectedRoute: React.FC<{
 }> = ({ children }) => {
   const { isConnected } = useAccount();
   if (!isConnected) {
-    return <Navigate to="/connect" />;
+    return <Navigate to="/" />;
   }
   return children;
 };

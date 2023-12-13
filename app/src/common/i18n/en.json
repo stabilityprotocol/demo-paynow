@@ -36,6 +36,8 @@
       "account": {
         "title": "Wallet Address"
       },
+      "activityTitle": "Activity",
+      "seeAllActivity": "See All",
       "usernameTitle": "Username",
       "setProfileName": "SET USERNAME",
       "helpCenter": "Help Center",
@@ -95,6 +97,11 @@
       "loading": "LOADING",
       "reject": "REJECT",
       "rejecting": "REJECTING..."
+    },
+    "landing": {
+      "title": "Fintech + Blockchain",
+      "description": "Any fintech app, powered by a feeless blockchain. No fees, no dependencies, just what you’d expect.",
+      "button": "GET STARTED"
     }
   },
   "components": {

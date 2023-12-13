@@ -10,28 +10,46 @@ import {
   ProfileWrapper,
   SetProfileName,
   UsernameTitle,
+  ActivityWrapper,
+  ActivityTitleWrapper,
+  ActivityTitle,
+  RedirectToActivity,
+  TransactionActivityWrapper,
 } from "./Styles";
 import { ActionBar } from "../../components/ActionBar";
 import { WalletDetail } from "./Components/WalletDetail";
 import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../common/State/User";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useDisconnect } from "wagmi";
 import { getUsernameInitials } from "../../common/Utils";
+import { TransactionActivity } from "../../components/TransactionActivity";
+import { TransactionActivityData } from "../../common/models/TransactionActivity";
+import { PiArrowCircleRightFill } from "react-icons/pi";
 
 export const Profile = () => {
   const { disconnect } = useDisconnect();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { ens: username } = useRecoilValue(UserState);
+  const { recentTransactions } = useRecoilValue(UserState);
+  const [transactions, setDisplayTransactions] = useState<
+    { date: string; items: TransactionActivityData[] }[]
+  >([]);
 
   const normalizedUsername = useMemo(() => {
     if (!username) return undefined;
     return username.concat(".stability");
   }, [username]);
+
+  useEffect(() => {
+    if (recentTransactions.length > 0) {
+      setDisplayTransactions([recentTransactions[0]]);
+    }
+  }, [recentTransactions]);
 
   return (
     <ProfileWrapper>
@@ -55,7 +73,18 @@ export const Profile = () => {
           </ActionBar>
         </ActionBarWrapper>
         <ProfileLowerContainer>
-          <h1>transactions here</h1>
+          <ActivityWrapper>
+            <ActivityTitleWrapper>
+              <ActivityTitle>{t("pages.profile.activityTitle")}</ActivityTitle>
+              <RedirectToActivity onClick={() => navigate("/activity")}>
+                {t("pages.profile.seeAllActivity")}
+                <PiArrowCircleRightFill />
+              </RedirectToActivity>
+            </ActivityTitleWrapper>
+            <TransactionActivityWrapper>
+              <TransactionActivity transactions={transactions} />
+            </TransactionActivityWrapper>
+          </ActivityWrapper>
           <ProfileFooter>
             <span
               onClick={() => window.open("https://docs.stabilityprotocol.com")}

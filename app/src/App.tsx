@@ -22,6 +22,7 @@ import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
 import { Updater } from "./components/Updater";
 import { Transfer } from "./pages/Transfer";
+import { Landing } from "./pages/Landing";
 import { TransferAddress } from "./pages/TransferAddress";
 import { PayRequest } from "./pages/PayRequest";
 
@@ -32,6 +33,20 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
+      <Shell>
+        <PortalRoot />
+      </Shell>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <Landing />,
+      },
+    ],
+  },
+  {
+    path: "/balance",
+    element: (
       <ProtectedRoute>
         <Shell>
           <PortalRoot />
@@ -40,13 +55,21 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/",
-        element: <Balance />,
-      },
-      {
         path: "/balance",
         element: <Balance />,
       },
+    ],
+  },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute>
+        <Shell>
+          <PortalRoot />
+        </Shell>
+      </ProtectedRoute>
+    ),
+    children: [
       {
         path: "/profile",
         element: <Profile />,
