@@ -48,7 +48,8 @@ export const Receive = () => {
   }, [ref]);
 
   const onCopy = () => {
-    copy(address ?? "");
+    if (!address) return;
+    copy(address);
     setCopyText(t("pages.receive.buttonPressed"));
     setTimeout(() => {
       setCopyText(t("pages.receive.button"));

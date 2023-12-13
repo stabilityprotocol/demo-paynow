@@ -20,6 +20,7 @@ import { LoadingIcon } from "../../components/LoadingIcon";
 import { shortAddress } from "../../common/ETH";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const Request = () => {
   const [memo, setMemo] = useState("");
@@ -35,17 +36,6 @@ export const Request = () => {
     navigate("/balance");
     return null;
   }
-
-  const imageLetters = useMemo(() => {
-    if (!transferState.account?.name) return "?";
-    // get initials delimitated by hyphen or dot and uppercase them with limit of 2
-    const initials = transferState.account.name
-      .split(/[-.]/)
-      .map((word) => word.charAt(0).toUpperCase())
-      .join("")
-      .substring(0, 2);
-    return initials;
-  }, [transferState.account?.name]);
 
   const displayName = useMemo(() => {
     return transferState.account?.name
@@ -78,48 +68,44 @@ export const Request = () => {
   };
 
   return (
-    <>
-      <RequestingWrapper>
-        <PageTitle>{t("pages.request.title")}</PageTitle>
-        <UserIcon name={displayName} letters={imageLetters} />
-        {transferState.account?.name &&
-          shortAddress(transferState.account!.address)}
-        <Quantity quantity={transferState.formattedAmount ?? ""} />
-        <AddMemoWrapper>
-          <AddMemo
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-            disabled={loading}
-          />
-        </AddMemoWrapper>
-
-        <AttributeWrapper>
-          <RequestAttribute name={t("pages.request.atributes.fee")} value="0" />
-          <RequestAttribute
-            name={t("pages.request.atributes.total")}
-            value={transferState.formattedAmount ?? ""}
-          />
-          <RequestAttribute
-            name={t("pages.request.atributes.txn-completed")}
-            value="In Second"
-          />
-        </AttributeWrapper>
-
-        <ButtonWrapper>
-          <Button onClick={!loading ? handleCreateRequest : undefined}>
-            {loading ? (
-              <>
-                {t("pages.request.pending")} <LoadingIcon />
-              </>
-            ) : (
-              t("pages.request.confirm")
-            )}
-          </Button>
-          <ButtonNoFilled onClick={() => (!loading ? navigate(-1) : undefined)}>
-            {t("pages.request.cancel")}
-          </ButtonNoFilled>
-        </ButtonWrapper>
-      </RequestingWrapper>
-    </>
+    <RequestingWrapper>
+      <PageTitle>{t("pages.request.title")}</PageTitle>
+      <UserIcon name={displayName} letters={getUsernameInitials(displayName)} />
+      {transferState.account?.name &&
+        shortAddress(transferState.account!.address)}
+      <Quantity quantity={transferState.formattedAmount ?? ""} />
+      <AddMemoWrapper>
+        <AddMemo
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+          disabled={loading}
+        />
+      </AddMemoWrapper>
+      <AttributeWrapper>
+        <RequestAttribute name={t("pages.request.atributes.fee")} value="0" />
+        <RequestAttribute
+          name={t("pages.request.atributes.total")}
+          value={transferState.formattedAmount ?? ""}
+        />
+        <RequestAttribute
+          name={t("pages.request.atributes.txn-completed")}
+          value="In Second"
+        />
+      </AttributeWrapper>
+      <ButtonWrapper>
+        <Button onClick={!loading ? handleCreateRequest : undefined}>
+          {loading ? (
+            <>
+              {t("pages.request.pending")} <LoadingIcon />
+            </>
+          ) : (
+            t("pages.request.confirm")
+          )}
+        </Button>
+        <ButtonNoFilled onClick={() => (!loading ? navigate(-1) : undefined)}>
+          {t("pages.request.cancel")}
+        </ButtonNoFilled>
+      </ButtonWrapper>
+    </RequestingWrapper>
   );
 };

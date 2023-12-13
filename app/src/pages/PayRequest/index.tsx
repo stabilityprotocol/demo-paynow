@@ -22,6 +22,7 @@ import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { AddMemo } from "../Request/components/AddMemo";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { LoadingIconWrapper, PayRequestWrapper } from "./Styles";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const PayRequest = () => {
   const { id } = useParams<{ id: string }>();
@@ -121,7 +122,7 @@ export const PayRequest = () => {
       <div>
         <UserIcon
           name={displayName ?? shortAddress(request.target)}
-          letters={(displayName ?? request.target).slice(0, 2).toUpperCase()}
+          letters={getUsernameInitials(displayName)}
         />
         {shortAddress(request.target)}
         <Quantity quantity={formatEther(request.amount)} />

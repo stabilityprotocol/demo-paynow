@@ -32,13 +32,11 @@ export const Transfer = () => {
   const { getNameByAddress } = useENS();
 
   const recommendedAddresses = useMemo(() => {
-    let addresses = recentTransactions
-      ?.map((e) => e.items)
+    let addresses = (recentTransactions || [])
+      .map((e) => e.items)
       .flat()
       .map((e) => [e.to.hash, e.from.hash])
       .flat();
-
-    if (!addresses) return [];
 
     addresses = addresses
       .filter((e) => e.toLowerCase() !== address?.toLowerCase())
@@ -46,7 +44,7 @@ export const Transfer = () => {
 
     addresses = [...new Set(addresses)];
 
-    return addresses.map((e) => getAddress(e));
+    return addresses.map((e) => getAddress(e)).slice(0, 6);
   }, [address, recentTransactions]);
 
   useEffect(() => {

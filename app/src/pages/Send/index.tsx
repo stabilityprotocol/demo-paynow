@@ -14,6 +14,7 @@ import { shortAddress } from "../../common/ETH";
 import { parseUnits } from "ethers";
 import { SendWrapper } from "./Styles";
 import { LoadingIcon } from "../../components/LoadingIcon";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const Send = () => {
   const { t } = useTranslation();
@@ -57,43 +58,38 @@ export const Send = () => {
   }, [transferState]);
 
   return (
-    <>
-      <SendWrapper>
-        <PageTitle>{t("pages.send.title")}</PageTitle>
-        <UserIcon
-          name={displayName}
-          letters={displayName.slice(0, 2).toUpperCase()}
+    <SendWrapper>
+      <PageTitle>{t("pages.send.title")}</PageTitle>
+      <UserIcon name={displayName} letters={getUsernameInitials(displayName)} />
+      {transferState.account?.name &&
+        shortAddress(transferState.account!.address)}
+      <Quantity quantity={transferState.formattedAmount ?? "0"} />
+      <AttributeWrapper>
+        <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
+        <RequestAttribute
+          name={t("pages.send.total")}
+          value={`${transferState.formattedAmount} ${symbol}`}
         />
-        {transferState.account?.name &&
-          shortAddress(transferState.account!.address)}
-        <Quantity quantity={transferState.formattedAmount ?? "0"} />
-        <AttributeWrapper>
-          <RequestAttribute name={t("pages.send.fee")} value={`0 ${symbol}`} />
-          <RequestAttribute
-            name={t("pages.send.total")}
-            value={`${transferState.formattedAmount} ${symbol}`}
-          />
-          <RequestAttribute
-            name={t("pages.send.txn-completed")}
-            value={t("pages.send.txn-completed-time")}
-          />
-        </AttributeWrapper>
+        <RequestAttribute
+          name={t("pages.send.txn-completed")}
+          value={t("pages.send.txn-completed-time")}
+        />
+      </AttributeWrapper>
 
-        <ButtonWrapper>
-          <Button onClick={onSend}>
-            {loading ? (
-              <>
-                {t("pages.send.pending")} <LoadingIcon />
-              </>
-            ) : (
-              t("pages.send.confirm")
-            )}
-          </Button>
-          <ButtonNoFilled onClick={() => navigate(-1)}>
-            {t("pages.send.cancel")}
-          </ButtonNoFilled>
-        </ButtonWrapper>
-      </SendWrapper>
-    </>
+      <ButtonWrapper>
+        <Button onClick={onSend}>
+          {loading ? (
+            <>
+              {t("pages.send.pending")} <LoadingIcon />
+            </>
+          ) : (
+            t("pages.send.confirm")
+          )}
+        </Button>
+        <ButtonNoFilled onClick={() => navigate(-1)}>
+          {t("pages.send.cancel")}
+        </ButtonNoFilled>
+      </ButtonWrapper>
+    </SendWrapper>
   );
 };

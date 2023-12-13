@@ -20,6 +20,7 @@ import { useRecoilValue } from "recoil";
 import { UserState } from "../../common/State/User";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useDisconnect } from "wagmi";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const Profile = () => {
   const { disconnect } = useDisconnect();
@@ -32,22 +33,11 @@ export const Profile = () => {
     return username.concat(".stability");
   }, [username]);
 
-  const normalizedImageText = useMemo(() => {
-    if (!username) return "?";
-    // get initials delimitated by hyphen or dot and uppercase them with limit of 2
-    const initials = username
-      .split(/[-.]/)
-      .map((word) => word.charAt(0).toUpperCase())
-      .join("")
-      .substring(0, 2);
-    return initials;
-  }, [username]);
-
   return (
     <ProfileWrapper>
       <ProfileUpperSection>
         <ProfileUpperContainer>
-          <ProfileImage>{normalizedImageText}</ProfileImage>
+          <ProfileImage>{getUsernameInitials(username)}</ProfileImage>
           <UsernameTitle>{t("pages.profile.usernameTitle")}</UsernameTitle>
           {normalizedUsername ? (
             <ProfileName>{normalizedUsername}</ProfileName>

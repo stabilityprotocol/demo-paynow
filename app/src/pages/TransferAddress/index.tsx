@@ -23,6 +23,7 @@ import { useTheme } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { shortAddress } from "../../common/ETH";
 import { UserIcon } from "../../components/UserIcon";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const TransferAddress = () => {
   const [transfer, setAccount] = useRecoilState(TransferState);
@@ -70,7 +71,9 @@ export const TransferAddress = () => {
       <AddressInformationWrapper>
         <UserIcon
           name={displayName}
-          letters={displayName.slice(0, 2).toUpperCase()}
+          letters={getUsernameInitials(
+            transfer.account?.name || transfer.account?.address
+          )}
         />
         {transfer.account?.name && shortAddress(transfer.account!.address)}
       </AddressInformationWrapper>
