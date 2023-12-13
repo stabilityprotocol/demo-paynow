@@ -79,7 +79,8 @@
         "txn-completed": "Txn Completed"
       },
       "cancel": "CANCEL",
-      "confirm": "CONFIRM"
+      "confirm": "CONFIRM",
+      "pending": "SENDING..."
     },
     "activity": {
       "title": "ACTIVITY",

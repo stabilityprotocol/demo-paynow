@@ -21,7 +21,7 @@ import { useAccount } from "wagmi";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { AddMemo } from "../Request/components/AddMemo";
 import { LoadingIcon } from "../../components/LoadingIcon";
-import { LoadingIconWrapper } from "./Styles";
+import { LoadingIconWrapper, PayRequestWrapper } from "./Styles";
 
 export const PayRequest = () => {
   const { id } = useParams<{ id: string }>();
@@ -116,14 +116,16 @@ export const PayRequest = () => {
     );
 
   return (
-    <>
+    <PayRequestWrapper>
       <PageTitle>{t("pages.pay-request.title")}</PageTitle>
-      <UserIcon
-        name={displayName ?? shortAddress(request.target)}
-        letters={(displayName ?? request.target).slice(0, 2).toUpperCase()}
-      />
-      {shortAddress(request.target)}
-      <Quantity quantity={formatEther(request.amount)} />
+      <div>
+        <UserIcon
+          name={displayName ?? shortAddress(request.target)}
+          letters={(displayName ?? request.target).slice(0, 2).toUpperCase()}
+        />
+        {shortAddress(request.target)}
+        <Quantity quantity={formatEther(request.amount)} />
+      </div>
       <AddMemoWrapper>
         <AddMemo value={request.memo} disabled />
       </AddMemoWrapper>
@@ -158,6 +160,6 @@ export const PayRequest = () => {
           )}
         </ButtonNoFilled>
       </ButtonWrapper>
-    </>
+    </PayRequestWrapper>
   );
 };

@@ -13,6 +13,7 @@ import { useCallback, useMemo, useState } from "react";
 import { shortAddress } from "../../common/ETH";
 import { parseUnits } from "ethers";
 import { SendWrapper } from "./Styles";
+import { LoadingIcon } from "../../components/LoadingIcon";
 
 export const Send = () => {
   const { t } = useTranslation();
@@ -80,7 +81,13 @@ export const Send = () => {
 
         <ButtonWrapper>
           <Button onClick={onSend}>
-            {loading ? t("pages.send.pending") : t("pages.send.confirm")}
+            {loading ? (
+              <>
+                {t("pages.send.pending")} <LoadingIcon />
+              </>
+            ) : (
+              t("pages.send.confirm")
+            )}
           </Button>
           <ButtonNoFilled onClick={() => navigate(-1)}>
             {t("pages.send.cancel")}

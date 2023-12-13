@@ -107,7 +107,13 @@ export const Request = () => {
 
         <ButtonWrapper>
           <Button onClick={!loading ? handleCreateRequest : undefined}>
-            {loading ? <LoadingIcon /> : t("pages.request.confirm")}
+            {loading ? (
+              <>
+                {t("pages.request.pending")} <LoadingIcon />
+              </>
+            ) : (
+              t("pages.request.confirm")
+            )}
           </Button>
           <ButtonNoFilled onClick={() => (!loading ? navigate(-1) : undefined)}>
             {t("pages.request.cancel")}
