@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ButtonWrapper = styled.div`
   width: 80%;
-  gap: 10px;
+  gap: ${(props) => props.theme.spacing.small};
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -30,4 +30,13 @@ export const AddMemoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const RequestingWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 `;

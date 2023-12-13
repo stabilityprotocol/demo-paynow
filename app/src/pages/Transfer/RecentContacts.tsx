@@ -6,6 +6,7 @@ import { useSetRecoilState } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
 import { UserIcon } from "../../components/UserIcon";
 import { shortAddress } from "../../common/ETH";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
             <RecentContactsListItem key={i} onClick={() => onClick(entry)}>
               <UserIcon
                 name={displayName}
-                letters={displayName.slice(0, 2).toUpperCase()}
+                letters={getUsernameInitials(displayName)}
               ></UserIcon>
             </RecentContactsListItem>
           );

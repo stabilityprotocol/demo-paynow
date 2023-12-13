@@ -47,10 +47,11 @@ export const mlWalletApiKey = "pk_live_35C72FCE8CC29C4C";
 export const dedicatedWallet = new DedicatedWalletConnector({
   options: {
     apiKey: mlWalletApiKey,
+    oauthOptions: { providers: ["google"] },
     magicSdkConfiguration: {
       network: {
         rpcUrl: "https://magic.free.testnet.stabilityprotocol.com",
-        chainId: 20180427,
+        chainId: stbleTestnet.id,
       },
     },
   },

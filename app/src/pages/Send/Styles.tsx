@@ -26,3 +26,12 @@ export const AttributeWrapper = styled.div`
   margin-bottom: ${(props) => props.theme.spacing.xlarge};
   width: 80%;
 `;
+
+export const SendWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+`;

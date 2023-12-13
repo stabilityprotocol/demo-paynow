@@ -7,6 +7,7 @@ import { TransferState } from "../../common/State/Transfer";
 import { shortAddress } from "../../common/ETH";
 import { useCopyToClipboard } from "usehooks-ts";
 import { FaCopy } from "react-icons/fa";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
   const navigate = useNavigate();
@@ -28,9 +29,7 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
         const address = shortAddress(entry.address);
         return (
           <SearchResultsItem onClick={() => onClick(entry)}>
-            <AccountLogo>
-              {displayName ? displayName.slice(0, 2).toUpperCase() : "0x"}
-            </AccountLogo>
+            <AccountLogo>{getUsernameInitials(displayName)}</AccountLogo>
             <SearchResultsItemName>
               <FlexSpan>{displayName}</FlexSpan>
               <FlexSpan>

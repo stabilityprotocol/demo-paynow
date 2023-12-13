@@ -4,6 +4,7 @@ import { EnsABI } from "../ABI/ENS";
 import { prepareWriteContract, writeContract, readContract } from "@wagmi/core";
 import { useCallback } from "react";
 import { useCache } from "./useCache";
+import { isAddress } from "viem";
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
@@ -29,8 +30,9 @@ export const useENS = () => {
   };
 
   const getNameByAddress = useCallback(
-    async (address: Address) => {
+    async (address: Address | undefined) => {
       try {
+        if (!address) return undefined;
         if (has(address)) return get(address);
 
         const data = await readContract({
@@ -40,7 +42,7 @@ export const useENS = () => {
           args: [address],
         });
 
-        set(address, data, ONE_DAY_IN_SECONDS);
+        isAddress(address) && set(address, data, ONE_DAY_IN_SECONDS);
         return data;
       } catch (error) {
         console.error(error);

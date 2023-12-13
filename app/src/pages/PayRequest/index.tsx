@@ -21,13 +21,16 @@ import { useAccount } from "wagmi";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { AddMemo } from "../Request/components/AddMemo";
 import { LoadingIcon } from "../../components/LoadingIcon";
-import { LoadingIconWrapper } from "./Styles";
+import { LoadingIconWrapper, PayRequestWrapper } from "./Styles";
+import { getUsernameInitials } from "../../common/Utils";
 
 export const PayRequest = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const [displayName, setDisplayName] = useState<string | undefined>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<
+    "confirming" | "rejecting" | undefined
+  >();
   const { symbol, allowance, approve } = useERC20();
   const navigate = useNavigate();
   const {
@@ -47,7 +50,7 @@ export const PayRequest = () => {
 
   const onConfirm = useCallback(() => {
     if (!request || !address || !balance) return;
-    setLoading(true);
+    setLoading("confirming");
     const fn = async () => {
       if (!request) return Promise.reject();
       // check allowance
@@ -63,11 +66,11 @@ export const PayRequest = () => {
     };
     fn()
       .then(() => {
-        setLoading(false);
+        setLoading(undefined);
         navigate("/balance");
       })
       .catch(() => {
-        setLoading(false);
+        setLoading(undefined);
       });
   }, [
     allowance,
@@ -82,7 +85,7 @@ export const PayRequest = () => {
 
   const onReject = useCallback(() => {
     if (!request) return;
-    setLoading(true);
+    setLoading("rejecting");
     const fn = () => {
       return cancelRequest(request.id).then((hash) =>
         waitForTransaction({ hash })
@@ -90,11 +93,11 @@ export const PayRequest = () => {
     };
     fn()
       .then(() => {
-        setLoading(false);
+        setLoading(undefined);
         navigate("/balance");
       })
       .catch(() => {
-        setLoading(false);
+        setLoading(undefined);
       });
   }, [cancelRequest, navigate, request]);
 
@@ -114,14 +117,16 @@ export const PayRequest = () => {
     );
 
   return (
-    <>
+    <PayRequestWrapper>
       <PageTitle>{t("pages.pay-request.title")}</PageTitle>
-      <UserIcon
-        name={displayName ?? shortAddress(request.target)}
-        letters={(displayName ?? request.target).slice(0, 2).toUpperCase()}
-      />
-      {shortAddress(request.target)}
-      <Quantity quantity={formatEther(request.amount)} />
+      <div>
+        <UserIcon
+          name={displayName ?? shortAddress(request.target)}
+          letters={getUsernameInitials(displayName)}
+        />
+        {shortAddress(request.target)}
+        <Quantity quantity={formatEther(request.amount)} />
+      </div>
       <AddMemoWrapper>
         <AddMemo value={request.memo} disabled />
       </AddMemoWrapper>
@@ -138,12 +143,24 @@ export const PayRequest = () => {
       </AttributeWrapper>
       <ButtonWrapper>
         <Button onClick={onConfirm}>
-          {loading ? t("pages.send.pending") : t("pages.send.confirm")}
+          {loading === "confirming" ? (
+            <>
+              {t("pages.send.pending")} <LoadingIcon />
+            </>
+          ) : (
+            t("pages.send.confirm")
+          )}
         </Button>
         <ButtonNoFilled onClick={onReject}>
-          {t("pages.send.cancel")}
+          {loading === "rejecting" ? (
+            <>
+              {t("pages.pay-request.rejecting")} <LoadingIcon />
+            </>
+          ) : (
+            t("pages.pay-request.reject")
+          )}
         </ButtonNoFilled>
       </ButtonWrapper>
-    </>
+    </PayRequestWrapper>
   );
 };

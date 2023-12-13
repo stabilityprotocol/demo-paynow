@@ -81,7 +81,8 @@
         "txn-completed": "Txn Completed"
       },
       "cancel": "CANCEL",
-      "confirm": "CONFIRM"
+      "confirm": "CONFIRM",
+      "pending": "SENDING..."
     },
     "activity": {
       "title": "ACTIVITY",
@@ -93,7 +94,9 @@
     },
     "pay-request": {
       "title": "PAY REQUEST",
-      "loading": "LOADING"
+      "loading": "LOADING",
+      "reject": "REJECT",
+      "rejecting": "REJECTING..."
     }
   },
   "components": {
