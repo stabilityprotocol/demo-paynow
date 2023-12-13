@@ -47,7 +47,7 @@ export const Profile = () => {
 
   useEffect(() => {
     if (recentTransactions.length > 0) {
-      setDisplayTransactions([recentTransactions[1]]);
+      setDisplayTransactions([recentTransactions[0]]);
     }
   }, [recentTransactions]);
 

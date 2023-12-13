@@ -1,4 +1,4 @@
-import { ActivityWrapper, ActivityTitle } from "./Styles";
+import { ActivityWrapper, ActivityTitle, ActivityListWrapper } from "./Styles";
 import { TransactionActivity } from "../../components/TransactionActivity";
 import { useTranslation } from "react-i18next";
 import { useRecoilValue } from "recoil";
@@ -10,7 +10,9 @@ export const Activity = () => {
   return (
     <ActivityWrapper>
       <ActivityTitle>{t("pages.activity.title")}</ActivityTitle>
-      <TransactionActivity transactions={recentTransactions}/>
+      <ActivityListWrapper>
+        <TransactionActivity transactions={recentTransactions} />
+      </ActivityListWrapper>
     </ActivityWrapper>
   );
 };

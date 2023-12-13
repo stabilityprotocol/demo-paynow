@@ -11,7 +11,6 @@ export const TransactionActivityWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: ${(props) => props.theme.spacing.medium};
-  padding: ${(props) => props.theme.spacing.medium};
   overflow-y: auto;
   background-color: transparent;
 `;
@@ -38,7 +37,6 @@ export const TransactionDate = styled.div`
 
 export const TransactionActivityItemWrapper = styled.div`
   display: flex;
-  height: 3.125rem;
   flex: 0 0 auto;
   width: 100%;
   align-items: flex-start;
@@ -47,7 +45,8 @@ export const TransactionActivityItemWrapper = styled.div`
 
 export const TransactionIconWrapper = styled.div`
   display: flex;
-  width: 3.125rem;
+  width: 3rem;
+  aspect-ratio: 1/1;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -58,8 +57,9 @@ export const IconBubble = styled.div<{
   transactionType?: TransactionActivityType;
 }>`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 3rem;
+  height: 3rem;
+  aspect-ratio: 1/1;
   align-items: center;
   justify-content: center;
   border-radius: 50%;

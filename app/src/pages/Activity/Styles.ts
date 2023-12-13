@@ -15,3 +15,9 @@ export const ActivityTitle = styled.div`
   font-size: ${(props) => props.theme.fontSizes.large};
   color: ${(props) => props.theme.colors.green1};
 `;
+
+export const ActivityListWrapper = styled.div`
+  padding: ${(props) => props.theme.spacing.small}
+    ${(props) => props.theme.spacing.medium};
+  width: 100%;
+`;
