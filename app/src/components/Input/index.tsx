@@ -10,6 +10,7 @@ export const Input: React.FC<{
   background?: string;
   color?: string;
   type?: string;
+  pattern?: string;
 }> = ({
   placeholder,
   onChange,
@@ -19,6 +20,7 @@ export const Input: React.FC<{
   background,
   color,
   type,
+  pattern,
 }) => {
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +34,7 @@ export const Input: React.FC<{
       {icon && icon}
       <InputComponent
         value={value}
+        pattern={pattern}
         placeholder={placeholder}
         onChange={onInputChange}
         type={type}
