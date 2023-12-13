@@ -31,11 +31,11 @@ import {
 } from "../../common/models/TransactionActivity";
 
 export const TransactionActivity = ({
-  transactions
-}:{
-  transactions: { date: string; items: TransactionActivityData[] }[]
+  transactions,
+}: {
+  transactions: { date: string; items: TransactionActivityData[] }[];
 }) => {
-  return transactions && (transactions.length > 0) ? (
+  return transactions && transactions.length > 0 ? (
     <TransactionActivityWrapper>
       {transactions.map((stack, i) => (
         <TransactionActivityStack key={i}>
@@ -142,12 +142,8 @@ const TransactionActivityItem: React.FC<{
             href={t("links.explorerTx", { hash: item.tx_hash })}
             target="_blank"
           >
-            {transactionType == "Send" && (
-              <span>-</span>
-            )}
-            {transactionType == "Receive" && (
-              <span>+</span>
-            )}
+            {transactionType == "Send" && <span>-</span>}
+            {transactionType == "Receive" && <span>+</span>}
             {formatUnits(item.total.value, Number(item.token.decimals))}
           </a>
           <span>{item.token.symbol}</span>
