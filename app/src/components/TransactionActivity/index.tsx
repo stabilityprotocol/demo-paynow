@@ -25,19 +25,19 @@ import { shortAddress } from "../../common/ETH";
 import { useENS } from "../../common/hooks/useENS";
 import { Address } from "wagmi";
 import { useTranslation } from "react-i18next";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../common/State/User";
 import {
   TransactionActivityStatus,
   TransactionActivityType,
 } from "../../common/models/TransactionActivity";
 
-export const TransactionActivity = () => {
-  const { recentTransactions } = useRecoilValue(UserState);
-
-  return recentTransactions.length > 0 ? (
+export const TransactionActivity = ({
+  transactions
+}:{
+  transactions: { date: string; items: TransactionActivityData[] }[]
+}) => {
+  return transactions && (transactions.length > 0) ? (
     <TransactionActivityWrapper>
-      {recentTransactions.map((stack, i) => (
+      {transactions.map((stack, i) => (
         <TransactionActivityStack key={i}>
           <TransactionDate>{stack.date}</TransactionDate>
           {stack.items.map((item, j) => (
@@ -142,6 +142,12 @@ const TransactionActivityItem: React.FC<{
             href={t("links.explorerTx", { hash: item.tx_hash })}
             target="_blank"
           >
+            {transactionType == "Send" && (
+              <span>-</span>
+            )}
+            {transactionType == "Receive" && (
+              <span>+</span>
+            )}
             {formatUnits(item.total.value, Number(item.token.decimals))}
           </a>
           <span>{item.token.symbol}</span>

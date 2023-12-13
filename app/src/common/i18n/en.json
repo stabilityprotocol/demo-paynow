@@ -36,6 +36,8 @@
       "account": {
         "title": "Wallet Address"
       },
+      "activityTitle": "Activity",
+      "seeAllActivity": "See All",
       "usernameTitle": "Username",
       "setProfileName": "SET USERNAME",
       "helpCenter": "Help Center",

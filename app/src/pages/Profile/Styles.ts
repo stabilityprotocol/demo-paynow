@@ -86,19 +86,22 @@ export const ProfileLowerSection = styled.div`
   left: 0;
   width: 100%;
   height: 60%;
+  max-height: 60%;
   background: ${(props) => props.theme.colors.bgGreen};
   border-radius: ${(props) => props.theme.box.borderRadius};
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
+  flex-grow: 1;
 `;
 
 export const ProfileLowerContainer = styled.div`
   margin-top: ${(props) => props.theme.spacing.xlarge};
   display: flex;
   flex-direction: column;
+  height: 100%;
   flex-grow: 1;
   justify-content: space-between;
-  align-items: center;
 `;
 
 export const ActionBarWrapper = styled.div`
@@ -112,8 +115,7 @@ export const ActionBarWrapper = styled.div`
 
 export const ProfileFooter = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.green1};
-  padding: ${(props) => props.theme.spacing.small}
-    ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.small} ${(props) => props.theme.spacing.medium};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,4 +134,53 @@ export const ProfileFooter = styled.div`
       width: auto;
     }
   }
+`;
+
+export const ActivityWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const ActivityTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.1rem;
+  width: 100%;
+  padding: ${(props) => props.theme.spacing.small}
+    ${(props) => props.theme.spacing.medium};
+  font-size: ${(props) => props.theme.fontSizes.large};
+  color: ${(props) => props.theme.colors.green1};
+`;
+
+export const ActivityTitle = styled.span`
+  font-size: ${(props) => props.theme.fontSizes.large};
+`;
+
+export const RedirectToActivity = styled.span`
+  font-size: ${(props) => props.theme.fontSizes.small};
+  font-family: ${(props) => props.theme.font.secondary};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-left: ${(props) => props.theme.spacing.xsmall};
+    height: 1.25rem;
+    width: auto;
+  }
+`;
+
+export const TransactionActivityWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 22rem;
+  align-items: center;
+  justify-content: center;
+  gap: ${(props) => props.theme.spacing.medium};
+  overflow-y: auto;
 `;

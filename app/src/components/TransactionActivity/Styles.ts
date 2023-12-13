@@ -8,12 +8,12 @@ export const TransactionActivityWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: flex-start;
   gap: ${(props) => props.theme.spacing.medium};
-  padding: ${(props) => props.theme.spacing.small}
-    ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.medium};
+  overflow-y: auto;
+  background-color: transparent;
 `;
 
 export const TransactionActivityStack = styled.div`
