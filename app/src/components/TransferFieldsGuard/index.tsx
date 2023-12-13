@@ -14,7 +14,7 @@ export const TransferFieldsGuard: React.FC<{
   }
 
   if (transferAmount && !transferState.formattedAmount) {
-    return <Navigate to="/transfer" />;
+    return <Navigate to="/transfer/address" />;
   }
 
   return children;
