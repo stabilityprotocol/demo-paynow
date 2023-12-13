@@ -30,8 +30,9 @@ export const useENS = () => {
   };
 
   const getNameByAddress = useCallback(
-    async (address: Address) => {
+    async (address: Address | undefined) => {
       try {
+        if (!address) return undefined;
         if (has(address)) return get(address);
 
         const data = await readContract({
