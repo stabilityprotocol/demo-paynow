@@ -7,7 +7,6 @@ export const ShellWrapper = styled.div`
   min-height: 100dvh;
   min-width: 100vw;
   max-width: 100vw;
-  padding: ${(props) => props.theme.spacing.large} 0 0 0;
 
   @media ${mediaSizes.portableQuery} {
     padding: 0;

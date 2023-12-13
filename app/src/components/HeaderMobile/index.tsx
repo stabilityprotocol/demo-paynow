@@ -11,14 +11,12 @@ export const HeaderMobile: React.FC = () => {
   const userState = useRecoilValue(UserState);
 
   return (
-    <>
-      <HeaderMobileWrapper>
-        <img src={Logo} alt="PayNow" onClick={() => navigate("/")} />
-        <HeaderMobileProfileWrapper>
-          <FaUserCircle onClick={() => navigate("/profile")} />
-          {!userState.ens && <span className="notification"></span>}
-        </HeaderMobileProfileWrapper>
-      </HeaderMobileWrapper>
-    </>
+    <HeaderMobileWrapper>
+      <img src={Logo} alt="PayNow" onClick={() => navigate("/")} />
+      <HeaderMobileProfileWrapper>
+        <FaUserCircle onClick={() => navigate("/profile")} />
+        {!userState.ens && <span className="notification"></span>}
+      </HeaderMobileProfileWrapper>
+    </HeaderMobileWrapper>
   );
 };

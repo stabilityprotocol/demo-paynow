@@ -2,17 +2,24 @@ import styled from "styled-components";
 import { mediaSizes } from "../../common/Theme";
 import heroBg from "../../assets/hero.png?url";
 
+export const PortalRootBackgroundLayer = styled.div`
+  background: url(${heroBg}) no-repeat top center;
+  background-size: cover;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+`;
+
 export const PortalRootWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: ${(props) => props.theme.box.borderRadius};
-  box-shadow: rgba(0, 0, 0, 0.2) 0 0 10px;
   overflow: hidden;
-  background: ${(props) => props.theme.colors.bgGreen};
-  background: url(${heroBg}) no-repeat top center;
-  background-size: 250% auto;
 
   width: ${(props) => props.theme.viewport.phone.width};
   max-width: ${(props) => props.theme.viewport.phone.width};
@@ -39,6 +46,7 @@ export const OutletWrapper = styled.div`
 
 export const HeaderWrapper = styled.div`
   width: 100%;
+  max-width: ${(props) => props.theme.viewport.desktop.maxWidth};
   position: absolute;
   top: ${(props) => props.theme.spacing.small};
   display: flex;

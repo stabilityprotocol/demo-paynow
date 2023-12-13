@@ -51,6 +51,7 @@ export const BalanceLowerSection = styled.div`
   left: 0;
   width: 100%;
   height: 45%;
+  border-radius: ${(props) => props.theme.box.borderRadius};
   background: ${(props) => props.theme.colors.bgGreen};
   padding: ${(props) => props.theme.spacing.small}
     ${(props) => props.theme.spacing.medium};

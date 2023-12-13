@@ -1,18 +1,33 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { FullScreenHeader, FullScreenWrapper } from "./Styles";
+import {
+  FullScreenBackgroundLayer,
+  FullScreenHeader,
+  FullScreenWrapper,
+} from "./Styles";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { HeaderMobile } from "../HeaderMobile";
+import { HeaderWrapper } from "../PortalRoot/Styles";
+import { usePortableDevice } from "../../common/hooks/usePortableDevice";
 
 export const FullScreen: React.FC<{ hideBack?: boolean }> = ({ hideBack }) => {
   const navigate = useNavigate();
+  const { isPortable } = usePortableDevice();
 
   return (
-    <FullScreenWrapper>
-      {!hideBack && (
-        <FullScreenHeader>
-          <IoArrowBackCircleSharp onClick={() => navigate(-1)} />
-        </FullScreenHeader>
+    <FullScreenBackgroundLayer>
+      {!isPortable && (
+        <HeaderWrapper>
+          <HeaderMobile />
+        </HeaderWrapper>
       )}
-      <Outlet />
-    </FullScreenWrapper>
+      <FullScreenWrapper>
+        {!hideBack && (
+          <FullScreenHeader>
+            <IoArrowBackCircleSharp onClick={() => navigate(-1)} />
+          </FullScreenHeader>
+        )}
+        <Outlet />
+      </FullScreenWrapper>
+    </FullScreenBackgroundLayer>
   );
 };
