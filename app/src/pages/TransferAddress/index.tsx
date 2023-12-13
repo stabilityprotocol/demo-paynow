@@ -15,7 +15,7 @@ import {
 } from "./Styles";
 import { useTranslation } from "react-i18next";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { TokenAmountInput } from "../../components/TokenAmountInput";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonAction } from "../../components/Button";
@@ -33,6 +33,12 @@ export const TransferAddress = () => {
 
   const { formatted } = useAppBalance();
   const [amount, setAmount] = useState("");
+
+  if (!transfer.account) {
+    // If the user dont follow the flow, redirect to the balance page
+    navigate("/balance");
+    return null;
+  }
 
   const enoughBalance = useMemo(() => {
     return Number(formatted) >= Number(amount);

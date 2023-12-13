@@ -7,6 +7,7 @@ import {
   ButtonWrapper,
   PageTitle,
   AddMemoWrapper,
+  RequestingWrapper,
 } from "./Styles";
 import { AddMemo } from "./components/AddMemo";
 import { Quantity } from "./components/Quantity";
@@ -28,6 +29,12 @@ export const Request = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { createRequest } = usePaymentRequest();
+
+  if (!transferState.account || !transferState.formattedAmount) {
+    // If the user dont follow the flow, redirect to the balance page
+    navigate("/balance");
+    return null;
+  }
 
   const imageLetters = useMemo(() => {
     if (!transferState.account?.name) return "?";
@@ -72,39 +79,41 @@ export const Request = () => {
 
   return (
     <>
-      <PageTitle>{t("pages.request.title")}</PageTitle>
-      <UserIcon name={displayName} letters={imageLetters} />
-      {transferState.account?.name &&
-        shortAddress(transferState.account!.address)}
-      <Quantity quantity={transferState.formattedAmount ?? ""} />
-      <AddMemoWrapper>
-        <AddMemo
-          value={memo}
-          onChange={(e) => setMemo(e.target.value)}
-          disabled={loading}
-        />
-      </AddMemoWrapper>
+      <RequestingWrapper>
+        <PageTitle>{t("pages.request.title")}</PageTitle>
+        <UserIcon name={displayName} letters={imageLetters} />
+        {transferState.account?.name &&
+          shortAddress(transferState.account!.address)}
+        <Quantity quantity={transferState.formattedAmount ?? ""} />
+        <AddMemoWrapper>
+          <AddMemo
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
+            disabled={loading}
+          />
+        </AddMemoWrapper>
 
-      <AttributeWrapper>
-        <RequestAttribute name={t("pages.request.atributes.fee")} value="0" />
-        <RequestAttribute
-          name={t("pages.request.atributes.total")}
-          value={transferState.formattedAmount ?? ""}
-        />
-        <RequestAttribute
-          name={t("pages.request.atributes.txn-completed")}
-          value="In Second"
-        />
-      </AttributeWrapper>
+        <AttributeWrapper>
+          <RequestAttribute name={t("pages.request.atributes.fee")} value="0" />
+          <RequestAttribute
+            name={t("pages.request.atributes.total")}
+            value={transferState.formattedAmount ?? ""}
+          />
+          <RequestAttribute
+            name={t("pages.request.atributes.txn-completed")}
+            value="In Second"
+          />
+        </AttributeWrapper>
 
-      <ButtonWrapper>
-        <Button onClick={!loading ? handleCreateRequest : undefined}>
-          {loading ? <LoadingIcon /> : t("pages.request.confirm")}
-        </Button>
-        <ButtonNoFilled onClick={() => (!loading ? navigate(-1) : undefined)}>
-          {t("pages.request.cancel")}
-        </ButtonNoFilled>
-      </ButtonWrapper>
+        <ButtonWrapper>
+          <Button onClick={!loading ? handleCreateRequest : undefined}>
+            {loading ? <LoadingIcon /> : t("pages.request.confirm")}
+          </Button>
+          <ButtonNoFilled onClick={() => (!loading ? navigate(-1) : undefined)}>
+            {t("pages.request.cancel")}
+          </ButtonNoFilled>
+        </ButtonWrapper>
+      </RequestingWrapper>
     </>
   );
 };
