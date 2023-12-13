@@ -1,4 +1,4 @@
-import { DedicatedWalletConnector } from "@magiclabs/wagmi-connector";
+import { MagicAuthConnector } from "@magiclabs/wagmi-connector";
 import { configureChains } from "@wagmi/core";
 import { publicProvider } from "@wagmi/core/providers/public";
 import { Chain, createConfig } from "wagmi";
@@ -44,13 +44,13 @@ export const { chains, publicClient } = configureChains(
 
 export const mlWalletApiKey = "pk_live_35C72FCE8CC29C4C";
 
-export const dedicatedWallet = new DedicatedWalletConnector({
+export const dedicatedWallet = new MagicAuthConnector({
   options: {
     apiKey: mlWalletApiKey,
     magicSdkConfiguration: {
       network: {
         rpcUrl: "https://magic.free.testnet.stabilityprotocol.com",
-        chainId: 20180427,
+        chainId: stbleTestnet.id,
       },
     },
   },

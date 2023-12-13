@@ -27,7 +27,9 @@ export const PayRequest = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const [displayName, setDisplayName] = useState<string | undefined>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<
+    "confirming" | "rejecting" | undefined
+  >();
   const { symbol, allowance, approve } = useERC20();
   const navigate = useNavigate();
   const {
@@ -47,7 +49,7 @@ export const PayRequest = () => {
 
   const onConfirm = useCallback(() => {
     if (!request || !address || !balance) return;
-    setLoading(true);
+    setLoading("confirming");
     const fn = async () => {
       if (!request) return Promise.reject();
       // check allowance
@@ -63,11 +65,11 @@ export const PayRequest = () => {
     };
     fn()
       .then(() => {
-        setLoading(false);
+        setLoading(undefined);
         navigate("/balance");
       })
       .catch(() => {
-        setLoading(false);
+        setLoading(undefined);
       });
   }, [
     allowance,
@@ -82,7 +84,7 @@ export const PayRequest = () => {
 
   const onReject = useCallback(() => {
     if (!request) return;
-    setLoading(true);
+    setLoading("rejecting");
     const fn = () => {
       return cancelRequest(request.id).then((hash) =>
         waitForTransaction({ hash })
@@ -90,11 +92,11 @@ export const PayRequest = () => {
     };
     fn()
       .then(() => {
-        setLoading(false);
+        setLoading(undefined);
         navigate("/balance");
       })
       .catch(() => {
-        setLoading(false);
+        setLoading(undefined);
       });
   }, [cancelRequest, navigate, request]);
 
@@ -138,10 +140,22 @@ export const PayRequest = () => {
       </AttributeWrapper>
       <ButtonWrapper>
         <Button onClick={onConfirm}>
-          {loading ? t("pages.send.pending") : t("pages.send.confirm")}
+          {loading === "confirming" ? (
+            <>
+              {t("pages.send.pending")} <LoadingIcon />
+            </>
+          ) : (
+            t("pages.send.confirm")
+          )}
         </Button>
         <ButtonNoFilled onClick={onReject}>
-          {t("pages.send.cancel")}
+          {loading === "rejecting" ? (
+            <>
+              {t("pages.pay-request.rejecting")} <LoadingIcon />
+            </>
+          ) : (
+            t("pages.pay-request.reject")
+          )}
         </ButtonNoFilled>
       </ButtonWrapper>
     </>

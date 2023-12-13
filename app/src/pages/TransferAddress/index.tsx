@@ -15,7 +15,7 @@ import {
 } from "./Styles";
 import { useTranslation } from "react-i18next";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { TokenAmountInput } from "../../components/TokenAmountInput";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { ButtonAction } from "../../components/Button";

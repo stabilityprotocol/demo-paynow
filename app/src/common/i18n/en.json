@@ -91,7 +91,9 @@
     },
     "pay-request": {
       "title": "PAY REQUEST",
-      "loading": "LOADING"
+      "loading": "LOADING",
+      "reject": "REJECT",
+      "rejecting": "REJECTING..."
     }
   },
   "components": {
