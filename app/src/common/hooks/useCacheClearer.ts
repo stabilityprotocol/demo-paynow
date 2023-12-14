@@ -3,7 +3,7 @@ import { CacheState } from "../State/PersistentCache";
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-const LastCacheUpdate = 1702474974000;
+const LastCacheUpdate = 1702542453657;
 
 export const useCacheClearer = () => {
   const [, setCache] = useRecoilState(CacheState);
