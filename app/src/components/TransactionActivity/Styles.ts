@@ -113,6 +113,8 @@ export const TransactionAmountWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   background-color: transparent;
+  gap: ${(props) => props.theme.spacing.xsmall};
+  flex-wrap: wrap;
   > a {
     color: ${(props) => props.theme.colors.blueLink};
     font-family: ${(props) => props.theme.font.secondary};
