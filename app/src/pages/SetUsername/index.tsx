@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ButtonSmallAction } from "../../components/Button";
 import { waitForTransaction } from "@wagmi/core";
 import {
@@ -18,12 +18,13 @@ import { useAccount } from "wagmi";
 import { useRecoilState } from "recoil";
 import { UserState } from "../../common/State/User";
 import { useRegisterEns } from "../../common/API/ENS";
+import { useEnsName } from "../../common/hooks/useEnsName";
+import { isAddress } from "viem";
 
 export const SetUsername = () => {
   const { t } = useTranslation();
   const [username, setUsername] = useState<string | undefined>();
-  const [actualUsername, setActualUsername] = useState<string | undefined>();
-  const { claimName, getNameByAddress } = useENS();
+  const { claimName } = useENS();
   const { address } = useAccount();
   const [claiming, setClaiming] = useState<"sent" | "success" | undefined>();
   const [userState, setUserState] = useRecoilState(UserState);
@@ -49,20 +50,13 @@ export const SetUsername = () => {
     setClaiming("sent");
   }, [address, username, claimName, registerEnsApi, setUserState, userState]);
 
-  useEffect(() => {
-    if (address && !actualUsername) {
-      getNameByAddress(address).then((name) => {
-        if (!name) return;
-        setActualUsername(name);
-      });
-    }
-  }, [actualUsername, address, getNameByAddress]);
+  const actualUsername = useEnsName(address);
 
   if (claiming === "success") {
     return <Navigate to="/profile" />;
   }
 
-  if (actualUsername && actualUsername.length > 0 && !claiming) {
+  if ((!actualUsername || isAddress(actualUsername)) && !claiming) {
     return <Navigate to="/profile" />;
   }
 
