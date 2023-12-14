@@ -45,7 +45,7 @@ export const useFetchRecentTransactions = () => {
     if (!data || !data.items) {
       return;
     }
-    const recentTransactions = formatActivityData({ items: [], ...data });
+    const recentTransactions = formatActivityData({ items: data.items ?? [] });
     setUserState((prevState) => ({
       ...prevState,
       recentTransactions,

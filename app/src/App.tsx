@@ -21,7 +21,7 @@ import { AddMoney } from "./pages/AddMoney";
 import { ComeLater } from "./pages/AddMoney/ComeLater";
 import { SetUsername } from "./pages/SetUsername";
 import { Updater } from "./components/Updater";
-import { Transfer } from "./pages/Transfer";
+import { TransferSearch } from "./pages/TransferSearch";
 import { Landing } from "./pages/Landing";
 import { TransferAddress } from "./pages/TransferAddress";
 import { PayRequest } from "./pages/PayRequest";
@@ -88,10 +88,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/transfer",
-        element: <Transfer />,
+        element: <TransferSearch />,
       },
       {
-        path: "/transfer/address",
+        path: "/transfer/search",
+        element: <TransferSearch />,
+      },
+      {
+        path: "/transfer/amount",
         element: (
           <TransferFieldsGuard transferAddress>
             <TransferAddress />
