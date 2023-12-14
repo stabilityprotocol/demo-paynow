@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { EnsEntry } from "../../common/models/EnsEntry";
-import { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { TransferState } from "../../common/State/Transfer";
@@ -8,8 +8,10 @@ import { UserIcon } from "../../components/UserIcon";
 import { shortAddress } from "../../common/ETH";
 import { getUsernameInitials } from "../../common/Utils";
 import { useTranslation } from "react-i18next";
+import { Address } from "viem";
+import { useEnsName } from "../../common/hooks/useEnsName";
 
-export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
+export const RecentContacts = ({ addresses }: { addresses: Address[] }) => {
   const navigate = useNavigate();
   const setAccount = useSetRecoilState(TransferState);
   const { t } = useTranslation();
@@ -28,22 +30,35 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
         {t("pages.search.recentContacts.title")}
       </RecentsContactsTitle>
       <RecentContactsList>
-        {entries.map((entry, i) => {
-          const displayName = entry.name
-            ? `${entry.name}.stability`
-            : shortAddress(entry.address);
-
+        {addresses.map((entry, i) => {
           return (
-            <RecentContactsListItem key={i} onClick={() => onClick(entry)}>
-              <UserIcon
-                name={displayName}
-                letters={getUsernameInitials(displayName)}
-              ></UserIcon>
+            <RecentContactsListItem key={i}>
+              <UserIconWrapper address={entry} onClick={onClick} />
             </RecentContactsListItem>
           );
         })}
       </RecentContactsList>
     </RecentContactsWrapper>
+  );
+};
+
+const UserIconWrapper: React.FC<{
+  address: Address;
+  onClick: (entry: EnsEntry) => void;
+}> = ({ address, onClick }) => {
+  const data = useEnsName(address);
+
+  const displayName = useMemo(() => {
+    if (!data) {
+      return shortAddress(address);
+    }
+    return `${data}.stability`;
+  }, [address, data]);
+
+  return (
+    <span onClick={() => onClick({ address, name: displayName })}>
+      <UserIcon name={displayName} letters={getUsernameInitials(displayName)} />
+    </span>
   );
 };
 

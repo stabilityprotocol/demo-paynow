@@ -19,7 +19,6 @@ import { useRecoilState } from "recoil";
 import { UserState } from "../../common/State/User";
 import { useRegisterEns } from "../../common/API/ENS";
 import { useEnsName } from "../../common/hooks/useEnsName";
-import { isAddress } from "viem";
 
 export const SetUsername = () => {
   const { t } = useTranslation();
@@ -56,7 +55,7 @@ export const SetUsername = () => {
     return <Navigate to="/profile" />;
   }
 
-  if ((!actualUsername || isAddress(actualUsername)) && !claiming) {
+  if (!actualUsername && !claiming) {
     return <Navigate to="/profile" />;
   }
 

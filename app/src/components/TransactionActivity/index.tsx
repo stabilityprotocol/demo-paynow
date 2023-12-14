@@ -98,7 +98,7 @@ const TransactionActivityItem: React.FC<{
           displayAddress: item.to.hash,
         };
     }
-  }, [transactionType, item.from.hash, item.to.hash, t]);
+  }, [transactionType, t, item.to.hash, item.from.hash, address]);
 
   const status = useMemo(() => TransactionActivityStatus.DONE, []);
 

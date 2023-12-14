@@ -32,7 +32,7 @@ export const useENS = () => {
   const getNameByAddress = useCallback(
     async (address: Address | undefined) => {
       try {
-        if (!address) return undefined;
+        if (!address || !isAddress(address)) return null;
         if (has(address)) return get(address);
 
         const data = await readContract({
@@ -42,8 +42,10 @@ export const useENS = () => {
           args: [address],
         });
 
-        isAddress(address) && set(address, data, ONE_DAY_IN_SECONDS);
-        return data;
+        if (data && data.length > 0) {
+          set(address, data, ONE_DAY_IN_SECONDS);
+        }
+        return data.length > 0 ? data : null;
       } catch (error) {
         console.error(error);
         throw error;
