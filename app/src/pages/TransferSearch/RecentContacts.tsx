@@ -7,10 +7,12 @@ import { TransferState } from "../../common/State/Transfer";
 import { UserIcon } from "../../components/UserIcon";
 import { shortAddress } from "../../common/ETH";
 import { getUsernameInitials } from "../../common/Utils";
+import { useTranslation } from "react-i18next";
 
 export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
   const navigate = useNavigate();
   const setAccount = useSetRecoilState(TransferState);
+  const { t } = useTranslation();
 
   const onClick = useCallback(
     (entry: EnsEntry) => {
@@ -22,7 +24,9 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
 
   return (
     <RecentContactsWrapper>
-      <RecentsContactsTitle>Recent Contacts</RecentsContactsTitle>
+      <RecentsContactsTitle>
+        {t("pages.search.recentContacts.title")}
+      </RecentsContactsTitle>
       <RecentContactsList>
         {entries.map((entry, i) => {
           const displayName = entry.name
