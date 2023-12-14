@@ -15,6 +15,8 @@ import { parseUnits } from "ethers";
 import { SendWrapper, HeaderWrapper } from "./Styles";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { getUsernameInitials } from "../../common/Utils";
+import { toast } from "react-toastify";
+
 export const Send = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
@@ -34,6 +36,7 @@ export const Send = () => {
       .then((hash) => waitForTransaction({ hash, timeout: 30_000 }))
       .then(() => navigate("/"))
       .catch(() => {
+        toast.error(t("pages.send.error", { symbol }));
         setLoading(false);
       });
   }, [
@@ -42,6 +45,7 @@ export const Send = () => {
     transfer,
     transferState.account,
     transferState.formattedAmount,
+    symbol,
   ]);
 
   const displayName = useMemo(() => {

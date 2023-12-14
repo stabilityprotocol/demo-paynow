@@ -112,6 +112,29 @@ const TransactionActivityItem: React.FC<{
     [TransactionActivityData.displayAddress, name]
   );
 
+  const TransactionSymbol = useMemo(
+    () => () => {
+      if (item.from.hash === item.to.hash) return null;
+
+      if (
+        transactionType === "Send" ||
+        (transactionType === "Request" && item.from.hash === address)
+      ) {
+        return <span>-</span>;
+      }
+
+      if (
+        transactionType === "Receive" ||
+        (transactionType === "Request" && item.to.hash === address)
+      ) {
+        return <span>+</span>;
+      }
+
+      return null;
+    },
+    [transactionType, item.from.hash, item.to.hash, address]
+  );
+
   return (
     <TransactionActivityItemWrapper>
       <TransactionIconWrapper>
@@ -138,14 +161,7 @@ const TransactionActivityItem: React.FC<{
             href={t("links.explorerTx", { hash: item.tx_hash })}
             target="_blank"
           >
-            {(transactionType == "Send" ||
-              (transactionType == "Request" && item.from.hash == address)) && (
-              <span>-</span>
-            )}
-            {(transactionType == "Receive" ||
-              (transactionType == "Request" && item.to.hash == address)) && (
-              <span>+</span>
-            )}
+            <TransactionSymbol />
             {formatUnits(item.total.value, Number(item.token.decimals))}
           </a>
           <span>{item.token.symbol}</span>

@@ -23,6 +23,7 @@ import { LoadingIcon } from "../../components/LoadingIcon";
 import { LoadingIconWrapper, PayRequestWrapper } from "./Styles";
 import { getUsernameInitials } from "../../common/Utils";
 import { useEnsName } from "../../common/hooks/useEnsName";
+import { toast } from "react-toastify";
 
 export const PayRequest = () => {
   const { id } = useParams<{ id: string }>();
@@ -68,6 +69,7 @@ export const PayRequest = () => {
         navigate("/balance");
       })
       .catch(() => {
+        toast.error(t("pages.pay-request.errorPaying"));
         setLoading(undefined);
       });
   }, [
@@ -95,6 +97,7 @@ export const PayRequest = () => {
         navigate("/balance");
       })
       .catch(() => {
+        toast.error(t("pages.pay-request.errorRejecting"));
         setLoading(undefined);
       });
   }, [cancelRequest, navigate, request]);

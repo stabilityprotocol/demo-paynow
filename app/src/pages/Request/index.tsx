@@ -22,11 +22,14 @@ import { shortAddress } from "../../common/ETH";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getUsernameInitials } from "../../common/Utils";
+import { toast } from "react-toastify";
+import { useERC20 } from "../../common/hooks/useERC20";
 
 export const Request = () => {
   const [memo, setMemo] = useState("");
   const [transferState] = useRecoilState(TransferState);
   const [loading, setLoading] = useState(false);
+  const { symbol } = useERC20()
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -57,7 +60,8 @@ export const Request = () => {
       setLoading(false);
       navigate("/balance");
     } catch (e) {
-      console.log(e);
+      toast.error(t("pages.request.error", {symbol}));
+      console.error(e);
       setLoading(false);
     }
   };

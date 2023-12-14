@@ -65,7 +65,8 @@
       "txn-completed-time": "In Seconds",
       "cancel": "CANCEL",
       "confirm": "CONFIRM",
-      "pending": "SENDING..."
+      "pending": "SENDING...",
+      "error": "Error sending {{symbol}}. Please try again later."
     },
     "address": {
       "title": "SEND / REQUEST",
@@ -86,7 +87,8 @@
       },
       "cancel": "CANCEL",
       "confirm": "CONFIRM",
-      "pending": "SENDING..."
+      "pending": "SENDING...",
+      "error": "Error requesting {{symbol}}. Please try again later."
     },
     "activity": {
       "title": "ACTIVITY",
@@ -102,7 +104,9 @@
       "title": "PAY REQUEST",
       "loading": "LOADING",
       "reject": "REJECT",
-      "rejecting": "REJECTING..."
+      "rejecting": "REJECTING...",
+      "errorPaying": "Error paying request. Please try again later.",
+      "errorRejecting": "Error rejecting request. Please try again later."
     },
     "landing": {
       "title": "Fintech + Blockchain",
