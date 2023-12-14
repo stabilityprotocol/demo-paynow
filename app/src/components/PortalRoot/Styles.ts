@@ -51,5 +51,5 @@ export const HeaderWrapper = styled.div`
   top: ${(props) => props.theme.spacing.small};
   display: flex;
   justify-content: center;
-  z-index: 99999;
+  z-index: 10;
 `;
