@@ -90,7 +90,9 @@
         "send": "Send",
         "receive": "Receive",
         "request": "Request"
-      }
+      },
+      "requestFrom": "From:",
+      "requestTo": "To:"
     },
     "pay-request": {
       "title": "PAY REQUEST",

@@ -127,7 +127,9 @@ const TransactionActivityItem: React.FC<{
           </TransactionOverviewWrapper>
           <TransactionOwnerWrapper>
             {transactionType == "Request" &&
-              (item.from.hash == address ? `From: ` : `To: `)}
+              (item.from.hash == address
+                ? t("pages.activity.requestFrom")
+                : t("pages.activity.requestTo"))}{" "}
             {displayAddress}
           </TransactionOwnerWrapper>
         </TransactionDetailsWrapper>
