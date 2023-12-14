@@ -20,7 +20,7 @@ import { UserState } from "../../common/State/User";
 import { useENS } from "../../common/hooks/useENS";
 import { useAccount } from "wagmi";
 
-export const Transfer = () => {
+export const TransferSearch = () => {
   const { t } = useTranslation();
   const { address } = useAccount();
   const [value, setValue] = useState("");

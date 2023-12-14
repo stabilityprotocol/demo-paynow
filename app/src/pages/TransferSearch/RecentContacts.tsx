@@ -15,7 +15,7 @@ export const RecentContacts = ({ entries }: { entries: EnsEntry[] }) => {
   const onClick = useCallback(
     (entry: EnsEntry) => {
       setAccount({ account: entry });
-      navigate(`address`);
+      navigate(`amount`);
     },
     [navigate, setAccount]
   );
