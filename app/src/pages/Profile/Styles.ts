@@ -113,8 +113,7 @@ export const ActionBarWrapper = styled.div`
 
 export const ProfileFooter = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.green1};
-  padding: ${(props) => props.theme.spacing.small}
-    ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.medium};
   display: flex;
   justify-content: space-between;
   align-items: center;
