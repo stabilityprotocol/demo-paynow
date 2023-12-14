@@ -51,7 +51,10 @@
     },
     "search": {
       "title": "SEND / REQUEST",
-      "placeholder": "Search username or wallet"
+      "placeholder": "Search username or wallet",
+      "recentContacts": {
+        "title": "Recent Contacts"
+      }
     },
     "send": {
       "title": "SENDING",
