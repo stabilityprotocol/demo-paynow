@@ -12,22 +12,21 @@ import { RequestAttribute } from "../Request/components/RequestAttribute";
 import { waitForTransaction } from "@wagmi/core";
 import { useERC20 } from "../../common/hooks/useERC20";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { shortAddress } from "../../common/ETH";
 import { usePaymentRequest } from "../../common/hooks/usePaymentRequest";
 import { formatEther } from "viem";
-import { useENS } from "../../common/hooks/useENS";
 import { useAccount } from "wagmi";
 import { useAppBalance } from "../../common/hooks/useAppBalance";
 import { AddMemo } from "../Request/components/AddMemo";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { LoadingIconWrapper, PayRequestWrapper } from "./Styles";
 import { getUsernameInitials } from "../../common/Utils";
+import { useEnsName } from "../../common/hooks/useEnsName";
 
 export const PayRequest = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
-  const [displayName, setDisplayName] = useState<string | undefined>();
   const [loading, setLoading] = useState<
     "confirming" | "rejecting" | undefined
   >();
@@ -39,7 +38,6 @@ export const PayRequest = () => {
     fullfillRequest,
     address: paymentRequestAddress,
   } = usePaymentRequest();
-  const { getNameByAddress } = useENS();
   const { address } = useAccount();
   const { value: balance } = useAppBalance();
 
@@ -101,12 +99,7 @@ export const PayRequest = () => {
       });
   }, [cancelRequest, navigate, request]);
 
-  useEffect(() => {
-    if (!request || !!displayName) return;
-    getNameByAddress(request.target).then((name) => {
-      setDisplayName(`${name}.stability` ?? shortAddress(request.target));
-    });
-  }, [displayName, request, getNameByAddress]);
+  const displayName = useEnsName(request?.target);
 
   if (!request)
     return (
