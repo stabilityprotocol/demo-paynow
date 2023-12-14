@@ -16,6 +16,7 @@ import { LoadingIcon } from "../../components/LoadingIcon";
 import { useTranslation } from "react-i18next";
 import { useAccount } from "wagmi";
 import { parseEther } from "viem";
+import { toast } from "react-toastify";
 
 export const AddMoney = () => {
   const { address } = useAccount();
@@ -36,11 +37,13 @@ export const AddMoney = () => {
       });
       return p;
     };
-    fn().catch(() => {
+    fn().catch((err) => {
+      console.error(err);
+      toast.error(t("pages.add-money.error", { symbol }));
       setClaiming(undefined);
     });
     setClaiming("sent");
-  }, [address, mint]);
+  }, [address, mint, symbol, t]);
 
   if ((value && value > 0n && !!claiming) || claiming === "success") {
     return <Navigate to="/" />;

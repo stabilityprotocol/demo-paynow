@@ -25,9 +25,9 @@ import { TransferSearch } from "./pages/TransferSearch";
 import { Landing } from "./pages/Landing";
 import { TransferAddress } from "./pages/TransferAddress";
 import { PayRequest } from "./pages/PayRequest";
-
-import "react-toastify/dist/ReactToastify.css";
 import { TransferFieldsGuard } from "./components/TransferFieldsGuard";
+
+import "react-toastify/dist/ReactToastify.min.css";
 
 const router = createBrowserRouter([
   {

@@ -14,7 +14,8 @@
       },
       "title": "ADD MONEY",
       "description": "This demo is for demonstration purposes only. As such, we have created a demo token called {{symbol}}. You can claim these {{symbol}} tokens to your wallet by clicking the button below.",
-      "button": "CLAIM"
+      "button": "CLAIM",
+      "error": "Error claiming {{symbol}}. Please try again later."
     },
     "receive": {
       "button": "COPY ADDRESS",
