@@ -51,11 +51,7 @@ export const SetUsername = () => {
 
   const actualUsername = useEnsName(address);
 
-  if (claiming === "success") {
-    return <Navigate to="/profile" />;
-  }
-
-  if (!actualUsername && !claiming) {
+  if (claiming === "success" || (actualUsername && actualUsername.length > 0)) {
     return <Navigate to="/profile" />;
   }
 
