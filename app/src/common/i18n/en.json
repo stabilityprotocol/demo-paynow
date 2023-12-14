@@ -20,7 +20,7 @@
       "button": "COPY ADDRESS",
       "buttonPressed": "COPIED!",
       "title": "RECEIVE",
-      "description": "This is an Stability wallet. Only send {{symbol}} or other ERC-20 tokensto this wallet."
+      "description": "This is an Stability wallet. Only send {{symbol}} or other ERC-20 tokens to this wallet."
     },
     "balance": {
       "title": "BALANCE",
