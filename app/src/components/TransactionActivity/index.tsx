@@ -17,18 +17,17 @@ import {
   PiArrowCircleUpRightFill,
   PiLightningFill,
 } from "react-icons/pi";
-import { useMemo, useEffect, useCallback, useState } from "react";
+import { useMemo } from "react";
 import { useAccount } from "wagmi";
 import { TransactionActivityData } from "../../common/models/TransactionActivity";
 import { formatUnits } from "ethers";
 import { shortAddress } from "../../common/ETH";
-import { useENS } from "../../common/hooks/useENS";
-import { Address } from "wagmi";
 import { useTranslation } from "react-i18next";
 import {
   TransactionActivityStatus,
   TransactionActivityType,
 } from "../../common/models/TransactionActivity";
+import { useEnsName } from "../../common/hooks/useEnsName";
 
 export const TransactionActivity = ({
   transactions,
@@ -54,22 +53,8 @@ export const TransactionActivity = ({
 const TransactionActivityItem: React.FC<{
   item: TransactionActivityData;
 }> = ({ item }) => {
-  const [displayAddress, setDisplayAddress] = useState<string | undefined>();
-  const { getNameByAddress } = useENS();
   const { t } = useTranslation();
   const { address } = useAccount();
-
-  const handleAddress = useCallback(
-    async (adress: Address) => {
-      const result = await getNameByAddress(adress);
-      if (!result || result == "") {
-        setDisplayAddress(shortAddress(adress));
-      } else {
-        setDisplayAddress(result.concat(".stability"));
-      }
-    },
-    [getNameByAddress]
-  );
 
   const transactionType = useMemo(() => {
     if (!address) return undefined;
@@ -116,11 +101,15 @@ const TransactionActivityItem: React.FC<{
 
   const status = useMemo(() => TransactionActivityStatus.DONE, []);
 
-  useEffect(() => {
-    if (displayAddress === undefined) {
-      handleAddress(TransactionActivityData.displayAddress as Address);
-    }
-  }, [TransactionActivityData.displayAddress, displayAddress, handleAddress]);
+  const name = useEnsName(TransactionActivityData.displayAddress);
+
+  const displayAddress = useMemo(
+    () =>
+      name
+        ? `${name}.stability`
+        : shortAddress(TransactionActivityData.displayAddress),
+    [TransactionActivityData.displayAddress, name]
+  );
 
   return (
     <TransactionActivityItemWrapper>
