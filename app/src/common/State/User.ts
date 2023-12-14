@@ -3,6 +3,7 @@ import { TransactionActivityData } from "../models/TransactionActivity";
 import { recoilPersist } from "recoil-persist";
 
 export type TUserState = {
+  address?: string;
   ens?: string | null;
   recentTransactions: { date: string; items: TransactionActivityData[] }[];
 };

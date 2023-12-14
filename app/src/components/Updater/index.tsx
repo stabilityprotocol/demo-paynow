@@ -39,14 +39,24 @@ export const Updater = () => {
   useInterval(() => refetch(), address ? 5_000 : null);
 
   useEffect(() => {
+    if (!address) return;
+    setUserState((st) => ({
+      ...st,
+      address,
+    }));
+  }, [address, setUserState]);
+
+  useEffect(() => {
     const unwatch = watchAccount((account) => {
       console.warn("Account changed to", account?.address);
-      setUserState({
-        recentTransactions: [],
-      });
+      if (account?.address && account?.address !== userState.address) {
+        setUserState({
+          recentTransactions: [],
+        });
+      }
     });
     return () => unwatch();
-  }, [setUserState]);
+  }, [address, userState, setUserState]);
 
   return <></>;
 };
