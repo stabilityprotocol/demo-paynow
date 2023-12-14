@@ -20,4 +20,6 @@ export const ActivityListWrapper = styled.div`
   padding: ${(props) => props.theme.spacing.small}
     ${(props) => props.theme.spacing.medium};
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
