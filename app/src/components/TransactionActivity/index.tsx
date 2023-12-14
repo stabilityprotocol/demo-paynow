@@ -88,7 +88,8 @@ const TransactionActivityItem: React.FC<{
         return {
           icon: <PiLightningFill />,
           type: t("pages.activity.transactionTypes.request"),
-          displayAddress: item.from.hash,
+          displayAddress:
+            address == item.from.hash ? item.to.hash : item.from.hash,
         };
       default:
         return {
@@ -124,15 +125,25 @@ const TransactionActivityItem: React.FC<{
             <span>{TransactionActivityData.type}</span>
             <StatusBubble status={status}>{status}</StatusBubble>
           </TransactionOverviewWrapper>
-          <TransactionOwnerWrapper>{displayAddress}</TransactionOwnerWrapper>
+          <TransactionOwnerWrapper>
+            {transactionType == "Request" &&
+              (item.from.hash == address ? `From: ` : `To: `)}
+            {displayAddress}
+          </TransactionOwnerWrapper>
         </TransactionDetailsWrapper>
         <TransactionAmountWrapper>
           <a
             href={t("links.explorerTx", { hash: item.tx_hash })}
             target="_blank"
           >
-            {transactionType == "Send" && <span>-</span>}
-            {transactionType == "Receive" && <span>+</span>}
+            {(transactionType == "Send" ||
+              (transactionType == "Request" && item.from.hash == address)) && (
+              <span>-</span>
+            )}
+            {(transactionType == "Receive" ||
+              (transactionType == "Request" && item.to.hash == address)) && (
+              <span>+</span>
+            )}
             {formatUnits(item.total.value, Number(item.token.decimals))}
           </a>
           <span>{item.token.symbol}</span>
