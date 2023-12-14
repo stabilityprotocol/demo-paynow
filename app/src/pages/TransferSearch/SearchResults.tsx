@@ -17,7 +17,7 @@ export const SearchResults = ({ entries }: { entries: EnsEntry[] }) => {
   const onClick = useCallback(
     (entry: EnsEntry) => {
       setAccount({ account: entry });
-      navigate(`amount`);
+      navigate(`/transfer/amount`);
     },
     [navigate, setAccount]
   );
