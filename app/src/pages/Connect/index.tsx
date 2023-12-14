@@ -30,8 +30,8 @@ export const Connect = () => {
     if (window.location.hostname.match(/localhost/)) return true;
     if (!localStorage) return false;
     try {
-      const { metamask } = JSON.parse(localStorage);
-      return metamask;
+      const { metamask } = JSON.parse(JSON.stringify(localStorage));
+      return metamask ?? false;
     } catch (err) {
       console.error(err);
       return false;
