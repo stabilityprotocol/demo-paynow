@@ -45,6 +45,7 @@ export const TokenAmountInput: FC<TokenAmountInputProps> = ({
           color={color}
           background={background}
           type="number"
+          pattern="[0-9]*"
         />
       </InputWrapper>
       <MaxButton
