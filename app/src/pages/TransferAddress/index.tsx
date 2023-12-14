@@ -40,12 +40,12 @@ export const TransferAddress = () => {
   }, [formatted, amount]);
 
   const onSend = useCallback(() => {
-    setAccount((prev) => ({ ...prev, formattedAmount: amount }));
+    setAccount((prev) => ({ ...prev, formattedAmount: amount || "0" }));
     navigate("/transfer/send");
   }, [setAccount, amount, navigate]);
 
   const onRequest = useCallback(() => {
-    setAccount((prev) => ({ ...prev, formattedAmount: amount }));
+    setAccount((prev) => ({ ...prev, formattedAmount: amount || "0" }));
     navigate("/transfer/request");
   }, [setAccount, amount, navigate]);
 
