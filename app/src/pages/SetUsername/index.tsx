@@ -34,7 +34,7 @@ export const SetUsername = () => {
       if (!address || !username) return Promise.reject();
       const p = claimName(username);
       p.then((hash) => {
-        waitForTransaction({ hash }).then(() => {
+        waitForTransaction({ hash, timeout: 30_000 }).then(() => {
           registerEnsApi({ address, name: username }).then(() => {
             setUserState({ ...userState, ens: username });
             setClaiming("success");

@@ -51,7 +51,7 @@ export const TransferAddress = () => {
 
   const displayName = useMemo(() => {
     return transfer.account?.name
-      ? `${transfer.account.name}.stability`
+      ? transfer.account.name
       : shortAddress(transfer.account!.address);
   }, [transfer]);
 

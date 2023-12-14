@@ -39,18 +39,11 @@ export const Send = () => {
         toast.error(t("pages.send.error", { symbol }));
         setLoading(false);
       });
-  }, [
-    decimals,
-    navigate,
-    transfer,
-    transferState.account,
-    transferState.formattedAmount,
-    symbol,
-  ]);
+  }, [transferState, decimals, transfer, navigate, t, symbol]);
 
   const displayName = useMemo(() => {
     return transferState.account?.name
-      ? `${transferState.account.name}.stability`
+      ? transferState.account.name
       : shortAddress(transferState.account!.address);
   }, [transferState]);
 

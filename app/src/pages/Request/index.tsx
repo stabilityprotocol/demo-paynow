@@ -29,7 +29,7 @@ export const Request = () => {
   const [memo, setMemo] = useState("");
   const [transferState] = useRecoilState(TransferState);
   const [loading, setLoading] = useState(false);
-  const { symbol } = useERC20()
+  const { symbol } = useERC20();
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export const Request = () => {
 
   const displayName = useMemo(() => {
     return transferState.account?.name
-      ? `${transferState.account.name}.stability`
+      ? transferState.account.name
       : shortAddress(transferState.account!.address);
   }, [transferState]);
 
@@ -55,12 +55,12 @@ export const Request = () => {
         memo
       );
 
-      await waitForTransaction({ hash });
+      await waitForTransaction({ hash, timeout: 30_000 });
 
       setLoading(false);
       navigate("/balance");
     } catch (e) {
-      toast.error(t("pages.request.error", {symbol}));
+      toast.error(t("pages.request.error", { symbol }));
       console.error(e);
       setLoading(false);
     }

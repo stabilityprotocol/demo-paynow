@@ -56,11 +56,11 @@ export const PayRequest = () => {
       const allowanceAmount = await allowance(address, paymentRequestAddress);
       if (allowanceAmount < request.amount) {
         await approve(paymentRequestAddress, balance.toString()).then((hash) =>
-          waitForTransaction({ hash })
+          waitForTransaction({ hash, timeout: 30_000 })
         );
       }
       return fullfillRequest(request.id).then((hash) =>
-        waitForTransaction({ hash })
+        waitForTransaction({ hash, timeout: 30_000 })
       );
     };
     fn()
@@ -73,14 +73,15 @@ export const PayRequest = () => {
         setLoading(undefined);
       });
   }, [
-    allowance,
-    approve,
-    fullfillRequest,
-    navigate,
+    request,
     address,
     balance,
+    allowance,
     paymentRequestAddress,
-    request,
+    fullfillRequest,
+    approve,
+    navigate,
+    t,
   ]);
 
   const onReject = useCallback(() => {
@@ -88,7 +89,7 @@ export const PayRequest = () => {
     setLoading("rejecting");
     const fn = () => {
       return cancelRequest(request.id).then((hash) =>
-        waitForTransaction({ hash })
+        waitForTransaction({ hash, timeout: 30_000 })
       );
     };
     fn()
@@ -100,7 +101,7 @@ export const PayRequest = () => {
         toast.error(t("pages.pay-request.errorRejecting"));
         setLoading(undefined);
       });
-  }, [cancelRequest, navigate, request]);
+  }, [cancelRequest, navigate, request, t]);
 
   const displayName = useEnsName(request?.target);
 
