@@ -9,12 +9,18 @@ export const useContract = () => {
     if (window.location.href.includes("pyusd")) {
       return Contracts["pyusd"]["token"];
     }
+    if (window.location.href.includes("usdc")) {
+      return Contracts["usdc"]["token"];
+    }
     return Contracts["pyusd"]["token"];
   }, []);
 
   const paymentRequestsAddress = useMemo(() => {
     if (window.location.href.includes("pyusd")) {
       return Contracts["pyusd"]["paymentRequests"];
+    }
+    if (window.location.href.includes("usdc")) {
+      return Contracts["usdc"]["paymentRequests"];
     }
     return Contracts["pyusd"]["paymentRequests"];
   }, []);
