@@ -1,0 +1,48 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1       localhost
+255.255.255.255 broadcasthost
+::1             localhost
+fe80::1%lo0     localhost
+80.211.161.23   cifuentes
+35.238.142.181  poppy-http
+35.202.149.183 poppy-subscriber-mainnet
+35.239.19.77 poppy-subscriber-testnet
+104.197.202.74 poppy-restapi
+82.223.98.197 wannalisn
+35.222.10.15 troncard-payments troncard-accounts
+46.101.249.124 common-services dev.accounts.troncard.io
+207.154.199.217 poppy-services
+159.89.31.102 troncard-services
+142.93.133.196 mydroplet
+#165.22.198.241 sesameseed-common
+142.93.135.12 sesameseed-common
+134.209.205.121 sprout-wallet
+134.209.83.163 sesameseed-listener
+64.227.78.193 sesameseed-isolated
+134.209.83.163 renardo-server
+# Added by Docker Desktop
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
+
+#START-Utrade
+127.0.0.1 binance.utrade.local
+127.0.0.1 ethereum.utrade.local
+127.0.0.1 ropsten.utrade.local
+127.0.0.1 tron.utrade.local
+127.0.0.1 iotex.utrade.local
+127.0.0.1 harmony.utrade.local
+127.0.0.1 ontology.utrade.local
+127.0.0.1 icon.utrade.local
+127.0.0.1 polygon.utrade.local
+127.0.0.1 antonio.utrade.local
+#END-Utrade
+
+cloudflare-eth.com eth-gateway.sesameseed.network
+206.189.101.167 unifiprotocol-bots
+127.0.0.1 bolt.local
