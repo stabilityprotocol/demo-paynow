@@ -3,7 +3,7 @@ import { CacheState } from "../State/PersistentCache";
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-const LastCacheUpdate = 1709659905046;
+const LastCacheUpdate = 1710190913369;
 
 export const useCacheClearer = () => {
   const [, setCache] = useRecoilState(CacheState);
@@ -17,7 +17,9 @@ export const useCacheClearer = () => {
   useEffect(() => {
     if (lastCacheClearTs < LastCacheUpdate) {
       setCache({});
+      localStorage.clear();
       setLastCacheClearTs(LastCacheUpdate.toString());
+      window.location.reload();
     }
   }, [lastCacheClearTs, setCache, setLastCacheClearTs]);
 };
